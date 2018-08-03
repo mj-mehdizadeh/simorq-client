@@ -1,0 +1,24 @@
+{
+  "common": {
+    "loading": "کمی صبر کنید..."
+  },
+  "login": {
+    "username": "نام کاربری",
+    "email": "آدرس ایمیل",
+    "mobile": "شماره تلفن",
+    "password": "رمز ورود",
+    "loginBtn": "ورود",
+    "forgetPasswordBtn": "فراموشی رمز ورود",
+    "signupBtn": "ثبت نام"
+  },
+  "register": {
+    "mobile": "شماره تلفن",
+    "verify": "کد تایید",
+    "email": "آدرس ایمیل",
+    "password": "رمز ورود",
+    "rePassword": "تکرار رمز ورود",
+    "registerBtn": "ثبت نام",
+    "loginBtn": "ورود",
+    "nextBtn": "مرحله بعد"
+  }
+}

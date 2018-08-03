@@ -1,0 +1,35 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "fbjs"
+  ],
+  "rules": {
+    "linebreak-style": [
+      2,
+      "unix"
+    ],
+    "max-len": [
+      "warn",
+      512
+    ]
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "globals": {}
+}

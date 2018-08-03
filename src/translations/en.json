@@ -1,0 +1,29 @@
+{
+  "common": {
+    "loading": "Loading..."
+  },
+  "local": {
+    "english": "English",
+    "persian": "فارسی"
+  },
+  "login": {
+    "username": "Username",
+    "email": "Email",
+    "mobile": "Phone Number",
+    "password": "Password",
+    "loginBtn": "Login",
+    "forgetPasswordBtn": "Forget Password",
+    "signupBtn": "Sign Up"
+  },
+  "register": {
+    "mobile": "Mobile",
+    "verify": "Verify Code",
+    "email": "Email",
+    "password": "Password",
+    "rePassword": "Repeat Password",
+    "registerBtn": "Sign up",
+    "loginBtn": "Login",
+    "nextBtn": "Next"
+  }
+}
+
