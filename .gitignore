@@ -50,3 +50,4 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+data/

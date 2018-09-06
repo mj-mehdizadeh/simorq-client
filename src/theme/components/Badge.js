@@ -24,6 +24,17 @@ export default (variables = variable) => {
       textAlign: 'center',
       paddingHorizontal: 3,
     },
+    '.small': {
+      borderRadius: 10,
+      width: 20,
+      height: 20,
+      paddingHorizontal: 0,
+      'NativeBase.Text': {
+        fontSize: variables.fontSizeBase - 3,
+        lineHeight: variables.lineHeight - 5,
+        paddingHorizontal: 0,
+      },
+    },
     backgroundColor: variables.badgeBg,
     padding: variables.badgePadding,
     paddingHorizontal: 6,

@@ -321,18 +321,13 @@ export default (variables = variable) => {
     flexDirection: 'row',
     paddingHorizontal: 10,
     justifyContent: 'center',
-    paddingTop: platform === 'ios' ? (variables.isIphoneX ? 39 : 15) : 0,
-    borderBottomWidth:
-      platform === 'ios' ? 1 / PixelRatio.getPixelSizeForLayoutSize(1) : 0,
+    paddingTop: platform === 'ios' ? 15 : 0,
+    borderBottomWidth: platform === 'ios' ? 1 / PixelRatio.getPixelSizeForLayoutSize(1) : 0,
     borderBottomColor: variables.toolbarDefaultBorder,
-    height:
-      variables.platform === 'ios' && variables.platformStyle === 'material'
-        ? variables.toolbarHeight + StatusBar.height
-        : variables.toolbarHeight,
+    height: variables.toolbarHeight,
     elevation: 3,
     shadowColor: platformStyle === 'material' ? '#000' : undefined,
-    shadowOffset:
-      platformStyle === 'material' ? {width: 0, height: 2} : undefined,
+    shadowOffset: platformStyle === 'material' ? { width: 0, height: 2 } : undefined,
     shadowOpacity: platformStyle === 'material' ? 0.2 : undefined,
     shadowRadius: platformStyle === 'material' ? 1.2 : undefined,
     top: 0,

@@ -9,6 +9,9 @@ export default (variables = variable) => {
     color: variables.titleFontColor,
     fontWeight: Platform.OS === 'ios' ? '600' : undefined,
     textAlign: 'center',
+    '.bold': {
+      fontWeight: 'bold',
+    },
   };
 
   return titleTheme;

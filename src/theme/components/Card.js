@@ -9,6 +9,13 @@ export default (variables = variable) => {
       shadowRadius: null,
       elevation: null,
     },
+    '.noMargin': {
+      marginVertical: 5,
+      marginHorizontal: 0,
+      borderRadius: 0,
+      borderWidth: 0,
+      marginTop: -5,
+    },
     marginVertical: 5,
     marginHorizontal: 2,
     flex: 1,
@@ -17,11 +24,11 @@ export default (variables = variable) => {
     borderColor: variables.cardBorderColor,
     flexWrap: 'nowrap',
     backgroundColor: variables.cardDefaultBg,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 1.5,
-    elevation: 3,
+    shadowColor: '#c6c6c6',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.5,
+    shadowRadius: 0.5,
+    elevation: 1,
   };
 
   return cardTheme;

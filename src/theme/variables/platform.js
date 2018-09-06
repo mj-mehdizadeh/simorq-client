@@ -152,7 +152,7 @@ export default {
   },
 
   // Icon
-  iconFamily: 'FontAwesome',
+  iconFamily: 'MaterialIcon',
   iconFontSize: platform === 'ios' ? 25 : 18,
   iconHeaderSize: platform === 'ios' ? 22 : 15,
 
@@ -178,8 +178,8 @@ export default {
 
   // List
   listBg: 'transparent',
-  listBorderColor: '#c9c9c9',
-  listDividerBg: '#f4f4f4',
+  listBorderColor: '#dee3ea',
+  listDividerBg: '#dee3ea',
   listBtnUnderlayColor: '#DDD',
   listItemPadding: platform === 'ios' ? 10 : 12,
   listNoteColor: '#808080',
