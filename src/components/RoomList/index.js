@@ -1,13 +1,18 @@
 import * as React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, InteractionManager} from 'react-native';
 import PropTypes from 'prop-types';
 import {Badge, Body, Button, Container, Header, Icon, Left, ListItem, Right, Text, Thumbnail, Title, View} from 'native-base';
 import {random} from 'lodash';
 import styles from './styles';
+import {navigate} from '../../services/navigator';
+import {ROOM_HISTORY_SCREEN} from '../../constant/navigator';
 
 export default class RoomList extends React.Component {
 
   onPress = () => {
+    InteractionManager.runAfterInteractions(() => {
+      navigate(ROOM_HISTORY_SCREEN);
+    });
   };
 
   _keyExtractor = (item, index) => item.id + '-' + index;
