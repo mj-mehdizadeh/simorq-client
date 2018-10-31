@@ -1,4 +1,4 @@
-rootProject.name = 'papa30'
+rootProject.name = 'horuf'
 include ':react-native-restart'
 project(':react-native-restart').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-restart/android')
 include ':react-native-linear-gradient'

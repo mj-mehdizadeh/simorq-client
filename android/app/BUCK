@@ -45,12 +45,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.papa30",
+    package = "com.horuf",
 )
 
 android_resource(
     name = "res",
-    package = "com.papa30",
+    package = "com.horuf",
     res = "src/main/res",
 )
 

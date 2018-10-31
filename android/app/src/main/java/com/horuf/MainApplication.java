@@ -1,4 +1,4 @@
-package com.papa30;
+package com.horuf;
 
 import android.app.Application;
 
