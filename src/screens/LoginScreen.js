@@ -11,12 +11,14 @@ class LoginScreen extends Component {
     super();
     this.languages = values(LOCALES);
   }
+
   onSubmit = () => {
 
   };
   goRegisterScreen = () => {
     navigate(REGISTER_SCREEN);
   };
+
   render() {
     return <Login
       currentLang={i18n.language}

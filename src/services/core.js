@@ -1,4 +1,3 @@
-
 /**
  * Mili-seconds sleep
  * @param {number} miliSeconds

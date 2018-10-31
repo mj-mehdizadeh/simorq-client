@@ -1,4 +1,4 @@
-import {PixelRatio, StatusBar} from 'react-native';
+import {PixelRatio} from 'react-native';
 
 import variable from './../variables/platform';
 
@@ -328,7 +328,7 @@ export default (variables = variable) => {
     height: variables.toolbarHeight,
     elevation: 3,
     shadowColor: platformStyle === 'material' ? '#000' : undefined,
-    shadowOffset: platformStyle === 'material' ? { width: 0, height: 2 } : undefined,
+    shadowOffset: platformStyle === 'material' ? {width: 0, height: 2} : undefined,
     shadowOpacity: platformStyle === 'material' ? 0.2 : undefined,
     shadowRadius: platformStyle === 'material' ? 1.2 : undefined,
     top: 0,

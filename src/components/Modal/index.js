@@ -27,7 +27,8 @@ class Modal extends PureComponent {
     this.setState(prev => ({isVisible: !prev.isVisible}));
   };
 
-  emptyFunc = () => {};
+  emptyFunc = () => {
+  };
 
   render() {
     return (<BaseModal

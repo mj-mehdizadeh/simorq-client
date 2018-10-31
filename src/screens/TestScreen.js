@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Body, Button, Container, Header, Text, Title} from 'native-base';
+import {Body, Container, Header, Title} from 'native-base';
 import {translate} from 'react-i18next';
 
 class TestScreen extends Component {

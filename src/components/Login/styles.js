@@ -54,8 +54,7 @@ export default StyleSheet.create({
   icon: {
     color: '#efefef',
   },
-  button: {
-  },
+  button: {},
   btnTxt: {},
   signupWrap: {
     flexDirection: 'row',

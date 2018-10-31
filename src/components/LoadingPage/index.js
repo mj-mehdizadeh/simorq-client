@@ -5,7 +5,7 @@ import styles from './styles';
 class LoadingPage extends Component {
   render() {
     return (<Container style={styles.container}>
-      <Spinner />
+      <Spinner/>
     </Container>);
   }
 }

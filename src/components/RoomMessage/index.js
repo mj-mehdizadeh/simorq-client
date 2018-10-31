@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Image, TouchableWithoutFeedback} from 'react-native';
 import {Icon, Text, View} from 'native-base';
-import styles, {boxSelf, footerSelf, imageSelf, timeSelf, wrapSelf} from './styles';
+import styles, {boxSelf, footerSelf, imageSelf, wrapSelf} from './styles';
 
 export default class RoomMessage extends React.Component {
   render() {

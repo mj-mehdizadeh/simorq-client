@@ -9,9 +9,11 @@ class RegisterScreen extends Component {
       state: 0,
     };
   }
+
   onSubmit = () => {
     this.setState(prev => ({state: prev.state + 1}));
   };
+
   render() {
     const {state} = this.state;
     return <Register

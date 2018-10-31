@@ -1,4 +1,5 @@
-import { AsyncStorage } from 'react-native';
+import {AsyncStorage} from 'react-native';
+
 const STORAGE_PREFIX = '@PP30';
 
 export function storeData(key, value) {
