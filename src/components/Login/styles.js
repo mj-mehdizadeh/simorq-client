@@ -1,73 +1,37 @@
 import {StyleSheet} from 'react-native';
+import variable from './../../theme/variables/material';
 
 export default StyleSheet.create({
-  container: {
+  flex: {
     flex: 1,
   },
-  picketWrap: {
-    height: 50,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  picker: {
-    width: 150,
-    color: '#fff',
-  },
-  content: {
-    flex: 1,
-    padding: 40,
-    paddingTop: 0,
-    paddingBottom: 0,
-  },
-  heading: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200,
-  },
-  logo: {
-    maxWidth: 280,
-    height: 65,
-  },
-  form: {},
-  item: {
-    marginBottom: 5,
-    borderBottomWidth: 0.5,
-    borderColor: '#efefef',
+  help: {
+    fontSize: 13,
+    padding: 20,
+    color: '#838c96',
   },
   label: {
-    fontSize: 13,
-    color: '#efefef',
-    left: 5,
+    fontSize: 12,
+    color: '#a6afba',
   },
-  usernameLabel: {
-    left: 15,
+  countryCode: {
+    textAlign: 'center',
+    marginTop: 26,
+    height: 39,
   },
-  input: {
-    color: '#efefef',
+  fabStyle: {
+    backgroundColor: variable.brandPrimary,
   },
-  changeIdentity: {
-    top: 15,
+  countryList: {
+    left: 0,
     right: 0,
+    bottom: 0,
+    top: 121,
     position: 'absolute',
+    backgroundColor: '#fff',
+    zIndex: 10000,
   },
-  icon: {
-    color: '#efefef',
-  },
-  button: {},
-  btnTxt: {},
-  signupWrap: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  signupBtn: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    borderColor: '#efefef',
-  },
-  blob: {
-    position: 'absolute',
-    backgroundColor: 'rgba(39, 144, 176, 0.3)',
+  item: {
+    padding: 15,
   },
 });

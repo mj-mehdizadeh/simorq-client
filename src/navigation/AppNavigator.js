@@ -18,7 +18,7 @@ const AppNavigator = StackNavigator(
   },
   {
     // initialRouteName: 'TEST',
-    initialRouteName: ROOM_LIST_SCREEN,
+    initialRouteName: LOGIN_SCREEN,
     headerMode: 'none',
   },
 );
