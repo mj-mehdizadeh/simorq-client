@@ -110,10 +110,10 @@ export default translate()(Login);
 Login.propTypes = {
   t: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  phoneNumber: PropTypes.string.isRequired,
+  phoneNumber: PropTypes.string,
   countryName: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
-  countryList: PropTypes.array.isRequired,
+  countryList: PropTypes.array,
   searchCountry: PropTypes.func.isRequired,
   selectCountry: PropTypes.func.isRequired,
   changeCountryCode: PropTypes.func.isRequired,

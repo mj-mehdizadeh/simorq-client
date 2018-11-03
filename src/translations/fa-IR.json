@@ -4,13 +4,9 @@
   },
   "login": {
     "title": "ورود",
-    "username": "نام کاربری",
-    "email": "آدرس ایمیل",
-    "mobile": "شماره تلفن",
-    "password": "رمز ورود",
-    "loginBtn": "ورود",
-    "forgetPasswordBtn": "فراموشی رمز ورود",
-    "signupBtn": "ثبت نام"
+    "country": "کشور",
+    "phoneNumber": "شماره تلفن",
+    "help": "ما یک کد تایید به شماره تلفن شما ارسال می کنیم."
   },
   "register": {
     "mobile": "شماره تلفن",
