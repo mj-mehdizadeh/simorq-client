@@ -18,7 +18,7 @@ const AppNavigator = StackNavigator(
   },
   {
     // initialRouteName: 'TEST',
-    initialRouteName: LOGIN_SCREEN,
+    initialRouteName: HOME_SCREEN,
     headerMode: 'none',
   },
 );

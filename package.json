@@ -28,10 +28,12 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "color": "^3.0.0",
     "i18next": "^11.5.0",
     "lodash": "^4.17.10",
     "native-base": "^2.7.1",
+    "p-queue": "^3.0.0",
     "react": "16.3.1",
     "react-i18next": "^7.9.1",
     "react-native": "~0.55.2",
