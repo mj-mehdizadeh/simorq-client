@@ -9,6 +9,7 @@ import variables from '../theme/variables/material';
 import createStore from '../redux/configureStore';
 import i18n, {loadUserLang} from '../services/i18n';
 import LoadingPage from '../components/LoadingPage';
+import {loadAuthToken} from '../services/auth';
 
 // create our store
 const store = createStore();
@@ -21,6 +22,7 @@ export default class RootContainer extends Component {
   async componentDidMount() {
     await Promise.all([
       loadUserLang(),
+      loadAuthToken(),
     ]);
     this.setState({loading: false});
   }

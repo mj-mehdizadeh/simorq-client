@@ -1,9 +1,19 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import AppNavigator from '../navigation/AppNavigator';
-import {setContainer} from '../services/navigator';
+import {navigate, setContainer} from '../services/navigator';
+import {getAuthToken} from '../services/auth';
+import {APP_NAVIGATOR, AUTH_NAVIGATOR} from '../constant/navigator';
 
 class App extends Component {
+
+
+  componentDidMount() {
+    if (getAuthToken()) {
+      return navigate(APP_NAVIGATOR);
+    }
+    navigate(AUTH_NAVIGATOR);
+  }
 
   setNavigationRef = (navigatorRef) => {
     setContainer(navigatorRef);
