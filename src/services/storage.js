@@ -7,11 +7,7 @@ export function storeData(key, value) {
 }
 
 export async function retrieveData(key) {
-  const value = await AsyncStorage.getItem(getKey(key));
-  if (value !== null) {
-    return value;
-  }
-  throw new Error('Not Found Data');
+  return AsyncStorage.getItem(getKey(key));
 }
 
 function getKey(key) {

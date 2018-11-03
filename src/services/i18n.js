@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import {reactI18nextModule} from 'react-i18next';
-import {LOCALE_EN, LOCALE_FA, LOCALES} from '../constant/locale';
+import {LOCALE_DEFAULT, LOCALE_EN, LOCALE_FA, LOCALES} from '../constant/locale';
 import {I18nManager} from 'react-native';
 import {retrieveData, storeData} from './storage';
 import RNRestart from 'react-native-restart'; // Import package from node modules
@@ -10,7 +10,7 @@ const LANGUAGE_STORE_KEY = 'userLang';
 i18n
   .use(reactI18nextModule)
   .init({
-    fallbackLng: LOCALE_EN,
+    fallbackLng: LOCALE_DEFAULT,
     debug: true,
     resources: {
       [LOCALE_EN]: {
@@ -44,9 +44,6 @@ export function changeLang(lang) {
 }
 
 export async function loadUserLang() {
-  try {
-    let _lang = await retrieveData(LANGUAGE_STORE_KEY);
-    i18n.changeLanguage(_lang);
-  } catch (e) {
-  }
+  let _lang = await retrieveData(LANGUAGE_STORE_KEY) || LOCALE_DEFAULT;
+  i18n.changeLanguage(_lang);
 }
