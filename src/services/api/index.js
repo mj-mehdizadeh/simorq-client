@@ -6,9 +6,10 @@ import {getPriority} from '../../constant/methods/priority';
 import {getMethod} from '../../constant/methods/methods';
 import axios from 'axios';
 import ApiError from './api_error';
+import {randomString} from '../core';
 
-const apiSingleton = Symbol();
-const apiSingletonEnforcer = Symbol();
+const apiSingleton = randomString(10);
+const apiSingletonEnforcer = randomString(10);
 
 let aggregate = new Map();
 
@@ -65,9 +66,7 @@ export default class Api {
       aggregate.set(aggregateId, wrapper.promise);
     }
 
-    _queue.add(() => {
-      this.instance.run(wrapper);
-    }, {
+    _queue.add(() => this.instance.run(wrapper), {
       priority: getPriority(actionId),
     });
 
@@ -80,7 +79,7 @@ export default class Api {
    */
   async run(requestWrapper) {
     const method = getMethod(requestWrapper.actionId);
-    const action = method === 'socket' ? this.socketEmit : this.sendRequest;
+    const action = method === 'socket' ? this.socketEmit.bind(this) : this.sendRequest.bind(this);
 
     try {
       const response = await action(requestWrapper);
