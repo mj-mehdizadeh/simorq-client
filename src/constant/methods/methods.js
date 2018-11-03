@@ -1,4 +1,4 @@
-import * as methods from 'index';
+import * as methods from './index';
 
 const methodsTable = {
   [methods.AUTH_SEND_CODE]: 'post',

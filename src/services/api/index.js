@@ -1,6 +1,5 @@
 import PQueue from 'p-queue';
 import {API_BASE_URL, API_CONCURRENCY} from '../../constant/config';
-import * as actions from '../../constant/methods/index';
 import RequestWrapper from './request_wrapper';
 import {getAggregateId} from '../../constant/methods/aggregate';
 import {getPriority} from '../../constant/methods/priority';
@@ -46,11 +45,6 @@ export default class Api {
    * @returns {Promise<any>}
    */
   static invoke(actionId, params) {
-
-    if (!actions[actionId]) {
-      throw new Error(`Invalid actionId #${actionId}`);
-    }
-
     let wrapper;
     const promise = new Promise((resolve, reject) => {
       wrapper = new RequestWrapper(
@@ -89,7 +83,7 @@ export default class Api {
     const action = method === 'socket' ? this.socketEmit : this.sendRequest;
 
     try {
-      const response = await action(requestWrapper.actionId, requestWrapper.params);
+      const response = await action(requestWrapper);
       requestWrapper.resolve(response);
     } catch (error) {
       requestWrapper.reject(error);
@@ -98,6 +92,7 @@ export default class Api {
       this._done(requestWrapper);
     }
   }
+
   /**
    * @param {RequestWrapper} requestWrapper
    * @returns {Promise<void>}
@@ -105,10 +100,11 @@ export default class Api {
   async sendRequest(requestWrapper) {
     const method = getMethod(requestWrapper.actionId);
     try {
-      return axiosApi[method](
+      const response = await axiosApi[method](
         requestWrapper.actionId,
-        this._getMethodParams(requestWrapper.params),
+        requestWrapper.getRequestParams(method),
       );
+      return response.data;
     } catch (error) {
       const apiError = new ApiError();
       if (error.response) {
@@ -117,10 +113,10 @@ export default class Api {
           //todo return this.sendRequest(requestWrapper)
         }
         apiError.code = error.code;
-        apiError.data = error.data;
+        apiError.params = error.params;
       } else {
         // todo check your network
-        if (requestWrapper.tried()) {
+        if (requestWrapper.tried) {
           return this.sendRequest(requestWrapper);
         }
         apiError.code = 'unexpected_error';

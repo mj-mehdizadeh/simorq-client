@@ -1,4 +1,4 @@
-import * as methods from 'index';
+import * as methods from './index';
 
 /**
  * @param {string[]} params

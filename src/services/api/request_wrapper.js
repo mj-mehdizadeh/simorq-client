@@ -37,6 +37,10 @@ export default class RequestWrapper {
     return this._promise;
   }
 
+  getRequestParams(method) {
+    return method === 'get' ? {params: this._params} : this._params;
+  }
+
   resolve(value) {
     this._resolve(value);
   }

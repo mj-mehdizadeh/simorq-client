@@ -1,27 +1,27 @@
 export default class ApiError extends Error {
 
   _code;
-  _data;
+  _params;
 
   constructor(code, data) {
     super();
     this._code = code;
-    this._data = data;
+    this._params = data;
   }
 
   get code() {
     return this._code;
   }
 
-  get data() {
-    return this._data;
+  get params() {
+    return this._params;
   }
 
   set code(code) {
     this._code = code;
   }
 
-  set data(data) {
-    this._data = data;
+  set params(data) {
+    this._params = data;
   }
 }
