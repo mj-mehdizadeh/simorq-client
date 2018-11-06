@@ -344,6 +344,20 @@ export default (variables = variable) => {
       shadowRadius: null,
       shadowOpacity: null,
     },
+    '.round': {
+      width: 56,
+      height: 56,
+      borderRadius: 28,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    '.bottomRight': {
+      position: 'absolute',
+      top: undefined,
+      bottom: 20,
+      left: undefined,
+      right: 20,
+    },
 
     paddingVertical: variables.buttonPadding,
     // paddingHorizontal: variables.buttonPadding + 10,

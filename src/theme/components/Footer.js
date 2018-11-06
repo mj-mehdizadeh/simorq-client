@@ -95,6 +95,9 @@ export default (variables = variable) => {
       alignSelf: 'center',
       alignItems: 'flex-end',
     },
+    '.noElevation': {
+      elevation: 0,
+    },
     backgroundColor: variables.footerDefaultBg,
     flexDirection: 'row',
     justifyContent: 'center',

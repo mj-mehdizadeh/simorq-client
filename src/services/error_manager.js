@@ -7,17 +7,19 @@ export default class ErrorManager {
   static toast(error) {
     const messages = ErrorManager.getErrorMessages(error);
     messages.forEach(function(text) {
-      Toast.show({
-        text,
-      });
-      Vibration.vibrate(300);
+      if (text) {
+        Toast.show({
+          text,
+        });
+        Vibration.vibrate(300);
+      }
     });
   }
 
   static getErrorMessages(error) {
     let messages = [];
     if (error.code) {
-      if (error.code === 'unexpected_error') {
+      if (error.code === 'unknown_error') {
         messages.push(translate('error.checkConnection'));
       }
       if (error.code === 'invalid_param') {

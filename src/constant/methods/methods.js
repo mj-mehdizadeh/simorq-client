@@ -3,6 +3,7 @@ import * as methods from './index';
 const methodsTable = {
   [methods.AUTH_SEND_CODE]: 'post',
   [methods.AUTH_LOGIN]: 'post',
+  [methods.AUTH_REGISTER]: 'post',
   [methods.MESSAGE_NEW]: 'socket',
 };
 

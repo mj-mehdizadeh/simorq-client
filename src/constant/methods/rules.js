@@ -7,6 +7,29 @@ const rulesTable = {
       numericality: true,
     },
   },
+  [methods.AUTH_LOGIN]: {
+    phone_number: {
+      presence: true,
+      numericality: true,
+    },
+    phone_code: {
+      presence: true,
+      numericality: true,
+    },
+  },
+  [methods.AUTH_REGISTER]: {
+    title: {
+      presence: true,
+    },
+    phone_number: {
+      presence: true,
+      numericality: true,
+    },
+    phone_code: {
+      presence: true,
+      numericality: true,
+    },
+  },
 };
 
 /**

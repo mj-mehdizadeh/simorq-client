@@ -37,3 +37,7 @@ export function randomString(length, chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWX
   }
   return str;
 }
+
+export function mkPhoneNumber(countryCode, phoneNumber) {
+  return parseInt((countryCode + '' + phoneNumber).replace(/\s+/g, ''), 10);
+}

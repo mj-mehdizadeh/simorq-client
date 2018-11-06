@@ -14,6 +14,11 @@ export default StyleSheet.create({
     fontSize: 12,
     color: '#a6afba',
   },
+  phoneNumber: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#838c96',
+  },
   countryCode: {
     textAlign: 'center',
     marginTop: 26,
@@ -33,5 +38,16 @@ export default StyleSheet.create({
   },
   item: {
     padding: 15,
+  },
+  registerForm: {
+    paddingTop: 25,
+    paddingRight: 25,
+  },
+  footerWrap: {
+    paddingLeft: 15,
+  },
+  thumbWrap: {
+    paddingTop: 15,
+    paddingLeft: 15,
   },
 });
