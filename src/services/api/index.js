@@ -120,18 +120,22 @@ export default class Api {
     } catch (error) {
       const apiError = new ApiError();
       if (error.response) {
-        if (error.response.code === 'access_token_expired') {
-          //todo await requestAccessToken();
-          //todo return this.sendRequest(requestWrapper)
+        if (error.response.data) {
+          if (error.response.data.code === 'access_token_expired') {
+            //todo await requestAccessToken();
+            //todo return this.sendRequest(requestWrapper)
+          }
+          apiError.code = error.response.data.code;
+          apiError.params = error.response.data.params;
+        } else {
+          apiError.code = error.response.status === 500 ? 'internal_server_error' : 'unexpected_error';
         }
-        apiError.code = error.code;
-        apiError.params = error.params;
       } else {
         // todo check your network
         if (requestWrapper.tried) {
           return this.sendRequest(requestWrapper);
         }
-        apiError.code = 'unexpected_error';
+        apiError.code = 'unknown_error';
       }
       throw apiError;
     }
