@@ -1,4 +1,5 @@
 import PQueue from 'p-queue';
+import validate from 'validate.js';
 import {API_BASE_URL, API_CONCURRENCY} from '../../constant/config';
 import RequestWrapper from './request_wrapper';
 import {getAggregateId} from '../../constant/methods/aggregate';
@@ -7,6 +8,7 @@ import {getMethod} from '../../constant/methods/methods';
 import axios from 'axios';
 import ApiError from './api_error';
 import {randomString} from '../core';
+import {getRule} from '../../constant/methods/rules';
 
 const apiSingleton = randomString(10);
 const apiSingletonEnforcer = randomString(10);
@@ -47,6 +49,7 @@ export default class Api {
    */
   static invoke(actionId, params) {
     let wrapper;
+    Api.validate(actionId, params);
     const promise = new Promise((resolve, reject) => {
       wrapper = new RequestWrapper(
         resolve,
@@ -71,6 +74,16 @@ export default class Api {
     });
 
     return promise;
+  }
+
+  static validate(actionId, params) {
+    const errors = validate(params, getRule(actionId));
+    if (errors) {
+      const apiError = new ApiError();
+      apiError.code = 'validate_error';
+      apiError.params = errors;
+      throw apiError;
+    }
   }
 
   /**

@@ -4,6 +4,7 @@ import {LOCALE_DEFAULT, LOCALE_EN, LOCALE_FA} from '../constant/locale';
 import {retrieveData, storeData} from './storage';
 
 const LANGUAGE_STORE_KEY = 'userLang';
+let _t;
 
 i18n
   .use(reactI18nextModule)
@@ -46,4 +47,12 @@ export function changeLang(lang, store = true) {
 export async function loadUserLang() {
   let _lang = await retrieveData(LANGUAGE_STORE_KEY) || LOCALE_DEFAULT;
   changeLang(_lang, false);
+}
+
+export function setT(t) {
+  _t = t;
+}
+
+export function translate(key, value) {
+  return _t ? _t(key, value) : null;
 }
