@@ -2,8 +2,13 @@ import {StyleSheet} from 'react-native';
 import variable from './../../theme/variables/material';
 
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   content: {
     flex: 1,
+    backgroundColor: '#f6f6f6',
+    zIndex: 10,
   },
   item: {
     backgroundColor: '#fff',
@@ -13,10 +18,6 @@ export default StyleSheet.create({
     marginBottom: 7,
     marginLeft: -1,
     marginRight: -1,
-    shadowColor: '#dadada',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.5,
-    shadowRadius: 0.5,
     elevation: 1,
     backgroundColor: '#fff',
   },
@@ -60,5 +61,15 @@ export default StyleSheet.create({
   },
   noteWrap: {
     flexDirection: 'row',
+  },
+  history: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: '#f7f7f7',
+    zIndex: 1000,
+    elevation: 3,
   },
 });

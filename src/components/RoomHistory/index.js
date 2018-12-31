@@ -20,7 +20,7 @@ export default class RoomHistory extends React.Component {
       style={styles.container}>
       <Header>
         <Left>
-          <Button transparent>
+          <Button transparent onPress={this.props.close}>
             <Icon name="arrow-back"/>
           </Button>
         </Left>

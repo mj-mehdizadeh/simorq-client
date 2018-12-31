@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
   },
   boxSelf: {
-    backgroundColor: '#fee3e3',
+    backgroundColor: '#f8f8f8',
     borderTopLeftRadius: 19,
     borderTopRightRadius: 8,
   },

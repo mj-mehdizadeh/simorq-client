@@ -1,24 +1,22 @@
 import * as React from 'react';
-import {FlatList, InteractionManager} from 'react-native';
+import {FlatList} from 'react-native';
 import PropTypes from 'prop-types';
-import {Badge, Body, Button, Container, Header, Icon, Left, ListItem, Right, Text, Thumbnail, Title, View} from 'native-base';
+import {Badge, SwipeRow, Body, Button, Container, Header, Icon, Left, ListItem, Right, Text, Thumbnail, Title, View} from 'native-base';
 import {random} from 'lodash';
 import styles from './styles';
-import {navigate} from '../../services/navigator';
-import {ROOM_HISTORY_SCREEN} from '../../constant/navigator';
+import * as Animatable from 'react-native-animatable';
+import RoomHistoryScreen from '../../screens/RoomHistoryScreen';
 
 export default class RoomList extends React.Component {
 
-  onPress = () => {
-    InteractionManager.runAfterInteractions(() => {
-      navigate(ROOM_HISTORY_SCREEN);
-    });
-  };
+  handleViewRef = ref => this.view = ref;
+  historyIn= () => setTimeout(() => this.view.slideInRight(400));
+  historyOut  = () => this.view.slideOutRight(400);
 
   _keyExtractor = (item, index) => item.id + '-' + index;
   _renderItem = ({item}) => (
     <View style={item.id === 2 ? styles.itemDivider : styles.item}>
-      <ListItem thumbnail noBorder={item.id === 2} onPress={this.onPress}>
+      <ListItem thumbnail noBorder={item.id === 2} onPress={this.historyIn}>
         <Left>
           <Thumbnail
             source={{uri: item.avatar}}/>
@@ -42,10 +40,10 @@ export default class RoomList extends React.Component {
   );
 
   render() {
-    return <Container>
+    return <Container style={styles.container}>
       <Header>
         <Body>
-          <Title bold>iGap+</Title>
+          <Title bold>SimorQ</Title>
         </Body>
         <Right>
           <Button transparent>
@@ -62,6 +60,21 @@ export default class RoomList extends React.Component {
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
       />
+      <Animatable.View
+        animation={{
+          0: {
+            translateX: 360,
+          },
+          1: {
+            translateX: 360,
+          },
+        }}
+        duration={500}
+        useNativeDriver={true}
+        style={styles.history}
+        ref={this.handleViewRef}>
+        <RoomHistoryScreen close={this.historyOut}/>
+      </Animatable.View>
     </Container>;
   }
 }
