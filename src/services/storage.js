@@ -1,6 +1,6 @@
 import {AsyncStorage} from 'react-native';
 
-const STORAGE_PREFIX = '@PP30';
+const STORAGE_PREFIX = '@SIQ';
 
 export function storeData(key, value) {
   return AsyncStorage.setItem(getKey(key), value);

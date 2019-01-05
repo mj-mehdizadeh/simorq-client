@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Vibration} from 'react-native';
 import {filter, find} from 'lodash';
 import Login from '../components/Login/index';
 import countryList from '../constant/country';
@@ -8,9 +7,9 @@ import Api from '../services/api';
 import {AUTH_LOGIN, AUTH_REGISTER, AUTH_SEND_CODE} from '../constant/methods';
 import {mkPhoneNumber} from '../services/core';
 import ErrorManager from '../services/error_manager';
-import {setAuthToken} from '../services/auth';
 import {ROOM_LIST_SCREEN} from '../constant/navigator';
 import {navigate} from '../services/navigator';
+import OAuth from '../services/oauth';
 
 const country = find(countryList, {code: DEFAULT_COUNTRY});
 
@@ -100,14 +99,15 @@ class LoginScreen extends Component {
         phone_hash: this.params.phone_hash,
         phone_code,
       });
-      setAuthToken(response);
+      await OAuth.grantPassword(this.params.phone_number, response.login_hash);
       navigate(ROOM_LIST_SCREEN);
     } catch (e) {
-      ErrorManager.toast(e);
-      if (e.code === 'invalid_phone_number') {
+      if (e.name === 'invalid_phone_number') {
         this.setState({state: 'register'});
+      } else {
+        ErrorManager.toast(e);
       }
-      if (e.code === 'invalid_phone_code') {
+      if (e.name === 'invalid_phone_code') {
         this.setState({invalidCode: true});
       }
     }
@@ -121,16 +121,16 @@ class LoginScreen extends Component {
         phone_hash: this.params.phone_hash,
         phone_code: this.params.phone_code,
       });
-      setAuthToken(response);
+      await OAuth.grantPassword(this.params.phone_number, response.login_hash);
       navigate(ROOM_LIST_SCREEN);
     } catch (e) {
-      ErrorManager.toast(e);
-      if (e.code === 'invalid_phone_code') {
+      if (e.name === 'invalid_phone_code') {
         this.setState({state: 'login', invalidCode: true});
-        Vibration.vibrate(300);
       }
-      if (e.code === 'invalid_phone_number') {
+      if (e.name === 'invalid_phone_number') {
         this.setState({state: 'sendCode'});
+      } else {
+        ErrorManager.toast(e);
       }
     }
   };

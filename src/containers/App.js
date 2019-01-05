@@ -2,18 +2,17 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import AppNavigator from '../navigation/AppNavigator';
 import {navigate, setContainer} from '../services/navigator';
-import {getAuthToken} from '../services/auth';
 import {APP_NAVIGATOR, AUTH_NAVIGATOR} from '../constant/navigator';
 import {translate} from 'react-i18next';
 import PropTypes from 'prop-types';
 import {setT} from '../services/i18n';
+import OAuth from '../services/oauth';
 
 class App extends Component {
 
-
   componentDidMount() {
     setT(this.props.t);
-    if (getAuthToken()) {
+    if (OAuth.getToken()) {
       return navigate(APP_NAVIGATOR);
     }
     navigate(AUTH_NAVIGATOR);

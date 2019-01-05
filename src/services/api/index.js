@@ -13,7 +13,7 @@ const apiSingletonEnforcer = randomString(10);
 
 const _queue = new PQueue({concurrency: API_CONCURRENCY});
 
-const axiosApi = axios.create({
+export const axiosApi = axios.create({
   baseURL: API_BASE_URL,
 });
 
