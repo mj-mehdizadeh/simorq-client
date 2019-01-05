@@ -1,40 +1,42 @@
 import {Toast} from 'native-base';
 import {Vibration} from 'react-native';
 import {translate} from './i18n';
-import {concat, forIn} from 'lodash';
+import AppError from './app_error';
+import {INVALID_PARAM_ERROR, UNKNOWN_ERROR, VALIDATE_ERROR} from '../constant/errors';
 
 export default class ErrorManager {
   static toast(error) {
-    const messages = ErrorManager.getErrorMessages(error);
-    messages.forEach(function(text) {
-      if (text) {
-        Toast.show({
-          text,
-        });
-        Vibration.vibrate(300);
-      }
-    });
+    const messages = this.getErrorMessages(error);
+    if (typeof messages === 'string') {
+      this.showToast(messages);
+    } else {
+      messages.forEach((text) => {
+        this.showToast(text);
+      });
+    }
+  }
+
+  static showToast(text) {
+    if (text) {
+      Toast.show({
+        text,
+      });
+    }
+    Vibration.vibrate(300);
   }
 
   static getErrorMessages(error) {
-    let messages = [];
-    if (error.code) {
-      if (error.code === 'unknown_error') {
-        messages.push(translate('error.checkConnection'));
-      }
-      if (error.code === 'invalid_param') {
-        error.params.forEach((param) => {
-          messages.push(translate(`error.${param.code}`, {field: translate(`field.${param.field}`)}));
+    switch (error.name) {
+      case UNKNOWN_ERROR:
+        return translate('error.checkConnection');
+      case INVALID_PARAM_ERROR:
+        return error.params.map((param) => {
+          return translate(`error.${param.name}`, {field: translate(`field.${param.field}`)});
         });
-      }
-      if (error.code === 'validate_error') {
-        forIn(error.params, function(value, key) {
-          messages = concat(messages, value);
-        });
-      }
-    } else if (error instanceof Error) {
-      messages.push(error.message);
+      case VALIDATE_ERROR:
+        return;
+      default:
+        return translate(`error.${error.name}`) || error.name;
     }
-    return messages;
   }
 }

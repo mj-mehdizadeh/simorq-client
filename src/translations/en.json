@@ -8,7 +8,8 @@
   },
   "error": {
     "checkConnection": "Check your network connection",
-    "invalid": "{{field}} is Invalid"
+    "invalid": "{{field}} is Invalid",
+    "invalid_phone_code": "Invalid Code"
   },
   "field": {
     "phone_number": "Phone number"

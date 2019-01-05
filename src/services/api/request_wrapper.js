@@ -5,29 +5,25 @@ export default class RequestWrapper {
    */
   _promise;
 
-  _tried = 3;
-
-  constructor(resolve, reject, actionId, params, promise) {
+  constructor(resolve, reject, actionId, data, promise, options) {
     this._resolve = resolve;
     this._reject = reject;
     this._actionId = actionId;
-    this._params = params;
+    this._data = data;
     this._promise = promise;
+    this._options = options;
   }
 
   get actionId() {
     return this._actionId;
   }
 
-  get params() {
-    return this._params;
+  get data() {
+    return this._data;
   }
 
-  get tried() {
-    if (this._tried) {
-      this._tried--;
-    }
-    return this._tried;
+  get options() {
+    return this._options;
   }
 
   /**
@@ -35,10 +31,6 @@ export default class RequestWrapper {
    */
   get promise() {
     return this._promise;
-  }
-
-  getRequestParams(method) {
-    return method === 'get' ? {params: this._params} : this._params;
   }
 
   resolve(value) {

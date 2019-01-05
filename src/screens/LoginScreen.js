@@ -60,7 +60,10 @@ class LoginScreen extends Component {
   };
 
   onSubmit = async () => {
-    const {state} = this.state;
+    const {state, loading} = this.state;
+    if (loading) {
+      return;
+    }
     this.setState({loading: true});
     if (state === 'sendCode') {
       await this._requestSendCode();
@@ -78,7 +81,7 @@ class LoginScreen extends Component {
     this.params.phone_number = phone_number;
 
     try {
-      const response = await Api.invoke(AUTH_SEND_CODE, {
+      const response = await Api.post(AUTH_SEND_CODE, {
         phone_number,
       });
       this.params.phone_hash = response.phone_hash;
@@ -92,7 +95,7 @@ class LoginScreen extends Component {
     const phone_code = parseInt(phoneCode, 10);
     this.params.phone_code = phone_code;
     try {
-      const response = await Api.invoke(AUTH_LOGIN, {
+      const response = await Api.post(AUTH_LOGIN, {
         phone_number: this.params.phone_number,
         phone_hash: this.params.phone_hash,
         phone_code,
@@ -106,14 +109,13 @@ class LoginScreen extends Component {
       }
       if (e.code === 'invalid_phone_code') {
         this.setState({invalidCode: true});
-        Vibration.vibrate(300);
       }
     }
   };
   _requestRegister = async () => {
     const {title} = this.state;
     try {
-      const response = await Api.invoke(AUTH_REGISTER, {
+      const response = await Api.post(AUTH_REGISTER, {
         title,
         phone_number: this.params.phone_number,
         phone_hash: this.params.phone_hash,
@@ -122,7 +124,6 @@ class LoginScreen extends Component {
       setAuthToken(response);
       navigate(ROOM_LIST_SCREEN);
     } catch (e) {
-      console.log('e', e.code, e.params);
       ErrorManager.toast(e);
       if (e.code === 'invalid_phone_code') {
         this.setState({state: 'login', invalidCode: true});

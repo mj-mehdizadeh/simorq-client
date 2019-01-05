@@ -2,24 +2,29 @@ import PQueue from 'p-queue';
 import validate from 'validate.js';
 import {API_BASE_URL, API_CONCURRENCY} from '../../constant/config';
 import RequestWrapper from './request_wrapper';
-import {getAggregateId} from '../../constant/methods/aggregate';
-import {getPriority} from '../../constant/methods/priority';
-import {getMethod} from '../../constant/methods/methods';
 import axios from 'axios';
-import ApiError from './api_error';
 import {randomString} from '../core';
 import {getRule} from '../../constant/methods/rules';
+import AppError from '../app_error';
+import {UNKNOWN_ERROR, VALIDATE_ERROR} from '../../constant/errors';
 
 const apiSingleton = randomString(10);
 const apiSingletonEnforcer = randomString(10);
-
-let aggregate = new Map();
 
 const _queue = new PQueue({concurrency: API_CONCURRENCY});
 
 const axiosApi = axios.create({
   baseURL: API_BASE_URL,
 });
+
+/**
+ * @typedef {{priority: number, loading: boolean}} RequestOptions
+ * @type RequestOptions
+ */
+const DEFAULT_OPTIONS = {
+  priority: 100,
+  loading: false,
+};
 
 
 export default class Api {
@@ -41,36 +46,41 @@ export default class Api {
     return this[apiSingleton];
   }
 
+  static post(actionId, body, options) {
+    return Api.instance.invoke('post', actionId, body, options);
+  }
+
+  static get(actionId, params, options) {
+    return Api.instance.invoke('get', actionId, {params}, options);
+  }
+
   /**
-   *
+   * @param {string} method
    * @param {string} actionId
-   * @param {Object} params
+   * @param {Object} data
+   * @param {RequestOptions} options
    * @returns {Promise<any>}
    */
-  static invoke(actionId, params) {
+  invoke(method, actionId, data, options) {
     let wrapper;
-    Api.validate(actionId, params);
+    options = {
+      ...DEFAULT_OPTIONS,
+      ...options,
+    };
+
+    // Api.validate(actionId, data);
     const promise = new Promise((resolve, reject) => {
       wrapper = new RequestWrapper(
         resolve,
         reject,
         actionId,
-        params,
+        data,
+        options,
       );
     });
-    wrapper.promise = promise;
 
-    const aggregateId = getAggregateId(wrapper);
-    if (aggregateId && aggregate.has(aggregateId)) {
-      return aggregate.get(aggregateId);
-    }
-
-    if (aggregateId) {
-      aggregate.set(aggregateId, wrapper.promise);
-    }
-
-    _queue.add(() => this.instance.run(wrapper), {
-      priority: getPriority(actionId),
+    _queue.add(() => this.run(method, wrapper), {
+      priority: options.priority,
     });
 
     return promise;
@@ -79,95 +89,54 @@ export default class Api {
   static validate(actionId, params) {
     const errors = validate(params, getRule(actionId));
     if (errors) {
-      const apiError = new ApiError();
-      apiError.code = 'validate_error';
-      apiError.params = errors;
-      throw apiError;
+      throw new AppError(VALIDATE_ERROR, errors);
     }
   }
 
   /**
+   * @param {String} method
    * @param {RequestWrapper} requestWrapper
    * @returns {Promise<void>}
    */
-  async run(requestWrapper) {
-    const method = getMethod(requestWrapper.actionId);
-    const action = method === 'socket' ? this.socketEmit.bind(this) : this.sendRequest.bind(this);
-
+  async run(method, requestWrapper) {
     try {
-      const response = await action(requestWrapper);
+      const response = await this.sendRequest(method, requestWrapper);
       requestWrapper.resolve(response);
     } catch (error) {
       requestWrapper.reject(error);
-      throw error;
-    } finally {
-      this._done(requestWrapper);
     }
   }
 
   /**
+   * @param {String} method
    * @param {RequestWrapper} requestWrapper
    * @returns {Promise<void>}
    */
-  async sendRequest(requestWrapper) {
-    const method = getMethod(requestWrapper.actionId);
+  async sendRequest(method, requestWrapper) {
     try {
+      // await checkConnection();
       const response = await axiosApi[method](
         requestWrapper.actionId,
-        requestWrapper.getRequestParams(method),
+        requestWrapper.data,
       );
       return response.data;
     } catch (error) {
-      const apiError = new ApiError();
-      if (error.response) {
-        if (error.response.data) {
-          if (error.response.data.code === 'access_token_expired') {
-            //todo await requestAccessToken();
-            //todo return this.sendRequest(requestWrapper)
-          }
-          apiError.code = error.response.data.code;
-          apiError.params = error.response.data.params;
-        } else {
-          apiError.code = error.response.status === 500 ? 'internal_server_error' : 'unexpected_error';
-        }
+      const appError = new AppError();
+      if (!error || !error.response) {
+        appError.name = UNKNOWN_ERROR;
       } else {
-        // todo check your network
-        if (requestWrapper.tried) {
-          return this.sendRequest(requestWrapper);
+        switch (error.response.status) {
+          case 401:
+            //todo await requestAccessToken();
+            //todo return this.sendRequest(method, requestWrapper)
+            break;
+          default:
+            appError.name = error.response.data.name;
+            appError.params = error.response.data.params;
+            break;
         }
-        apiError.code = 'unknown_error';
       }
-      throw apiError;
-    }
-  }
-
-  /**
-   * return axios params
-   * @param method
-   * @param params
-   * @returns {*}
-   * @private
-   */
-  _getMethodParams(method, params) {
-    if (method === 'get') {
-      return {params};
-    }
-    return params;
-  }
-
-  /**
-   * @param actionId
-   * @param params
-   * @returns {Promise<void>}
-   */
-  async socketEmit(actionId, params) {
-
-  }
-
-  _done(requestWrapper) {
-    const aggregateId = getAggregateId(requestWrapper);
-    if (aggregateId && aggregate.has(aggregateId)) {
-      return aggregate.delete(aggregateId);
+      throw appError;
     }
   }
 }
