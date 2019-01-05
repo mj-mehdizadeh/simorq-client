@@ -71,5 +71,10 @@ export default StyleSheet.create({
     backgroundColor: '#f7f7f7',
     zIndex: 1000,
     elevation: 3,
+    transform: [
+      {
+        translateX: 360,
+      },
+    ],
   },
 });

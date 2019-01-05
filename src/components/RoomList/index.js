@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FlatList} from 'react-native';
 import PropTypes from 'prop-types';
-import {Badge, SwipeRow, Body, Button, Container, Header, Icon, Left, ListItem, Right, Text, Thumbnail, Title, View} from 'native-base';
+import {Badge, Body, Button, Container, Header, Icon, Left, ListItem, Right, Text, Thumbnail, Title, View} from 'native-base';
 import {random} from 'lodash';
 import styles from './styles';
 import * as Animatable from 'react-native-animatable';
@@ -10,8 +10,20 @@ import RoomHistoryScreen from '../../screens/RoomHistoryScreen';
 export default class RoomList extends React.Component {
 
   handleViewRef = ref => this.view = ref;
-  historyIn= () => setTimeout(() => this.view.slideInRight(400));
-  historyOut  = () => this.view.slideOutRight(400);
+  historyIn = () => this.view.transitionTo({
+    transform: [
+      {
+        translateX: 0,
+      },
+    ],
+  }, 400);
+  historyOut = () => this.view.transitionTo({
+    transform: [
+      {
+        translateX: 360,
+      },
+    ],
+  }, 400);
 
   _keyExtractor = (item, index) => item.id + '-' + index;
   _renderItem = ({item}) => (
@@ -39,6 +51,51 @@ export default class RoomList extends React.Component {
     </View>
   );
 
+  _onPanResponderMove = (evt, gesture) => {
+    if (gesture.moveX > 50 && gesture.dx > 10) {
+      this.view.setNativeProps({
+        style: {
+          transform: [
+            {
+              translateX: gesture.dx,
+            },
+          ],
+        },
+      });
+    }
+  };
+  _onPanResponderRelease = (evt, gesture) => {
+    if (gesture.dx > 250 || (gesture.dx > 20 && gesture.vx > 0.5)) {
+      this.view.transition({
+        transform: [
+          {
+            translateX: gesture.dx,
+          },
+        ],
+      }, {
+        transform: [
+          {
+            translateX: 360,
+          },
+        ],
+      }, 200);
+    } else if (gesture.dx > 0) {
+      this.view.transition({
+        transform: [
+          {
+            translateX: gesture.dx,
+          },
+        ],
+      }, {
+        transform: [
+          {
+            translateX: 0,
+          },
+        ],
+      }, 100);
+    }
+  };
+
   render() {
     return <Container style={styles.container}>
       <Header>
@@ -61,19 +118,14 @@ export default class RoomList extends React.Component {
         renderItem={this._renderItem}
       />
       <Animatable.View
-        animation={{
-          0: {
-            translateX: 360,
-          },
-          1: {
-            translateX: 360,
-          },
-        }}
         duration={500}
         useNativeDriver={true}
         style={styles.history}
         ref={this.handleViewRef}>
-        <RoomHistoryScreen close={this.historyOut}/>
+        <RoomHistoryScreen
+          onPanResponderMove={this._onPanResponderMove}
+          onPanResponderRelease={this._onPanResponderRelease}
+          close={this.historyOut}/>
       </Animatable.View>
     </Container>;
   }

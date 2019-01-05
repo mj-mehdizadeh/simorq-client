@@ -1,15 +1,24 @@
 // @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {FlatList, ImageBackground, View} from 'react-native';
+import {FlatList, ImageBackground, View, PanResponder} from 'react-native';
 import {Body, Button, Footer, Header, Icon, Input, Left, Right, Subtitle, Thumbnail, Title} from 'native-base';
 import styles from './styles';
 import RoomMessageContainer from '../../containers/RoomMessageContainer';
 
 export default class RoomHistory extends React.Component {
-
-  onPress = () => {
-  };
+  constructor(props) {
+    super(props);
+    this._panResponder = PanResponder.create({
+      // Ask to be the responder:
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onPanResponderMove: this.props.onPanResponderMove,
+      onPanResponderRelease: this.props.onPanResponderRelease,
+    });
+  }
 
   _keyExtractor = (item, index) => item.id + '-' + index;
   _renderItem = ({item}) => (<RoomMessageContainer message={item}/>);
@@ -38,6 +47,7 @@ export default class RoomHistory extends React.Component {
         </Right>
       </Header>
       <FlatList
+        {...this._panResponder.panHandlers}
         style={styles.content}
         data={this.props.history}
         keyExtractor={this._keyExtractor}

@@ -14,6 +14,9 @@ export default class RoomHistoryScreen extends React.Component {
   }
 
   render() {
-    return <RoomHistory close={this.props.close} history={this.state.history}/>;
+    return <RoomHistory
+      onPanResponderMove={this.props.onPanResponderMove}
+      onPanResponderRelease={this.props.onPanResponderRelease}
+      close={this.props.close} history={this.state.history}/>;
   }
 }
