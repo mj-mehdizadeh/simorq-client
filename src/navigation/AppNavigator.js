@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import RoomListScreen from '../screens/RoomListScreen';
 import RoomHistoryScreen from '../screens/RoomHistoryScreen';
+import AppLoader from '../containers/AppLoader';
 // import TestScreen from '../screens/TestScreen';
 
 const AppNavigator = createStackNavigator(
@@ -34,10 +35,11 @@ const AuthNavigator = createStackNavigator(
 
 export default createSwitchNavigator(
   {
+    AppLoader: AppLoader,
     [APP_NAVIGATOR]: AppNavigator,
     [AUTH_NAVIGATOR]: AuthNavigator,
   },
   {
-    initialRouteName: APP_NAVIGATOR,
+    initialRouteName: 'AppLoader',
   }
 );
