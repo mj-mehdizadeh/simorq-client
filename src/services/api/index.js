@@ -7,6 +7,7 @@ import {randomString} from '../core';
 import {getRule} from '../../constant/methods/rules';
 import AppError from '../app_error';
 import {UNKNOWN_ERROR, VALIDATE_ERROR} from '../../constant/errors';
+import OAuth from '../oauth';
 
 const apiSingleton = randomString(10);
 const apiSingletonEnforcer = randomString(10);
@@ -16,6 +17,10 @@ const _queue = new PQueue({concurrency: API_CONCURRENCY});
 export const axiosApi = axios.create({
   baseURL: API_BASE_URL,
 });
+
+export function setAxiosToken(token_type, access_token) {
+  axiosApi.defaults.headers.common['Authorization'] = token_type + ' ' + access_token;
+}
 
 /**
  * @typedef {{priority: number, loading: boolean}} RequestOptions
@@ -103,6 +108,7 @@ export default class Api {
       const response = await this.sendRequest(method, requestWrapper);
       requestWrapper.resolve(response);
     } catch (error) {
+      console.log('errpor', error);
       requestWrapper.reject(error);
     }
   }
@@ -127,9 +133,9 @@ export default class Api {
       } else {
         switch (error.response.status) {
           case 401:
-            //todo await requestAccessToken();
-            //todo return this.sendRequest(method, requestWrapper)
-            break;
+            await OAuth.grantRefreshToken();
+            console.log('OAuth.grantRefreshToken');
+            return this.sendRequest(method, requestWrapper);
           default:
             appError.name = error.response.data.name;
             appError.params = error.response.data.params;
