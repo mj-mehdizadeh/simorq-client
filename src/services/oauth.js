@@ -1,10 +1,10 @@
 import qs from 'qs';
-import {axiosApi, setAxiosToken} from './api';
+import {axiosApi, resetAxiosToken, setAxiosToken} from './api';
 import {OAUTH_TOKEN} from '../constant/methods';
 import {APP_CLIENT_ID} from '../constant/config';
 import AppError from './app_error';
 import {UNAUTHORIZED_ERROR} from '../constant/errors';
-import {retrieveData, storeData} from './storage';
+import {removeData, retrieveData, storeData} from './storage';
 
 const AUTH_STORE_KEY = 'authToken';
 let _authToken;
@@ -30,7 +30,7 @@ export default class OAuth {
       if (!error.response || !error.response.data) {
         return this.grantRefreshToken();
       }
-      throw new AppError(UNAUTHORIZED_ERROR);
+      throw new AppError(UNAUTHORIZED_ERROR, null);
     } finally {
       _promise = null;
     }
@@ -63,9 +63,17 @@ export default class OAuth {
     return storeData(AUTH_STORE_KEY, JSON.stringify(token));
   }
 
+  static removeToken() {
+    _authToken = null;
+    resetAxiosToken();
+    return removeData(AUTH_STORE_KEY);
+  }
+
   static async retrieveToken() {
     _authToken = JSON.parse(await retrieveData(AUTH_STORE_KEY));
-    setAxiosToken(_authToken.token_type, _authToken.access_token);
+    if (_authToken) {
+      setAxiosToken(_authToken.token_type, _authToken.access_token);
+    }
     return _authToken;
   }
 

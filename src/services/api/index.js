@@ -8,6 +8,7 @@ import {getRule} from '../../constant/methods/rules';
 import AppError from '../app_error';
 import {UNKNOWN_ERROR, VALIDATE_ERROR} from '../../constant/errors';
 import OAuth from '../oauth';
+import ErrorManager from '../error_manager';
 
 const apiSingleton = randomString(10);
 const apiSingletonEnforcer = randomString(10);
@@ -20,6 +21,9 @@ export const axiosApi = axios.create({
 
 export function setAxiosToken(token_type, access_token) {
   axiosApi.defaults.headers.common['Authorization'] = token_type + ' ' + access_token;
+}
+export function resetAxiosToken() {
+  axiosApi.defaults.headers.common['Authorization'] = null;
 }
 
 /**
@@ -108,8 +112,8 @@ export default class Api {
       const response = await this.sendRequest(method, requestWrapper);
       requestWrapper.resolve(response);
     } catch (error) {
-      console.log('errpor', error);
       requestWrapper.reject(error);
+      ErrorManager.onError(error);
     }
   }
 

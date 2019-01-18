@@ -5,8 +5,8 @@ export default class AppError extends Error {
 
   constructor(name, params) {
     super();
-    this._name = name;
-    this._params = params;
+    this.name = name;
+    this.params = params;
   }
 
   get name() {
