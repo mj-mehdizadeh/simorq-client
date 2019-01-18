@@ -1,7 +1,9 @@
 import {put, take, call} from 'redux-saga/effects';
 import Creators, {RoomsTypes} from '../redux/rooms';
+import MessageCreators from '../redux/messages';
 import Api from '../services/api';
 import {SUBSCRIBES} from '../constant/methods';
+import {keyBy} from 'lodash';
 
 const fetchRoomList = () => {
   return Api.get(SUBSCRIBES);
@@ -9,9 +11,10 @@ const fetchRoomList = () => {
 
 export function* getRoomList() {
   try {
-    yield take(RoomsTypes.GET_ROOM_LIST);
-    const rooms = yield call(fetchRoomList);
-    yield put(Creators.addRoomList(rooms));
+    yield take(RoomsTypes.FETCH_ROOMS);
+    const response = yield call(fetchRoomList);
+    yield put(Creators.appendRooms(keyBy(response.rooms, 'id')));
+    yield put(MessageCreators.appendMessages(keyBy(response.messages, 'id')));
   } catch (error) {
     yield put(Creators.failed());
   }
