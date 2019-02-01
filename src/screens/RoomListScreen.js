@@ -1,23 +1,18 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import RoomList from '../components/RoomList/index';
 import RoomsCreators from '../redux/rooms';
+import {getRoomList} from '../selector/rooms';
 
-class RoomListScreen extends React.Component {
-  state = {
-    roomList: [],
-  };
+class RoomListScreen extends React.PureComponent {
 
   componentDidMount() {
     const {getRoomList} = this.props;
     getRoomList();
-    this.setState({
-      roomList: [],
-    });
   }
 
   render() {
-    return <RoomList roomList={this.state.roomList}/>;
+    return <RoomList rooms={this.props.rooms}/>;
   }
 }
 
@@ -26,8 +21,9 @@ function bindAction(dispatch) {
     getRoomList: () => dispatch(RoomsCreators.getRoomList()),
   };
 }
+
 const mapStateToProps = state => ({
-  rooms: state.rooms,
+  rooms: getRoomList(state),
 });
 
 export default connect(mapStateToProps, bindAction)(RoomListScreen);
