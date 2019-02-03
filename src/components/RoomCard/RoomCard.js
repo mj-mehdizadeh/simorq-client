@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {Badge, Body, Icon, Left, ListItem, Text, Thumbnail, View} from 'native-base';
+import {Badge, Body, Icon, Left, ListItem, Text, View} from 'native-base';
 import styles from '../RoomList/styles';
+import AvatarContainer from '../../containers/AvatarContainer';
 
 export default class RoomCard extends React.PureComponent {
   render() {
@@ -10,8 +11,7 @@ export default class RoomCard extends React.PureComponent {
     return (<View style={room.id === 2 ? styles.itemDivider : styles.item}>
       <ListItem thumbnail noBorder={room.id === 2} onPress={this.historyIn}>
         <Left>
-          <Thumbnail
-            source={{uri: room.avatar}}/>
+          <AvatarContainer roomId={room.id}/>
         </Left>
         <Body style={styles.body}>
           <View style={styles.titleWrap}>
