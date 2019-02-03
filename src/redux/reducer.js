@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {reducer as config} from './AppRedux';
+import {reducer as config} from './appRedux';
 import {reducer as rooms} from './rooms';
 import {reducer as messages} from './messages';
 

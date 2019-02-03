@@ -5,10 +5,10 @@ import RequestWrapper from './request_wrapper';
 import axios from 'axios';
 import {randomString} from '../core';
 import {getRule} from '../../constant/methods/rules';
-import AppError from '../app_error';
+import AppError from '../error/app_error';
 import {UNKNOWN_ERROR, VALIDATE_ERROR} from '../../constant/errors';
 import OAuth from '../oauth';
-import ErrorManager from '../error_manager';
+import ErrorManager from '../error/error_manager';
 
 const apiSingleton = randomString(10);
 const apiSingletonEnforcer = randomString(10);

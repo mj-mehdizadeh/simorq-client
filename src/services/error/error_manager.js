@@ -1,10 +1,10 @@
 import {Toast} from 'native-base';
 import {Vibration} from 'react-native';
-import {translate} from './i18n';
-import {INVALID_PARAM_ERROR, UNAUTHORIZED_ERROR, UNKNOWN_ERROR, VALIDATE_ERROR} from '../constant/errors';
-import {AUTH_NAVIGATOR} from '../constant/navigator';
-import {navigate} from './navigator';
-import OAuth from './oauth';
+import {translate} from '../i18n';
+import {INVALID_PARAM_ERROR, UNAUTHORIZED_ERROR, UNKNOWN_ERROR, VALIDATE_ERROR} from '../../constant/errors';
+import {AUTH_NAVIGATOR} from '../../constant/navigator';
+import {navigate} from '../navigator';
+import OAuth from '../oauth';
 
 export default class ErrorManager {
   static async onError(error) {

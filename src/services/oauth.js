@@ -2,7 +2,7 @@ import qs from 'qs';
 import {axiosApi, resetAxiosToken, setAxiosToken} from './api';
 import {OAUTH_TOKEN} from '../constant/methods';
 import {APP_CLIENT_ID} from '../constant/config';
-import AppError from './app_error';
+import AppError from './error/app_error';
 import {UNAUTHORIZED_ERROR} from '../constant/errors';
 import {removeData, retrieveData, storeData} from './storage';
 

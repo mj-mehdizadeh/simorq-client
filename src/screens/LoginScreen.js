@@ -6,7 +6,7 @@ import {DEFAULT_COUNTRY} from '../constant/config';
 import Api from '../services/api';
 import {AUTH_LOGIN, AUTH_REGISTER, AUTH_SEND_CODE} from '../constant/methods';
 import {mkPhoneNumber} from '../services/core';
-import ErrorManager from '../services/error_manager';
+import ErrorManager from '../services/error/error_manager';
 import {ROOM_LIST_SCREEN} from '../constant/navigator';
 import {navigate} from '../services/navigator';
 import OAuth from '../services/oauth';
