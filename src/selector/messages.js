@@ -24,10 +24,3 @@ export const getRoomMessages = createSelector(
     'id',
   ),
 );
-
-export function fettleMessage(message) {
-  return {
-    ...message,
-    out: message.createdBy === USER_ID,
-  };
-}
