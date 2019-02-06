@@ -8,9 +8,6 @@ export default class RoomHistoryScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({
-      history: require('../../data/roomHistory'),
-    });
   }
 
   render() {

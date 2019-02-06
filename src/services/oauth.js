@@ -1,7 +1,7 @@
 import qs from 'qs';
 import {axiosApi, resetAxiosToken, setAxiosToken} from './api';
 import {OAUTH_TOKEN} from '../constant/methods';
-import {APP_CLIENT_ID} from '../constant/config';
+import {APP_CLIENT_ID, APP_CLIENT_SECRET} from '../constant/config';
 import AppError from './error/app_error';
 import {UNAUTHORIZED_ERROR} from '../constant/errors';
 import {removeData, retrieveData, storeData} from './storage';
@@ -21,6 +21,7 @@ export default class OAuth {
         grant_type: 'refresh_token',
         refresh_token: _authToken.refresh_token,
         client_id: APP_CLIENT_ID,
+        client_secret: APP_CLIENT_SECRET,
       }), {
         headers: {'content-type': 'application/x-www-form-urlencoded'},
       });
@@ -43,7 +44,7 @@ export default class OAuth {
         username,
         password,
         client_id: APP_CLIENT_ID,
-        client_secret: '112233',
+        client_secret: APP_CLIENT_SECRET,
       }), {
         headers: {'content-type': 'application/x-www-form-urlencoded'},
       });
