@@ -18,8 +18,8 @@ export default StyleSheet.create({
     borderRadius: 22,
   },
   'medium': {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
     borderRadius: 27.5,
   },
 
@@ -33,7 +33,7 @@ export default StyleSheet.create({
   },
   'text-medium': {
     color: '#fff',
-    fontSize: 25,
+    fontSize: 18,
     lineHeight: 30,
   },
 });

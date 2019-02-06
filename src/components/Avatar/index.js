@@ -23,7 +23,6 @@ class Avatar extends PureComponent {
       onError={this.onImageError}
       style={StyleSheet.flatten([styles.container, styles[this.props.size], {backgroundColor: color}])}>
       {this.state.showTxt && (<Text
-        bold={true}
         style={styles[`text-${size}`]}>
         {initial.toUpperCase()}
       </Text>)}
