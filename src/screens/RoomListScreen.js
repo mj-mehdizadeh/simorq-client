@@ -18,7 +18,7 @@ class RoomListScreen extends React.PureComponent {
 
 function bindAction(dispatch) {
   return {
-    getRoomList: () => dispatch(RoomsCreators.getRoomList()),
+    getRoomList: () => dispatch(RoomsCreators.fetchRooms()),
   };
 }
 

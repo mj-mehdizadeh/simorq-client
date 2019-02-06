@@ -10,7 +10,8 @@ class RoomCardContainer extends React.PureComponent {
   render() {
     return <RoomCard
       room={this.props.room}
-      message={this.props.lastMessage}
+      lastMessage={this.props.lastMessage}
+      onPress={this.props.onPress}
     />;
   }
 }
@@ -27,4 +28,5 @@ RoomCardContainer.propTypes = {
   index: PropTypes.number,
   room: PropTypes.object.isRequired,
   lastMessage: PropTypes.object,
+  onPress: PropTypes.func,
 };

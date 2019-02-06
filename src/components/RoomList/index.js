@@ -11,7 +11,11 @@ import {transitionIn, transitionMove, transitionOut, transitionRelease} from '..
 export default class RoomList extends React.Component {
 
   _keyExtractor = (item, index) => item.id + '-' + index;
-  _renderItem = (roomId, index) => <RoomCardContainer roomId={roomId} index={index}/>;
+  _renderItem = ({item, index}) => <RoomCardContainer
+    onPress={this.historyIn}
+    roomId={item}
+    index={index}
+  />;
 
   handleViewRef = ref => this.view = ref;
   historyIn = () => transitionIn(this.view);
