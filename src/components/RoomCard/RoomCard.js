@@ -2,12 +2,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Badge, Body, Icon, Left, ListItem, Text, View} from 'native-base';
-import styles from '../RoomList/styles';
+import styles from './styles';
 import AvatarContainer from '../../containers/AvatarContainer';
+import {translate} from 'react-i18next';
 
-export default class RoomCard extends React.PureComponent {
+class RoomCard extends React.PureComponent {
   render() {
-    const {room, lastMessage, onPress} = this.props;
+    const {room, lastMessage, onPress, t} = this.props;
     return (<View style={room.id === 2 ? styles.itemDivider : styles.item}>
       <ListItem thumbnail noBorder={room.id === 2} onPress={onPress}>
         <Left>
@@ -22,7 +23,7 @@ export default class RoomCard extends React.PureComponent {
             {(lastMessage && lastMessage.out && room.subscribe.lastPeerRead >= lastMessage.createdAt) && (
               <Icon style={styles.iconSeen} name="check-all" type="MaterialCommunityIcons"/>
             )}
-            <Text style={styles.time} note>16:45</Text>
+            <Text style={styles.time} note>{!!lastMessage && t('date.msgTime', {date: lastMessage.createdAt})}</Text>
           </View>
           <View style={styles.noteWrap}>
             <Text style={styles.note} note numberOfLines={1}>{!!lastMessage && lastMessage.text}</Text>
@@ -35,8 +36,10 @@ export default class RoomCard extends React.PureComponent {
     </View>);
   }
 }
+export default translate()(RoomCard);
 
 RoomCard.propTypes = {
+  t: PropTypes.func.isRequired,
   room: PropTypes.object,
   lastMessage: PropTypes.object,
 };
