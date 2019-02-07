@@ -14,6 +14,10 @@
   "field": {
     "phone_number": "Phone number"
   },
+  "date": {
+    "yesterday": "Yesterday",
+    "msgTime": "{{date, msgTime}}"
+  },
   "login": {
     "title": "Login",
     "country": "Country",

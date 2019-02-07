@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import {reactI18nextModule} from 'react-i18next';
 import {LOCALE_DEFAULT, LOCALE_EN, LOCALE_FA} from '../constant/locale';
 import {retrieveData, storeData} from './storage';
+import {msgTime} from './core';
 
 const LANGUAGE_STORE_KEY = 'userLang';
 let _t;
@@ -21,6 +22,12 @@ i18n
     },
     interpolation: {
       escapeValue: false,
+      format: function(value, format, lng) {
+        if (format === 'msgTime') {
+          return msgTime(value);
+        }
+        return value;
+      },
     },
     react: {
       wait: false,

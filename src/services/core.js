@@ -1,4 +1,6 @@
 import {floor} from 'lodash';
+import moment from 'moment';
+import {translate} from './i18n';
 
 /**
  * Mili-seconds sleep
@@ -40,4 +42,21 @@ export function randomString(length, chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWX
 
 export function mkPhoneNumber(countryCode, phoneNumber) {
   return parseInt((countryCode + '' + phoneNumber).replace(/\s+/g, ''), 10);
+}
+
+export function msgTime(date) {
+  const msgDate = moment(date);
+  const tody = moment(Date.now());
+
+  if (msgDate.year() !== tody.year()) {
+    return msgDate.format('MMM D,Y');
+  } else if (msgDate.week() !== tody.week()) {
+    return msgDate.format('MMM D');
+  } else if (tody.day() - msgDate.day() > 1) {
+    return msgDate.format('dddd');
+  } else if (tody.day() - msgDate.day() === 1) {
+    return translate('date.yesterday');
+  }
+
+  return msgDate.format('LT');
 }
