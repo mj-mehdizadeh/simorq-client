@@ -5,12 +5,11 @@ export default class RequestWrapper {
    */
   _promise;
 
-  constructor(resolve, reject, actionId, data, promise, options) {
+  constructor(resolve, reject, actionId, data, options) {
     this._resolve = resolve;
     this._reject = reject;
     this._actionId = actionId;
     this._data = data;
-    this._promise = promise;
     this._options = options;
   }
 

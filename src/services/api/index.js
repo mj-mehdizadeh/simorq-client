@@ -27,12 +27,13 @@ export function resetAxiosToken() {
 }
 
 /**
- * @typedef {{priority: number, loading: boolean}} RequestOptions
+ * @typedef {{priority: number, loading: boolean, toastError: boolean}} RequestOptions
  * @type RequestOptions
  */
 const DEFAULT_OPTIONS = {
   priority: 100,
   loading: false,
+  toastError: false,
 };
 
 
@@ -113,7 +114,7 @@ export default class Api {
       requestWrapper.resolve(response);
     } catch (error) {
       requestWrapper.reject(error);
-      ErrorManager.onError(error);
+      ErrorManager.onError(error, requestWrapper.options.toastError);
     }
   }
 

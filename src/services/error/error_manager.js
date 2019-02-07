@@ -7,12 +7,15 @@ import {navigate} from '../navigator';
 import OAuth from '../oauth';
 
 export default class ErrorManager {
-  static async onError(error) {
+  static async onError(error, toast) {
     switch (error.name) {
       case UNAUTHORIZED_ERROR:
         await OAuth.removeToken();
         navigate(AUTH_NAVIGATOR);
         break;
+    }
+    if (toast) {
+      this.toast(error);
     }
   }
 

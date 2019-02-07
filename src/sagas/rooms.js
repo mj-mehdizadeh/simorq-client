@@ -1,4 +1,4 @@
-import {put, take, call} from 'redux-saga/effects';
+import {call, put, take} from 'redux-saga/effects';
 import Creators, {RoomsTypes} from '../redux/rooms';
 import Api from '../services/api';
 import {SUBSCRIBES} from '../constant/methods';
@@ -10,7 +10,7 @@ import {mkColor, mkInitials} from '../services/app';
 /* ------------- Api ------------- */
 
 const fetchRoomList = () => {
-  return Api.get(SUBSCRIBES);
+  return Api.get(SUBSCRIBES, null, {toastError: true});
 };
 
 /* ------------- Sags ------------- */
@@ -22,7 +22,6 @@ export function* getRoomList() {
     yield putRooms(response.rooms);
     yield putMessages(response.messages);
   } catch (error) {
-    yield put(Creators.failed());
   }
 }
 
@@ -31,9 +30,9 @@ export function putRooms(rooms) {
     Creators.appendRooms(
       keyBy(
         map(rooms, trimRoom),
-        'id'
-      )
-    )
+        'id',
+      ),
+    ),
   );
 }
 
