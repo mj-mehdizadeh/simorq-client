@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Badge, Body, Icon, Left, ListItem, Text, View} from 'native-base';
 import styles from './styles';
-import AvatarContainer from '../../containers/AvatarContainer';
+import AvatarContainer from '../../containers/room/AvatarContainer';
 import {translate} from 'react-i18next';
 
 class RoomCard extends React.PureComponent {
@@ -36,6 +36,7 @@ class RoomCard extends React.PureComponent {
     </View>);
   }
 }
+
 export default translate()(RoomCard);
 
 RoomCard.propTypes = {

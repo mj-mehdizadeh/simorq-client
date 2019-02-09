@@ -1,17 +1,23 @@
 // @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import RoomCard from '../components/RoomCard/RoomCard';
-import {getRoom} from '../selector/rooms';
+import RoomCard from '../../components/RoomCard/RoomCard';
+import {getRoom} from '../../selector/rooms';
 import connect from 'react-redux/es/connect/connect';
-import {getRoomLastMessage} from '../selector/messages';
+import {getRoomLastMessage} from '../../selector/messages';
 
-class RoomCardContainer extends React.PureComponent {
+class CardContainer extends React.PureComponent {
+  onPress = () => {
+    if (this.props.onPress) {
+      this.props.onPress(this.props.roomId);
+    }
+  };
+
   render() {
     return <RoomCard
       room={this.props.room}
       lastMessage={this.props.lastMessage}
-      onPress={this.props.onPress}
+      onPress={this.onPress}
     />;
   }
 }
@@ -21,9 +27,9 @@ const mapStateToProps = (state, props) => ({
   lastMessage: getRoomLastMessage(state, props),
 });
 
-export default connect(mapStateToProps)(RoomCardContainer);
+export default connect(mapStateToProps)(CardContainer);
 
-RoomCardContainer.propTypes = {
+CardContainer.propTypes = {
   roomId: PropTypes.string.isRequired,
   index: PropTypes.number,
   room: PropTypes.object.isRequired,

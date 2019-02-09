@@ -2,8 +2,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Avatar from '../components/Avatar';
-import {getRoomProp} from '../selector/rooms';
+import Avatar from '../../components/Avatar/index';
+import {getRoomProp} from '../../selector/rooms';
 
 class AvatarContainer extends React.PureComponent {
   render() {
@@ -28,5 +28,5 @@ const mapStateToProps = (state, props) => {
 };
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
 )(AvatarContainer);

@@ -3,7 +3,7 @@ import * as React from 'react';
 import RoomMessage from '../components/RoomMessage';
 import PropTypes from 'prop-types';
 
-export default class RoomMessageContainer extends React.Component {
+export default class MessageContainer extends React.Component {
   render() {
     return <RoomMessage
       message={this.props.message}/>;
@@ -11,6 +11,6 @@ export default class RoomMessageContainer extends React.Component {
 }
 
 
-RoomMessageContainer.propTypes = {
+MessageContainer.propTypes = {
   message: PropTypes.object.isRequired,
 };
