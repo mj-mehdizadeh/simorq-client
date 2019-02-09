@@ -1,8 +1,7 @@
 import {createStackNavigator, createSwitchNavigator} from 'react-navigation';
 import Home from '../screens/home';
-import {APP_NAVIGATOR, AUTH_NAVIGATOR, HOME_SCREEN, LOGIN_SCREEN, REGISTER_SCREEN, ROOM_LIST_SCREEN} from '../constant/navigator';
+import {APP_NAVIGATOR, AUTH_NAVIGATOR, HOME_SCREEN, LOGIN_SCREEN, ROOM_LIST_SCREEN} from '../constant/navigator';
 import LoginScreen from '../screens/LoginScreen';
-import RegisterScreen from '../screens/RegisterScreen';
 import RoomListScreen from '../screens/RoomListScreen';
 import AppLoader from '../containers/AppLoader';
 // import TestScreen from '../screens/TestScreen';
@@ -23,7 +22,6 @@ const AppNavigator = createStackNavigator(
 const AuthNavigator = createStackNavigator(
   {
     [LOGIN_SCREEN]: {screen: LoginScreen},
-    [REGISTER_SCREEN]: {screen: RegisterScreen},
   },
   {
     initialRouteName: LOGIN_SCREEN,
