@@ -8,7 +8,7 @@ import {transitionIn, transitionMove, transitionOut, transitionRelease} from '..
 import HistoryContainer from '../../containers/room/HistoryContainer';
 import styles from './styles';
 
-export default class RoomHistoryWrap extends React.Component {
+export default class RoomHistoryWrap extends React.PureComponent {
   constructor(props) {
     super(props);
     this._panResponder = PanResponder.create({

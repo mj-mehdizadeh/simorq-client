@@ -8,7 +8,7 @@ import MessageContainer from '../../containers/MessageContainer';
 import AvatarContainer from '../../containers/room/AvatarContainer';
 import styles from './styles';
 
-class RoomHistory extends React.Component {
+class RoomHistory extends React.PureComponent  {
 
   _keyExtractor = (item, index) => item.id + '-' + index;
   _renderItem = ({item}) => (<MessageContainer message={item}/>);

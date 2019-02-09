@@ -2,7 +2,7 @@
 import * as React from 'react';
 import SendBox from '../../components/SendBox';
 
-export default class SendBoxContainer extends React.Component {
+export default class SendBoxContainer extends React.PureComponent {
   state = {
     text: '',
   };
