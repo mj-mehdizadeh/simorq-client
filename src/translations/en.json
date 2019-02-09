@@ -37,6 +37,9 @@
     "registerBtn": "Sign up",
     "loginBtn": "Login",
     "nextBtn": "Next"
+  },
+  "history": {
+    "loading": "Loading messages..."
   }
 }
 

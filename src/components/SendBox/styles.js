@@ -9,6 +9,9 @@ export default StyleSheet.create({
     paddingRight: 7,
   },
   footerBtn: {},
+  hide: {
+    display: 'none',
+  },
   footerIcon: {
     color: '#7d858f',
     marginLeft: 7,

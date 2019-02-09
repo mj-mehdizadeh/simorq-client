@@ -5,6 +5,7 @@ import RoomHistory from '../../components/RoomHistory/index';
 
 export default class HistoryContainer extends React.Component {
   state = {
+    loading: false,
     history: [],
   };
 
@@ -12,6 +13,7 @@ export default class HistoryContainer extends React.Component {
     return <RoomHistory
       roomId={this.props.roomId}
       history={this.state.history}
+      loading={this.state.loading}
       panHandlers={this.props.panHandlers}/>;
   }
 }

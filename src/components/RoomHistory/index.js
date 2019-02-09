@@ -1,19 +1,20 @@
 // @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import {translate} from 'react-i18next';
 import {FlatList, View} from 'react-native';
-import {Body, Button, Header, Icon, Left, Right, Subtitle, Title} from 'native-base';
+import {Body, Button, Header, Icon, Left, Right, Subtitle, Text, Title} from 'native-base';
 import MessageContainer from '../../containers/MessageContainer';
 import AvatarContainer from '../../containers/room/AvatarContainer';
 import styles from './styles';
 
-export default class RoomHistory extends React.Component {
+class RoomHistory extends React.Component {
 
   _keyExtractor = (item, index) => item.id + '-' + index;
   _renderItem = ({item}) => (<MessageContainer message={item}/>);
 
   render() {
-    const {roomId, panHandlers} = this.props;
+    const {t, roomId, panHandlers} = this.props;
     return <View style={styles.container}>
       <Header>
         <Left>
@@ -34,17 +35,23 @@ export default class RoomHistory extends React.Component {
           </Button>
         </Right>
       </Header>
-      <FlatList
+      {this.props.loading && (<View style={styles.loadingWrap}>
+        <Text style={styles.loading}>{t('history.loading')}</Text>
+      </View>)}
+      {!this.props.loading && (<FlatList
         {...panHandlers}
         style={styles.content}
         data={this.props.history}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
-      />
+      />)}
     </View>;
   }
 }
 
 RoomHistory.propTypes = {
+  t: PropTypes.func.isRequired,
   history: PropTypes.array.isRequired,
 };
+
+export default translate()(RoomHistory);
