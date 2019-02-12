@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import {Image, TouchableWithoutFeedback} from 'react-native';
 import {Icon, Text, View} from 'native-base';
 import styles, {boxSelf, footerSelf, imageSelf, wrapSelf} from './styles';
+import {translate} from 'react-i18next';
 
-export default class RoomMessage extends React.Component {
+class RoomMessage extends React.Component {
   render() {
     const {message} = this.props;
     return <View style={message.sender ? wrapSelf : styles.wrap}>
@@ -19,19 +20,21 @@ export default class RoomMessage extends React.Component {
   renderMessage() {
     const {message} = this.props;
     return (<TouchableWithoutFeedback style={styles.text}>
-      <Text>{message.message}</Text>
+      <Text>{message.text}</Text>
     </TouchableWithoutFeedback>);
   }
 
   renderFooter() {
-    const {message} = this.props;
+    const {t, message} = this.props;
     return (<Text style={message.sender ? footerSelf : styles.footer}>
-      {message.time}
-      {message.sender && (<Icon style={styles.statusIcon} name="check" type="MaterialCommunityIcons"/>)}
+      {t('date.msgTime', {date: message.time})}
+      {message.out && (<Icon style={styles.statusIcon} name="check" type="MaterialCommunityIcons"/>)}
     </Text>);
   }
 }
 
 RoomMessage.propTypes = {
+  t: PropTypes.func.isRequired,
   message: PropTypes.object.isRequired,
 };
+export default translate()(RoomMessage);

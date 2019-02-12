@@ -11,7 +11,7 @@ import styles from './styles';
 class RoomHistory extends React.PureComponent  {
 
   _keyExtractor = (item, index) => item.id + '-' + index;
-  _renderItem = ({item}) => (<MessageContainer message={item}/>);
+  _renderItem = ({item}) => (<MessageContainer id={item}/>);
 
   render() {
     const {t, roomId, panHandlers} = this.props;

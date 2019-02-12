@@ -2,15 +2,21 @@
 import * as React from 'react';
 import RoomMessage from '../components/RoomMessage';
 import PropTypes from 'prop-types';
+import {getMessage} from "../selector/messages";
+import {connect} from "react-redux";
 
-export default class MessageContainer extends React.Component {
+class MessageContainer extends React.Component {
   render() {
     return <RoomMessage
       message={this.props.message}/>;
   }
 }
 
-
 MessageContainer.propTypes = {
-  message: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
 };
+const mapStateToProps = (state, props) => ({
+  message: getMessage(state, props),
+});
+
+export default connect(mapStateToProps)(MessageContainer);
