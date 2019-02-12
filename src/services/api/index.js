@@ -9,6 +9,7 @@ import AppError from '../error/app_error';
 import {UNKNOWN_ERROR, VALIDATE_ERROR} from '../../constant/errors';
 import OAuth from '../oauth';
 import ErrorManager from '../error/error_manager';
+import {map, join, split, startsWith} from 'lodash';
 
 const apiSingleton = randomString(10);
 const apiSingletonEnforcer = randomString(10);
@@ -78,12 +79,24 @@ export default class Api {
       ...options,
     };
 
+    let action = split(actionId, '/');
+    action = map(action, spl => {
+      if (startsWith(spl, ':')) {
+        const key = spl.substr(1);
+        const value = data[key];
+        delete data[key];
+        return value;
+      }
+      return spl;
+    });
+    action = join(action, '/');
+
     // Api.validate(actionId, data);
     const promise = new Promise((resolve, reject) => {
       wrapper = new RequestWrapper(
         resolve,
         reject,
-        actionId,
+        action,
         data,
         options,
       );
