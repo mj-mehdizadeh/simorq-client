@@ -3,7 +3,7 @@ import {createActions, createReducer} from 'reduxsauce';
 /* ------------- Types and Action Creators ------------- */
 
 const {Types, Creators} = createActions({
-  fetchHistory: null,
+  fetchHistory: ['roomId', 'from', 'direction'],
   appendMessages: ['messages'],
 });
 

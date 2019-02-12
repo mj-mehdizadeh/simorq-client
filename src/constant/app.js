@@ -17,3 +17,4 @@ export const MATERIAL_COLORS = [
   '#4e342e',
 ];
 export const DEFAULT_COLOR = '#1976d2';
+export const HISTORY_PAGINATION = 40;
