@@ -5,16 +5,23 @@ import RoomHistory from '../../components/RoomHistory/index';
 import MessageCreators from '../../redux/messages';
 import {connect} from 'react-redux';
 import {getRoomMessages} from '../../selector/messages';
+import {last} from 'lodash';
 
 class HistoryContainer extends React.PureComponent {
 
+  state = {
+    loading: 'initial',
+  };
+
   async componentDidMount() {
-    const {loadHistory, roomId} = this.props;
-    await loadHistory(roomId);
+    const {history, loadHistory, roomId} = this.props;
+    await loadHistory(roomId, last(history));
+    this.setState({loading: false});
   }
 
   render() {
     return <RoomHistory
+      loading={this.state.loading}
       roomId={this.props.roomId}
       history={this.props.history}
       panHandlers={this.props.panHandlers}/>;
