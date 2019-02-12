@@ -1,8 +1,7 @@
 import {createSelector} from 'reselect';
-import {getRoomProp} from './rooms';
+import {getRoomChatId} from './rooms';
 import {filter, findLastKey, get, map} from 'lodash';
 
-export const getChatId = (state, props) => props.chatId;
 export const getMessages = state => state.messages;
 
 export const getMessage = (state, props) => state.messages[props.id];
@@ -11,16 +10,15 @@ export const getRoomLastMessage = (state, props) => {
   const id = findLastKey(
     state.messages,
     {
-      chatId: props.chatId || getRoomProp(state, {roomId: props.roomId, key: 'subscribe.chatId'}),
+      chatId: getRoomChatId(state, props),
     },
   );
   return getMessage(state, {id});
 };
 
-
 export const getRoomMessages = createSelector(
   getMessages,
-  getChatId,
+  getRoomChatId,
   (messages, chatId) => map(
     filter(messages, {chatId}),
     'id',
