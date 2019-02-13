@@ -3,6 +3,7 @@ import variable from '../../theme/variables/material';
 
 const styles = StyleSheet.create({
   wrap: {
+    transform: [{scaleY: -1}],
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -10,6 +11,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   wrapSelf: {
+    transform: [{scaleY: -1}],
     justifyContent: 'flex-end',
     paddingLeft: 2.5,
     paddingRight: 10,
@@ -54,10 +56,6 @@ const styles = StyleSheet.create({
   footer: {
     fontSize: 11,
     color: '#838c96',
-    backgroundColor: 'yellow',
-    position: 'absolute',
-    right: 0,
-    width: '100%',
   },
   footerSelf: {
     color: '#be8081',

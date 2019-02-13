@@ -2,19 +2,19 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {translate} from 'react-i18next';
-import {FlatList, View} from 'react-native';
-import {Body, Button, Header, Icon, Left, Right, Subtitle, Text, Title} from 'native-base';
-import MessageContainer from '../../containers/MessageContainer';
+import {Body, Button, Header, Icon, Left, Right, Subtitle, Text, Title, View} from 'native-base';
 import AvatarContainer from '../../containers/room/AvatarContainer';
 import styles from './styles';
+import RecycleContainer from '../../containers/room/RecycleContainer';
 
-class RoomHistory extends React.PureComponent  {
+class RoomHistory extends React.PureComponent {
 
-  _keyExtractor = (item, index) => item.id + '-' + index;
-  _renderItem = ({item}) => (<MessageContainer id={item}/>);
+  recycleRef = () => {
+
+  };
 
   render() {
-    const {t, roomId, panHandlers} = this.props;
+    const {t, roomId, history, onScroll, panHandlers} = this.props;
     return <View style={styles.container}>
       <Header>
         <Left>
@@ -35,23 +35,26 @@ class RoomHistory extends React.PureComponent  {
           </Button>
         </Right>
       </Header>
-      {this.props.loading && (<View style={styles.loadingWrap}>
+      {this.props.loading === 'initial' && (<View style={styles.loadingWrap}>
         <Text style={styles.loading}>{t('history.loading')}</Text>
       </View>)}
-      {!this.props.loading && (<FlatList
-        {...panHandlers}
-        style={styles.content}
-        data={this.props.history}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-      />)}
+      <View
+        style={styles.content}>
+        {history.length && (
+          <RecycleContainer
+            history={history}
+            onScroll={onScroll}
+            recycleRef={this.recycleRef}
+          />)}
+      </View>
     </View>;
   }
 }
 
 RoomHistory.propTypes = {
   t: PropTypes.func.isRequired,
-  history: PropTypes.array.isRequired,
+  history: PropTypes.array,
+  onScroll: PropTypes.func.isRequired,
 };
 
 export default translate()(RoomHistory);

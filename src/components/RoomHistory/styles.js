@@ -6,6 +6,7 @@ export default StyleSheet.create({
   },
   content: {
     flex: 1,
+    transform: [{scaleY: -1}],
   },
   headerBody: {
     flexDirection: 'row',

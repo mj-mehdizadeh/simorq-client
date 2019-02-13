@@ -13,6 +13,7 @@ class RoomMessage extends React.Component {
       <View style={message.sender ? boxSelf : styles.box}>
         {!!message.image && (<Image style={message.sender ? imageSelf : styles.image} source={{uri: message.image}}/>)}
         {this.renderMessage()}
+        {this.renderFooter()}
       </View>
     </View>;
   }
