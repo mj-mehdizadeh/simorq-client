@@ -1,4 +1,4 @@
-import {createStackNavigator, createSwitchNavigator} from 'react-navigation';
+import {createAppContainer, createStackNavigator, createSwitchNavigator} from 'react-navigation';
 import Home from '../screens/home';
 import {APP_NAVIGATOR, AUTH_NAVIGATOR, HOME_SCREEN, LOGIN_SCREEN, ROOM_LIST_SCREEN} from '../constant/navigator';
 import LoginScreen from '../screens/LoginScreen';
@@ -29,7 +29,7 @@ const AuthNavigator = createStackNavigator(
   },
 );
 
-export default createSwitchNavigator(
+const AppSwitchNavigator = createSwitchNavigator(
   {
     AppLoader: AppLoader,
     [APP_NAVIGATOR]: AppNavigator,
@@ -39,3 +39,5 @@ export default createSwitchNavigator(
     initialRouteName: 'AppLoader',
   },
 );
+
+export default createAppContainer(AppSwitchNavigator);
