@@ -2,10 +2,10 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import Creators, {MessagesTypes} from '../redux/messages';
 
 import {keyBy, map} from 'lodash';
-import {USER_ID} from '../constant/user';
 import Api from '../services/api';
 import {MESSAGES} from '../constant/methods';
 import {HISTORY_PAGINATION} from '../constant/app';
+import {getMe} from '../services/client';
 
 /* ------------- CONSTANT ------------- */
 const _END_OF_SCROLL = {};
@@ -38,9 +38,9 @@ export function putMessages(messages) {
     Creators.appendMessages(
       keyBy(
         map(messages, TrimMessage),
-        'id'
-      )
-    )
+        'id',
+      ),
+    ),
   );
 }
 
@@ -49,6 +49,6 @@ export function putMessages(messages) {
 export function TrimMessage(message) {
   return {
     ...message,
-    out: message.createdBy === USER_ID,
+    out: message.createdBy === getMe('id'),
   };
 }
