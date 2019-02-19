@@ -60,3 +60,7 @@ export function msgTime(date) {
 
   return msgDate.format('LT');
 }
+
+export function unreadCount(number) {
+  return number > 99 ? '+99' : number;
+}
