@@ -11,6 +11,7 @@ import styles from './styles';
 export default class RoomHistoryWrap extends React.PureComponent {
   constructor(props) {
     super(props);
+    // todo [transition] - move to message container and pass the `this.view` ref. move-right: reply, move-left: back
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
       onStartShouldSetPanResponder: (evt, gestureState) => true,
