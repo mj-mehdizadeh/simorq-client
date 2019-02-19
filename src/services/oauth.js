@@ -61,7 +61,7 @@ export default class OAuth {
   static storeTokens(token) {
     _authToken = token;
     setAxiosToken(token.token_type, token.access_token);
-    return storeData(AUTH_STORE_KEY, JSON.stringify(token));
+    return storeData(AUTH_STORE_KEY, token);
   }
 
   static removeToken() {
@@ -71,7 +71,7 @@ export default class OAuth {
   }
 
   static async retrieveToken() {
-    _authToken = JSON.parse(await retrieveData(AUTH_STORE_KEY));
+    _authToken = await retrieveData(AUTH_STORE_KEY);
     if (_authToken) {
       setAxiosToken(_authToken.token_type, _authToken.access_token);
     }

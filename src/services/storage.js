@@ -5,12 +5,17 @@ const STORAGE_PREFIX = '@SIQ';
 export function removeData(key) {
   return AsyncStorage.removeItem(getKey(key));
 }
+
 export function storeData(key, value) {
-  return AsyncStorage.setItem(getKey(key), value);
+  return AsyncStorage.setItem(getKey(key), JSON.stringify(value));
 }
 
 export async function retrieveData(key) {
-  return AsyncStorage.getItem(getKey(key));
+  const data = await AsyncStorage.getItem(getKey(key));
+  if (data) {
+    return JSON.parse(data);
+  }
+  return null;
 }
 
 function getKey(key) {
