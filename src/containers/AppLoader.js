@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 import {loadUserLang, setT} from '../services/i18n';
 import OAuth from '../services/oauth';
 import LoadingPage from '../components/LoadingPage';
+import {loadMe} from '../services/client';
 
 class AppLoader extends Component {
 
   async componentDidMount() {
     await Promise.all([
+      loadMe(),
       loadUserLang(),
       OAuth.retrieveToken(),
     ]);

@@ -10,6 +10,7 @@ import ErrorManager from '../services/error/error_manager';
 import {ROOM_LIST_SCREEN} from '../constant/navigator';
 import {navigate} from '../services/navigator';
 import OAuth from '../services/oauth';
+import {fetchMe} from '../services/client';
 
 const country = find(countryList, {code: DEFAULT_COUNTRY});
 
@@ -100,6 +101,7 @@ class LoginScreen extends Component {
         phone_code,
       });
       await OAuth.grantPassword(this.params.phone_number, response.login_hash);
+      await fetchMe();
       navigate(ROOM_LIST_SCREEN);
     } catch (e) {
       if (e.name === 'invalid_phone_number') {
@@ -122,6 +124,7 @@ class LoginScreen extends Component {
         phone_code: this.params.phone_code,
       });
       await OAuth.grantPassword(this.params.phone_number, response.login_hash);
+      await fetchMe();
       navigate(ROOM_LIST_SCREEN);
     } catch (e) {
       if (e.name === 'invalid_phone_code') {
