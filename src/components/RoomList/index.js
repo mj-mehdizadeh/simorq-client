@@ -21,7 +21,7 @@ export default class RoomList extends React.Component {
 
   render() {
     return <Container style={styles.container}>
-      <Header>
+      <Header style={styles.header}>
         <Body>
           <Title bold>SimorQ</Title>
         </Body>

@@ -24,7 +24,7 @@ export default StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 17,
+    fontSize: 15,
   },
   iconSeen: {
     maxWidth: 20,
