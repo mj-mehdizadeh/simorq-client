@@ -9,9 +9,9 @@ import {translate} from 'react-i18next';
 class RoomMessage extends React.Component {
   render() {
     const {message} = this.props;
-    return <View style={message.sender ? wrapSelf : styles.wrap}>
-      <View style={message.sender ? boxSelf : styles.box}>
-        {!!message.image && (<Image style={message.sender ? imageSelf : styles.image} source={{uri: message.image}}/>)}
+    return <View style={message.out ? wrapSelf : styles.wrap}>
+      <View style={message.out ? boxSelf : styles.box}>
+        {!!message.image && (<Image style={message.out ? imageSelf : styles.image} source={{uri: message.image}}/>)}
         {this.renderMessage()}
         {this.renderFooter()}
       </View>
@@ -26,10 +26,11 @@ class RoomMessage extends React.Component {
   }
 
   renderFooter() {
-    const {t, message} = this.props;
-    return (<Text style={message.sender ? footerSelf : styles.footer}>
+    const {t, message, readHistoryMaxId} = this.props;
+    return (<Text style={message.out ? footerSelf : styles.footer}>
       {t('date.msgTime', {date: message.time})}
-      {message.out && (<Icon style={styles.statusIcon} name="check" type="MaterialCommunityIcons"/>)}
+      {message.out && (<Icon style={styles.statusIconDeliver} name="check" type="MaterialCommunityIcons"/>)}
+      {(message.out && readHistoryMaxId >= message.id) && (<Icon style={styles.statusIconSeen} name="check-all" type="MaterialCommunityIcons"/>)}
     </Text>);
   }
 }

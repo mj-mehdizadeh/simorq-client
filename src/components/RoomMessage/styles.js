@@ -4,7 +4,6 @@ import variable from '../../theme/variables/material';
 const styles = StyleSheet.create({
   wrap: {
     transform: [{scaleY: -1}],
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     padding: 2.5,
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   box: {
-    padding: 10,
+    padding: 9,
     maxWidth: 290,
     backgroundColor: '#fff',
     shadowColor: '#d9d9d9',
@@ -25,25 +24,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 0.5,
     elevation: 1,
-    borderRadius: 19,
-    borderTopLeftRadius: 8,
+    borderRadius: 20,
+    borderTopLeftRadius: 9,
   },
   boxSelf: {
-    backgroundColor: '#f8f8f8',
-    borderTopLeftRadius: 19,
-    borderTopRightRadius: 8,
+    backgroundColor: '#ebebeb',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 9,
   },
   image: {
     width: 276,
     height: 276,
     margin: -8,
     marginBottom: 6,
-    borderRadius: 6,
-    borderTopRightRadius: 15,
+    borderRadius: 9,
+    borderTopRightRadius: 20,
   },
   imageSelf: {
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 6,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 9,
   },
   content: {
     // backgroundColor: 'yellow',
@@ -56,11 +55,19 @@ const styles = StyleSheet.create({
   footer: {
     fontSize: 11,
     color: '#838c96',
+    textAlign: 'right',
+    marginBottom: -4,
+    paddingRight: 8,
   },
   footerSelf: {
-    color: '#be8081',
+    paddingRight: 0,
   },
-  statusIcon: {
+  statusIconDeliver: {
+    width: 10,
+    fontSize: 15,
+    color: '#838c96',
+  },
+  statusIconSeen: {
     width: 10,
     fontSize: 15,
     color: variable.brandPrimary,
