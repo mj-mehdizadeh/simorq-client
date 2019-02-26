@@ -7,33 +7,21 @@ export default StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
   },
-  'x-small': {
+  'small': {
     width: 35,
     height: 35,
     borderRadius: 17.5,
   },
-  'small': {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-  },
   'medium': {
-    width: 50,
-    height: 50,
-    borderRadius: 27.5,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
 
-  'text-x-small': {
-    color: '#fff',
-  },
-  'text-small': {
-    color: '#fff',
-    fontSize: 16,
-    lineHeight: 24,
-  },
+  'text-small': {},
   'text-medium': {
-    color: '#fff',
-    fontSize: 18,
-    lineHeight: 30,
+    fontSize: 20,
+    height: 35,
+    lineHeight: 33,
   },
 });

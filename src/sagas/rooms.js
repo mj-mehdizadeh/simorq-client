@@ -39,11 +39,13 @@ export function putRooms(rooms) {
 /* ------------- Trim ------------- */
 
 export function trimRoom(room) {
+  const item = mkColor(room.id);
   return {
     ...room,
     avatar: {
       file: room.avatar,
-      color: mkColor(room.id),
+      color: item[1],
+      backgroundColor: item[0],
       initial: mkInitials(room.title),
     },
   };

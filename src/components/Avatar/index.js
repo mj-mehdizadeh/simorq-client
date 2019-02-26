@@ -17,13 +17,13 @@ class Avatar extends PureComponent {
   };
 
   render() {
-    const {uri, initial, color, size} = this.props;
+    const {uri, initial, backgroundColor, color, size} = this.props;
     return (<ImageBackground
       source={{uri}}
       onError={this.onImageError}
-      style={StyleSheet.flatten([styles.container, styles[this.props.size], {backgroundColor: color}])}>
+      style={StyleSheet.flatten([styles.container, styles[this.props.size], {backgroundColor}])}>
       {this.state.showTxt && (<Text
-        style={styles[`text-${size}`]}>
+        style={StyleSheet.flatten([styles[`text-${size}`], {color}])}>
         {initial.toUpperCase()}
       </Text>)}
     </ImageBackground>);
@@ -33,6 +33,7 @@ class Avatar extends PureComponent {
 Avatar.propTypes = {
   uri: PropTypes.string,
   color: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string.isRequired,
   initial: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['x-small', 'small', 'medium']),
 };

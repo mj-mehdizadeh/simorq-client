@@ -12,6 +12,7 @@ class AvatarContainer extends React.PureComponent {
       size={size}
       initial={avatar.initial}
       color={avatar.color}
+      backgroundColor={avatar.backgroundColor}
       uri={avatar.file ? avatar.file.uri : null}/>;
   }
 }
