@@ -1,7 +1,9 @@
 import {DEFAULT_COLOR, MATERIAL_COLORS} from '../constant/app';
+import {API_BASE_URL} from '../constant/config';
 
 export function mkColor(id) {
-  const index = parseInt(id.substr(-1), 16);
+  let index = parseInt(id.substr(-1), 16);
+  index = index >= 8 ? index - 8 : index;
   return index >= 0 ? MATERIAL_COLORS[index] : DEFAULT_COLOR;
 }
 
@@ -17,4 +19,8 @@ export function mkInitials(title) {
       .toUpperCase();
   }
   return initials;
+}
+
+export function generateFileUri(token) {
+  return `${API_BASE_URL}download/${token}`;
 }

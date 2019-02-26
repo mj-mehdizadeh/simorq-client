@@ -16,8 +16,8 @@ class RecycleContainer extends React.PureComponent {
       index => 1,
       (type, dim) => {
         dim.width = width;
-        dim.height = 65;
-      }
+        dim.height = 58;
+      },
     );
     this.state = {
       dataProvider: this._dataProvider.cloneWithRows(this.props.history),

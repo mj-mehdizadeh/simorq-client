@@ -8,20 +8,30 @@ export default StyleSheet.create({
     flex: 1,
     transform: [{scaleY: -1}],
   },
+  header: {
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 56,
+    position: 'absolute',
+    zIndex: 15,
+  },
   headerBody: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    backgroundColor: 'transparent',
   },
   headerTitleWrap: {
     flexDirection: 'column',
     paddingLeft: 10,
   },
   headerThumb: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 24,
   },
   headerTitle: {
+    fontSize: 16,
     paddingLeft: 0,
   },
   headerSubTitle: {

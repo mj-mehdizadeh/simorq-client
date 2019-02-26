@@ -7,8 +7,13 @@ import SendBoxContainer from '../../containers/sendBox/SendBoxContainer';
 import {transitionIn, transitionMove, transitionOut, transitionRelease} from '../../services/transition';
 import HistoryContainer from '../../containers/room/HistoryContainer';
 import styles from './styles';
+import {BACKGROUND_IMAGES} from '../../constant/app';
+import {generateFileUri} from '../../services/app';
 
 export default class RoomHistoryWrap extends React.PureComponent {
+
+  state = {idx: 0, backgroundSource: {uri: generateFileUri(BACKGROUND_IMAGES[0])}};
+
   constructor(props) {
     super(props);
     // todo [transition] - move to message container and pass the `this.view` ref. move-right: reply, move-left: back
@@ -23,6 +28,10 @@ export default class RoomHistoryWrap extends React.PureComponent {
     });
   }
 
+  changeBackground = () => {
+    this.setState(prev => ({backgroundSource: {uri: generateFileUri(BACKGROUND_IMAGES[prev.idx + 1])}, idx: prev.idx + 1}));
+  };
+
   handleViewRef = ref => this.view = ref;
 
   historyIn = () => transitionIn(this.view);
@@ -35,7 +44,7 @@ export default class RoomHistoryWrap extends React.PureComponent {
       style={styles.history}
       ref={this.handleViewRef}>
       <ImageBackground
-        source={require('../../../assets/images/bg1.jpg')}
+        source={this.state.backgroundSource}
         style={styles.container}>
         {this.props.rooms.map(roomId =>
           <View
@@ -43,6 +52,7 @@ export default class RoomHistoryWrap extends React.PureComponent {
             style={roomId === this.props.roomId ? styles.container : styles.hide}>
             <HistoryContainer
               roomId={roomId}
+              changeBg={this.changeBackground}
               panHandlers={this._panResponder.panHandlers}
             />
           </View>,

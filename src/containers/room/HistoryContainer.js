@@ -42,12 +42,13 @@ class HistoryContainer extends React.PureComponent {
 
   render() {
     const {loading} = this.state;
-    const {roomId, history, panHandlers} = this.props;
+    const {roomId, history, panHandlers, changeBg} = this.props;
     return <RoomHistory
       loading={loading}
       roomId={roomId}
       history={history}
       onScroll={this.onScroll}
+      changeBg={changeBg}
       panHandlers={panHandlers}
     />;
   }

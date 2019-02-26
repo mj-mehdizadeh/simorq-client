@@ -14,27 +14,29 @@ class RoomHistory extends React.PureComponent {
   };
 
   render() {
-    const {t, roomId, history, onScroll, panHandlers} = this.props;
+    const {t, roomId, history, onScroll, changeBg} = this.props;
     return <View style={styles.container}>
-      <Header>
-        <Left>
-          <Button transparent onPress={this.props.close}>
-            <Icon name="arrow-back"/>
-          </Button>
-        </Left>
-        <Body style={styles.headerBody}>
-          <AvatarContainer roomId={roomId}/>
-          <View style={styles.headerTitleWrap}>
-            <Title style={styles.headerTitle} bold>Title</Title>
-            <Subtitle style={styles.headerSubTitle}>Subtitle</Subtitle>
-          </View>
-        </Body>
-        <Right>
-          <Button transparent>
-            <Icon name="more-vert"/>
-          </Button>
-        </Right>
-      </Header>
+      <View style={styles.header}>
+        <Header>
+          <Left>
+            <Button transparent onPress={this.props.close}>
+              <Icon name="arrow-back"/>
+            </Button>
+          </Left>
+          <Body style={styles.headerBody}>
+            <AvatarContainer roomId={roomId}/>
+            <View style={styles.headerTitleWrap}>
+              <Title style={styles.headerTitle} bold>Title</Title>
+              <Subtitle style={styles.headerSubTitle}>Subtitle</Subtitle>
+            </View>
+          </Body>
+          <Right>
+            <Button transparent onPress={changeBg}>
+              <Icon name="more-vert"/>
+            </Button>
+          </Right>
+        </Header>
+      </View>
       {this.props.loading === 'initial' && (<View style={styles.loadingWrap}>
         <Text style={styles.loading}>{t('history.loading')}</Text>
       </View>)}
