@@ -42,7 +42,7 @@ class RoomHistory extends React.PureComponent {
       </View>)}
       <View
         style={styles.content}>
-        {history.length && (
+        {!!history.length && (
           <RecycleContainer
             history={history}
             onScroll={onScroll}
