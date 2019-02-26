@@ -64,3 +64,10 @@ export function msgTime(date) {
 export function unreadCount(number) {
   return number > 99 ? '+99' : number;
 }
+
+export function mongoObjectId() {
+  const timestamp = (new Date().getTime() / 1000|0).toString(16);
+  return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function() {
+    return (Math.random() * 16|0).toString(16);
+  }).toLowerCase();
+}

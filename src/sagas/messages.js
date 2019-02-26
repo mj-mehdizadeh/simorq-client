@@ -3,7 +3,7 @@ import Creators, {MessagesTypes} from '../redux/messages';
 
 import {keyBy, map} from 'lodash';
 import Api from '../services/api';
-import {MESSAGES} from '../constant/methods';
+import {MESSAGE_NEW, MESSAGES} from '../constant/methods';
 import {HISTORY_PAGINATION} from '../constant/app';
 import {getMe} from '../services/client';
 
@@ -13,6 +13,10 @@ const _END_OF_SCROLL = {};
 
 const fetchHistory = (roomId, from, direction) => {
   return Api.get(MESSAGES, {roomId, from, direction, limit: HISTORY_PAGINATION}, {toastError: true});
+};
+
+const postNewMessage = (params) => {
+  return Api.post(MESSAGE_NEW, params, {toastError: true});
 };
 
 /* ------------- Sags ------------- */
@@ -42,6 +46,27 @@ export function putMessages(messages) {
       ),
     ),
   );
+}
+
+export function* newMessage() {
+  yield takeEvery(MessagesTypes.NEW_MESSAGE, takeNewMessage);
+}
+
+export function* takeNewMessage(action) {
+  try {
+    yield putMessages([action.message]);
+    if (action.params) {
+      const message = yield call(postNewMessage, {
+        room_id: action.params.roomId,
+        random_id: action.message.randomId,
+        text: action.message.text,
+      });
+      yield put(Creators.deleteMessage(action.message.id, message.chatId));
+      yield putMessages([message]);
+    }
+  } catch (e) {
+  }
+
 }
 
 /* ------------- Trim ------------- */

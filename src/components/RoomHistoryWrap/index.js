@@ -58,7 +58,7 @@ export default class RoomHistoryWrap extends React.PureComponent {
           </View>,
         )}
       </ImageBackground>
-      <SendBoxContainer/>
+      <SendBoxContainer roomId={this.props.roomId}/>
     </Animatable.View>;
   }
 }

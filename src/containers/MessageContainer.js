@@ -2,11 +2,14 @@
 import * as React from 'react';
 import RoomMessage from '../components/RoomMessage';
 import PropTypes from 'prop-types';
-import {getMessage} from "../selector/messages";
-import {connect} from "react-redux";
+import {getMessage} from '../selector/messages';
+import {connect} from 'react-redux';
 
 class MessageContainer extends React.Component {
   render() {
+    if (!this.props.message) {
+      return null;
+    }
     return <RoomMessage
       message={this.props.message}/>;
   }

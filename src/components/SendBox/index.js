@@ -6,7 +6,7 @@ import styles from './styles';
 
 export default class SendBox extends React.Component {
   render() {
-    const {text, changeText} = this.props;
+    const {text, changeText, onSubmit} = this.props;
     return <Footer style={styles.footer}>
       <Body>
         <Button style={styles.footerBtn} small transparent>
@@ -27,7 +27,7 @@ export default class SendBox extends React.Component {
         <Button style={text !== '' ? styles.hide : styles.footerBtn} small transparent>
           <Icon style={styles.footerIcon} name="microphone-outline" type="MaterialCommunityIcons"/>
         </Button>
-        <Button style={text === '' ? styles.hide : styles.footerBtn} small transparent>
+        <Button style={text === '' ? styles.hide : styles.footerBtn} small transparent onPress={onSubmit}>
           <Icon style={styles.footerIcon} name="send"/>
         </Button>
       </Body>
@@ -37,4 +37,5 @@ export default class SendBox extends React.Component {
 SendBox.propTypes = {
   text: PropTypes.string,
   changeText: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
