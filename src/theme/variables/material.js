@@ -130,20 +130,18 @@ export default {
   tabActiveBgColor: '#0078d7',
 
   // Header
-  toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#0078d7',
+  toolbarBtnColor: '#3e3e3e',
+  toolbarDefaultBg: 'rgba(255,255,255,0.95)',
   toolbarHeight: 56,
   toolbarSearchIconSize: 23,
-  toolbarInputColor: '#fff',
+  toolbarInputColor: '#3e3e3e',
   searchBarHeight: platform === 'ios' ? 30 : 40,
   searchBarInputHeight: platform === 'ios' ? 40 : 50,
-  toolbarBtnTextColor: '#fff',
-  toolbarDefaultBorder: '#0078d7',
-  iosStatusbar: 'light-content',
+  toolbarBtnTextColor: '#3e3e3e',
+  toolbarDefaultBorder: '#fff',
+  iosStatusbar: 'dark-content',
   get statusBarColor() {
-    return color(this.toolbarDefaultBg)
-      .darken(0.2)
-      .hex();
+    return '#eee';
   },
   get darkenHeader() {
     return color(this.tabBgColor)
@@ -232,8 +230,8 @@ export default {
   titleFontfamily: 'Roboto',
   titleFontSize: 19,
   subTitleFontSize: 14,
-  subtitleColor: '#FFF',
-  titleFontColor: '#FFF',
+  subtitleColor: '#3e3e3e',
+  titleFontColor: '#3e3e3e',
 
   // Other
   borderRadiusBase: 2,

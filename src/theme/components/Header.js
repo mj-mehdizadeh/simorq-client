@@ -1,5 +1,3 @@
-import {PixelRatio} from 'react-native';
-
 import variable from './../variables/platform';
 
 export default (variables = variable) => {
@@ -323,14 +321,8 @@ export default (variables = variable) => {
     paddingHorizontal: 10,
     justifyContent: 'center',
     paddingTop: platform === 'ios' ? 15 : 0,
-    borderBottomWidth: platform === 'ios' ? 1 / PixelRatio.getPixelSizeForLayoutSize(1) : 0,
-    borderBottomColor: variables.toolbarDefaultBorder,
     height: variables.toolbarHeight,
-    elevation: 3,
-    shadowColor: platformStyle === 'material' ? '#000' : undefined,
-    shadowOffset: platformStyle === 'material' ? {width: 0, height: 2} : undefined,
-    shadowOpacity: platformStyle === 'material' ? 0.2 : undefined,
-    shadowRadius: platformStyle === 'material' ? 1.2 : undefined,
+    elevation: 0,
     top: 0,
     left: 0,
     right: 0,
