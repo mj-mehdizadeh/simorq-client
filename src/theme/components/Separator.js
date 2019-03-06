@@ -20,14 +20,14 @@ export default (variables = variable) => {
         borderBottomWidth: 0,
       },
       height: 35,
-      paddingTop: variables.listItemPadding + 2,
+      paddingTop: variables.listItemPadding,
       paddingBottom: variables.listItemPadding,
       borderBottomWidth: variables.borderWidth,
       borderTopWidth: variables.borderWidth,
       borderColor: variables.listBorderColor,
     },
     'NativeBase.Text': {
-      fontSize: variables.tabBarTextSize - 2,
+      fontSize: variables.tabBarTextSize,
       color: '#777',
     },
     '.noTopBorder': {

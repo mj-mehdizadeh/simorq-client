@@ -12,7 +12,8 @@ class RoomListScreen extends React.PureComponent {
   }
 
   render() {
-    return <RoomList rooms={this.props.rooms}/>;
+    return <RoomList
+      rooms={this.props.rooms}/>;
   }
 }
 

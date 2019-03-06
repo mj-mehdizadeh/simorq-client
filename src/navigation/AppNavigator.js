@@ -1,15 +1,17 @@
 import {createAppContainer, createStackNavigator, createSwitchNavigator} from 'react-navigation';
 import Home from '../screens/home';
-import {APP_NAVIGATOR, AUTH_NAVIGATOR, HOME_SCREEN, LOGIN_SCREEN, ROOM_LIST_SCREEN} from '../constant/navigator';
+import {APP_NAVIGATOR, AUTH_NAVIGATOR, HOME_SCREEN, LOGIN_SCREEN, NEW_ROOM_SCREEN, ROOM_LIST_SCREEN} from '../constant/navigator';
 import LoginScreen from '../screens/LoginScreen';
 import RoomListScreen from '../screens/RoomListScreen';
 import AppLoader from '../containers/AppLoader';
+import NewRoomScreen from '../screens/NewRoomScreen';
 // import TestScreen from '../screens/TestScreen';
 
 const AppNavigator = createStackNavigator(
   {
     [HOME_SCREEN]: {screen: Home},
     [ROOM_LIST_SCREEN]: {screen: RoomListScreen},
+    [NEW_ROOM_SCREEN]: {screen: NewRoomScreen},
     // 'TEST': {screen: TestScreen},
   },
   {

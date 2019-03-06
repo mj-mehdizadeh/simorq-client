@@ -332,11 +332,13 @@ export default (variables = variable) => {
         },
         'NativeBase.Icon': {
           width: variables.iconFontSize - 5,
-          fontSize: variables.iconFontSize - 2,
+          fontSize: variables.iconFontSize - 7,
+          color: variables.listNoteColor,
         },
         'NativeBase.IconNB': {
           width: variables.iconFontSize - 5,
-          fontSize: variables.iconFontSize - 2,
+          fontSize: variables.iconFontSize - 7,
+          color: variables.listNoteColor,
         },
         paddingRight: variables.listItemPadding + 5,
         flex: 0,
@@ -350,7 +352,7 @@ export default (variables = variable) => {
           fontSize: 17,
         },
         flex: 1,
-        height: 44,
+        height: 55,
         justifyContent: 'center',
         borderBottomWidth: 1 / PixelRatio.getPixelSizeForLayoutSize(1),
         borderColor: variables.listBorderColor,
@@ -395,7 +397,7 @@ export default (variables = variable) => {
       borderBottomWidth: null,
       paddingVertical: null,
       paddingRight: null,
-      height: 44,
+      height: 55,
       justifyContent: 'center',
     },
     '.noBorder': {
