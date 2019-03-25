@@ -62,6 +62,10 @@ export default class Api {
     return Api.instance.invoke('post', actionId, body, options);
   }
 
+  static patch(actionId, body, options) {
+    return Api.instance.invoke('patch', actionId, body, options);
+  }
+
   static get(actionId, params, options) {
     return Api.instance.invoke('get', actionId, {params}, options);
   }
