@@ -28,7 +28,7 @@ class RoomMessage extends React.Component {
   renderFooter() {
     const {t, message, readHistoryMaxId} = this.props;
     return (<Text style={message.out ? footerSelf : styles.footer}>
-      {t('date.msgTime', {date: message.time})}
+      {t('date.msgTime', {date: message.createdAt})}
       {message.out && (<Icon style={styles.statusIconDeliver} name="check" type="MaterialCommunityIcons"/>)}
       {(message.out && readHistoryMaxId >= message.id) && (<Icon style={styles.statusIconSeen} name="check-all" type="MaterialCommunityIcons"/>)}
     </Text>);
