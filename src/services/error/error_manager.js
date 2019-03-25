@@ -24,9 +24,7 @@ export default class ErrorManager {
     if (typeof messages === 'string') {
       this.showToast(messages);
     } else {
-      messages.forEach((text) => {
-        this.showToast(text);
-      });
+      this.showToast(messages.join('\n'));
     }
   }
 
@@ -45,7 +43,7 @@ export default class ErrorManager {
         return translate('error.checkConnection');
       case INVALID_PARAM_ERROR:
         return error.params.map((param) => {
-          return translate(`error.${param.name}`, {field: translate(`field.${param.field}`)});
+          return translate(`error.${param.code}`, {field: translate(`field.${param.field}`)});
         });
       case VALIDATE_ERROR:
         return;
