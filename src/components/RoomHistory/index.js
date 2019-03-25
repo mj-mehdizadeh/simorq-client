@@ -24,11 +24,11 @@ class RoomHistory extends React.PureComponent {
             </Button>
           </Left>
           <Body style={styles.headerBody}>
-            <AvatarContainer roomId={roomId}/>
-            <View style={styles.headerTitleWrap}>
-              <Title style={styles.headerTitle} bold>Title</Title>
-              <Subtitle style={styles.headerSubTitle}>Subtitle</Subtitle>
-            </View>
+          <AvatarContainer size={'small'} roomId={roomId}/>
+          <View style={styles.headerTitleWrap}>
+            <Title style={styles.headerTitle} bold>Title</Title>
+            <Subtitle style={styles.headerSubTitle}>Subtitle</Subtitle>
+          </View>
           </Body>
           <Right>
             <Button transparent onPress={changeBg}>

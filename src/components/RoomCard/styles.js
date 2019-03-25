@@ -25,6 +25,7 @@ export default StyleSheet.create({
   title: {
     flex: 1,
     fontSize: 15,
+    textAlign: 'left',
   },
   iconSeen: {
     maxWidth: 20,
@@ -41,7 +42,7 @@ export default StyleSheet.create({
     color: '#838c96',
   },
   time: {
-    maxWidth: 35,
+    maxWidth: 45,
     fontSize: 10,
     color: '#838c96',
   },
@@ -50,6 +51,7 @@ export default StyleSheet.create({
     color: '#838c96',
     flex: 1,
     paddingRight: 5,
+    textAlign: 'left',
   },
   noteWrap: {
     flexDirection: 'row',

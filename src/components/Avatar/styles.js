@@ -8,19 +8,19 @@ export default StyleSheet.create({
     overflow: 'hidden',
   },
   'small': {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-  },
-  'medium': {
     width: 40,
     height: 40,
     borderRadius: 20,
   },
+  'medium': {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+  },
 
   'text-small': {},
   'text-medium': {
-    fontSize: 20,
+    fontSize: 23,
     height: 35,
     lineHeight: 33,
   },

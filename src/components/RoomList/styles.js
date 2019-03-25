@@ -7,7 +7,7 @@ export default StyleSheet.create({
   },
   content: {
     flex: 1,
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#fff',
     zIndex: 10,
   },
   header: {
@@ -15,7 +15,6 @@ export default StyleSheet.create({
     borderBottomWidth: variable.borderWidth,
   },
   fab: {
-    zIndex: 999,
-    backgroundColor: '#267ae9',
+    zIndex: 10,
   },
 });

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FlatList} from 'react-native';
 import PropTypes from 'prop-types';
-import {Body, Button, Container, Fab, Header, Icon, Right, Title} from 'native-base';
+import {Body, Button, Container, Header, Icon, Right, Title} from 'native-base';
 import RoomCardContainer from '../../containers/room/CardContainer';
 import HistoryWrapContainer from '../../containers/room/HistoryWrapContainer';
 import styles from './styles';
@@ -29,7 +29,7 @@ export default class RoomList extends React.PureComponent {
     return <Container style={styles.container}>
       <Header style={styles.header}>
         <Body>
-        <Title bold>SimorQ</Title>
+          <Title bold>SimorQ</Title>
         </Body>
         <Right>
           <Button transparent>
@@ -48,13 +48,9 @@ export default class RoomList extends React.PureComponent {
       />
       <HistoryWrapContainer
         ref={'history'}/>
-      <Fab
-        direction="up"
-        style={styles.fab}
-        onPress={this.onNewPress}
-        position="bottomRight">
+      <Button style={styles.fab} round primary bottomRight onPress={this.onNewPress}>
         <Icon name="add"/>
-      </Fab>
+      </Button>
     </Container>;
   }
 }
