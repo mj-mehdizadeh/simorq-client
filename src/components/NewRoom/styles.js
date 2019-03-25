@@ -23,6 +23,9 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     marginBottom: 10,
   },
+  titleItem: {
+    flex: 1,
+  },
   avatarPicker: {
     width: 52,
     height: 52,
@@ -74,5 +77,8 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 14,
+  },
+  usernameItem: {
+    height: 50,
   },
 });

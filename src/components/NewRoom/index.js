@@ -33,8 +33,8 @@ class NewRoom extends React.PureComponent {
           </Button>
         </Left>
         <Body>
-        {page === 'CREATE' && (<Title bold>{t(`newRoom.header_${type}`)}</Title>)}
-        {page === 'COMPLETE' && (<Title bold>{t(`newRoom.privacy`)}</Title>)}
+          {page === 'CREATE' && (<Title bold>{t(`newRoom.header_${type}`)}</Title>)}
+          {page === 'COMPLETE' && (<Title bold>{t(`newRoom.privacy`)}</Title>)}
         </Body>
       </Header>
       <Content padder>
@@ -56,11 +56,11 @@ class NewRoom extends React.PureComponent {
             <Icon style={styles.avatarPickerIcon} name={'camera'} type={'MaterialCommunityIcons'}/>
           </View>
         </TouchableWithoutFeedback>
-        <Item>
+        <Item style={styles.titleItem}>
           <Input autoFocus={true}
-                 value={title}
-                 onChangeText={changeTitle}
-                 placeholder={t(`newRoom.title_${type}`)}/>
+            value={title}
+            onChangeText={changeTitle}
+            placeholder={t(`newRoom.title_${type}`)}/>
         </Item>
       </View>
       <Item style={styles.item}>
@@ -77,22 +77,32 @@ class NewRoom extends React.PureComponent {
   }
 
   renderComplete() {
+    const {t, username, inviteLink, availability, changeUsername, changeAvailability} = this.props;
     return (<View>
       <Item style={styles.pubWrap}>
-        <View style={styles.pubItem}>
-          <Radio selected={true}/>
-          <Text style={styles.pubText}>Private</Text>
-        </View>
-        <View style={styles.pubItem}>
-          <Radio selected={true}/>
-          <Text style={styles.pubText}>Public</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={() => changeAvailability('PRIVATE')}>
+          <View style={styles.pubItem}>
+            <Radio onPress={() => changeAvailability('PRIVATE')} selected={availability === 'PRIVATE'}/>
+            <Text style={styles.pubText}>{t('newRoom.private')}</Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => changeAvailability('PUBLIC')}>
+          <View style={styles.pubItem}>
+            <Radio onPress={() => changeAvailability('PUBLIC')} selected={availability === 'PUBLIC'}/>
+            <Text style={styles.pubText}>{t('newRoom.public')}</Text>
+          </View>
+        </TouchableWithoutFeedback>
       </Item>
 
-      <Item style={styles.item}>
+      <Item style={[styles.item, styles.usernameItem]}>
         <Icon style={styles.icon} name="link"/>
-        <Text style={styles.usernameHolder}>https://30q.me/</Text>
-        <Input style={styles.usernameInput} placeholder="Username"/>
+        <Text style={styles.usernameHolder}>https://30q.me/{availability === 'PRIVATE' ? inviteLink : null}</Text>
+        {availability === 'PUBLIC' &&
+        (<Input style={styles.usernameInput}
+          autoFocus={true}
+          value={username}
+          onChangeText={changeUsername}
+          placeholder={t('newRoom.username')}/>)}
       </Item>
     </View>);
   }
@@ -105,8 +115,13 @@ NewRoom.propTypes = {
   type: PropTypes.oneOf(['GROUP', 'CHANNEL']).isRequired,
   title: PropTypes.string,
   info: PropTypes.string,
+  username: PropTypes.string,
+  inviteLink: PropTypes.string,
+  availability: PropTypes.string,
   changeTitle: PropTypes.func,
   changeInfo: PropTypes.func,
+  changeAvailability: PropTypes.func,
+  changeUsername: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
 };
 export default translate()(NewRoom);

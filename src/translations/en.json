@@ -9,10 +9,13 @@
   "error": {
     "checkConnection": "Check your network connection",
     "invalid": "{{field}} is Invalid",
-    "invalid_phone_code": "Invalid Code"
+    "invalid_phone_code": "Invalid Code",
+    "missing_field": "{{field}} is Required"
   },
   "field": {
-    "phone_number": "Phone number"
+    "phone_number": "Phone number",
+    "title": "Title",
+    "info": "Description"
   },
   "date": {
     "yesterday": "Yesterday",
@@ -48,7 +51,10 @@
     "title_GROUP": "Group name",
     "title_CHANNEL": "Channel name",
     "info": "Description",
-    "infoHint": "You can provide an optional description for your channel."
+    "username": "Username",
+    "infoHint": "You can provide an optional description for your channel.",
+    "private": "Private",
+    "public":"Public"
   }
 }
 
