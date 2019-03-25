@@ -14,19 +14,65 @@ export default StyleSheet.create({
     borderBottomColor: variable.listBorderColor,
     borderBottomWidth: variable.borderWidth,
   },
-  newFormWrap: {
+  arrowIcon: {
+    color: '#eee',
+  },
+  titleWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginBottom: 10,
+  },
+  avatarPicker: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: variable.brandPrimary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+    marginBottom: -10,
+  },
+  avatarPickerIcon: {
+    color: '#fff',
+    fontSize: 20,
+  },
+  titleInput: {},
+  infoInput: {
+    flex: 1,
+  },
+  item: {
+    marginLeft: 35,
+  },
+  icon: {
+    marginLeft: -35,
+    color: '#767687',
+  },
+  pubWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 15,
+    paddingBottom: 10,
+  },
+  pubText: {
+    marginLeft: 15,
+  },
+  pubItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  usernameInput: {
+    paddingLeft: 105,
+  },
+  usernameHolder: {
+    fontSize: 14,
+    color: variable.brandPrimary,
     position: 'absolute',
     left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: '#f7f7f7',
-    zIndex: 1000,
-    elevation: 3,
-    transform: [
-      {
-        translateX: 360,
-      },
-    ],
+    top: 14,
   },
 });

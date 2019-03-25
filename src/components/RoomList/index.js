@@ -22,14 +22,14 @@ export default class RoomList extends React.PureComponent {
   };
 
   onNewPress = () => {
-    navigate(NEW_ROOM_SCREEN);
+    navigate(NEW_ROOM_SCREEN, {type: 'GROUP'});
   };
 
   render() {
     return <Container style={styles.container}>
       <Header style={styles.header}>
         <Body>
-          <Title bold>SimorQ</Title>
+        <Title bold>SimorQ</Title>
         </Body>
         <Right>
           <Button transparent>

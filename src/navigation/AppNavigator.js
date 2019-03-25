@@ -1,6 +1,13 @@
 import {createAppContainer, createStackNavigator, createSwitchNavigator} from 'react-navigation';
 import Home from '../screens/home';
-import {APP_NAVIGATOR, AUTH_NAVIGATOR, HOME_SCREEN, LOGIN_SCREEN, NEW_ROOM_SCREEN, ROOM_LIST_SCREEN} from '../constant/navigator';
+import {
+  APP_NAVIGATOR,
+  AUTH_NAVIGATOR,
+  HOME_SCREEN,
+  LOGIN_SCREEN,
+  NEW_ROOM_SCREEN,
+  ROOM_LIST_SCREEN,
+} from '../constant/navigator';
 import LoginScreen from '../screens/LoginScreen';
 import RoomListScreen from '../screens/RoomListScreen';
 import AppLoader from '../containers/AppLoader';

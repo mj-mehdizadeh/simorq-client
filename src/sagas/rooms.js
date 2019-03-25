@@ -1,4 +1,4 @@
-import {call, put, take} from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 import Creators, {RoomsTypes} from '../redux/rooms';
 import Api from '../services/api';
 import {SUBSCRIBES} from '../constant/methods';
@@ -10,19 +10,27 @@ import {mkColor, mkInitials} from '../services/app';
 /* ------------- Api ------------- */
 
 const fetchRoomList = () => {
-  return Api.get(SUBSCRIBES, null, {toastError: true});
+  return Api.get(SUBSCRIBES, null, {toastError: true}).catch(err => []);
 };
 
 /* ------------- Sags ------------- */
 
 export function* getRoomList() {
-  try {
-    yield take(RoomsTypes.FETCH_ROOMS);
-    const response = yield call(fetchRoomList);
-    yield putRooms(response.rooms);
-    yield putMessages(response.messages);
-  } catch (error) {
-  }
+  yield takeEvery(RoomsTypes.FETCH_ROOMS, takeRoomList);
+}
+
+export function* takeRoomList() {
+  const response = yield call(fetchRoomList);
+  yield putRooms(response.rooms);
+  yield putMessages(response.messages);
+}
+
+export function* appendRoom() {
+  yield takeEvery(RoomsTypes.APPEND_ROOM, takeAppendRoom);
+}
+
+export function* takeAppendRoom(action) {
+  yield putRooms([action.room]);
 }
 
 export function putRooms(rooms) {

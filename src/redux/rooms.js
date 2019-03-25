@@ -5,6 +5,7 @@ import {createActions, createReducer} from 'reduxsauce';
 const {Types, Creators} = createActions({
   fetchRooms: null,
   appendRooms: ['rooms'],
+  appendRoom: ['room'],
 });
 
 export const RoomsTypes = Types;
@@ -12,8 +13,7 @@ export default Creators;
 
 /* ------------- Initial State ------------- */
 
-export const INITIAL_STATE = {
-};
+export const INITIAL_STATE = {};
 
 /* ------------- Reducers ------------- */
 

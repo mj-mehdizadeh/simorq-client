@@ -200,6 +200,9 @@ export default (variables = variable) => {
         color: '#384850',
       },
     },
+    '.noBorder': {
+      borderBottomWidth: 0,
+    },
 
     borderWidth: variables.borderWidth * 2,
     borderTopWidth: 0,

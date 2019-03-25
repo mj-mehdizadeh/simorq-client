@@ -1,79 +1,112 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import {Body, Button, Container, Content, Header, Icon, Left, ListItem, Right, Separator, Text, Title} from 'native-base';
+import {TouchableWithoutFeedback} from 'react-native';
+import {
+  Body,
+  Button,
+  Container,
+  Content,
+  Header,
+  Icon,
+  Input,
+  Item,
+  Left,
+  Radio,
+  Spinner,
+  Text,
+  Textarea,
+  Title,
+  View,
+} from 'native-base';
 import styles from './styles';
-import NewRoomForm from './NewRoomForm';
-import * as Animatable from 'react-native-animatable';
-import {PanResponder} from 'react-native';
-import {transitionIn, transitionMove, transitionOut, transitionRelease} from '../../services/transition';
+import {translate} from 'react-i18next';
+import PropTypes from 'prop-types';
+import {goBack} from '../../services/navigator';
 
-export default class NewRoom extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    // todo [transition] - move to message container and pass the `this.view` ref. move-right: reply, move-left: back
-    this._panResponder = PanResponder.create({
-      // Ask to be the responder:
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onPanResponderMove: (evt, gesture) => transitionMove(this.view, evt, gesture),
-      onPanResponderRelease: (evt, gesture) => transitionRelease(this.view, evt, gesture),
-    });
-  }
-
-  handleViewRef = ref => this.view = ref;
-
-  newFormIn = () => transitionIn(this.view);
-  newFormOut = () => transitionOut(this.view);
-
+class NewRoom extends React.PureComponent {
   render() {
-    const {goNewGroup, goNewChannel} = this.props;
+    const {t, page, type, loading, onSubmit} = this.props;
     return <Container style={styles.container}>
       <Header style={styles.header}>
+        <Left>
+          <Button transparent>
+            <Icon onPress={goBack} style={styles.arrowIcon} name={'arrow-back'}/>
+          </Button>
+        </Left>
         <Body>
-          <Title bold>New Message</Title>
+        {page === 'CREATE' && (<Title bold>{t(`newRoom.header_${type}`)}</Title>)}
+        {page === 'COMPLETE' && (<Title bold>{t(`newRoom.privacy`)}</Title>)}
         </Body>
-        <Right>
-          <Button transparent>
-            <Icon name="magnify" type={'MaterialCommunityIcons'}/>
-          </Button>
-          <Button transparent>
-            <Icon name="account-plus" type={'MaterialCommunityIcons'}/>
-          </Button>
-        </Right>
       </Header>
-      <Content>
-        <ListItem icon onPress={this.newFormIn}>
-          <Left>
-            <Icon name="account-multiple" type={'MaterialCommunityIcons'}/>
-          </Left>
-          <Body>
-            <Text>New Group</Text>
-          </Body>
-        </ListItem>
-        <ListItem icon last onPress={this.newFormIn}>
-          <Left>
-            <Icon name="bullhorn" type={'FontAwesome'}/>
-          </Left>
-          <Body>
-            <Text>New Channel</Text>
-          </Body>
-        </ListItem>
-        <Separator bordered>
-          <Text>Sorted by last seen time</Text>
-        </Separator>
+      <Content padder>
+        {page === 'CREATE' && this.renderCreate()}
+        {page === 'COMPLETE' && this.renderComplete()}
       </Content>
-      <Animatable.View
-        duration={500}
-        useNativeDriver={true}
-        style={styles.newFormWrap}
-        ref={this.handleViewRef}>
-        <NewRoomForm />
-      </Animatable.View>
+      <Button round primary bottomRight onPress={loading ? null : onSubmit}>
+        {loading ? (<Spinner color="white"/>) : (<Icon name="arrow-forward"/>)}
+      </Button>
     </Container>;
+  }
+
+  renderCreate() {
+    const {t, type, title, info, changeTitle, changeInfo} = this.props;
+    return (<View>
+      <View style={styles.titleWrap}>
+        <TouchableWithoutFeedback>
+          <View style={styles.avatarPicker}>
+            <Icon style={styles.avatarPickerIcon} name={'camera'} type={'MaterialCommunityIcons'}/>
+          </View>
+        </TouchableWithoutFeedback>
+        <Item>
+          <Input autoFocus={true}
+                 value={title}
+                 onChangeText={changeTitle}
+                 placeholder={t(`newRoom.title_${type}`)}/>
+        </Item>
+      </View>
+      <Item style={styles.item}>
+        <Icon style={styles.icon} name="info"/>
+        <Textarea
+          rowSpan={2}
+          value={info}
+          onChangeText={changeInfo}
+          style={styles.infoInput}
+          placeholder={t('newRoom.info')}/>
+      </Item>
+      <Text note>{t('newRoom.infoHint')}</Text>
+    </View>);
+  }
+
+  renderComplete() {
+    return (<View>
+      <Item style={styles.pubWrap}>
+        <View style={styles.pubItem}>
+          <Radio selected={true}/>
+          <Text style={styles.pubText}>Private</Text>
+        </View>
+        <View style={styles.pubItem}>
+          <Radio selected={true}/>
+          <Text style={styles.pubText}>Public</Text>
+        </View>
+      </Item>
+
+      <Item style={styles.item}>
+        <Icon style={styles.icon} name="link"/>
+        <Text style={styles.usernameHolder}>https://30q.me/</Text>
+        <Input style={styles.usernameInput} placeholder="Username"/>
+      </Item>
+    </View>);
   }
 }
 
 NewRoom.propTypes = {
+  t: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  page: PropTypes.oneOf(['CREATE', 'COMPLETE']).isRequired,
+  type: PropTypes.oneOf(['GROUP', 'CHANNEL']).isRequired,
+  title: PropTypes.string,
+  info: PropTypes.string,
+  changeTitle: PropTypes.func,
+  changeInfo: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
 };
+export default translate()(NewRoom);
