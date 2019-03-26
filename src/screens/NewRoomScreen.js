@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import NewRoom from '../components/NewRoom';
 import Api from '../services/api';
-import {ROOMS_CREATE, ROOMS_EDIT} from '../constant/methods';
+import {FILE_UPLOAD, ROOMS_ADD_AVATAR, ROOMS_CREATE, ROOMS_EDIT} from '../constant/methods';
 import RoomsCreators from '../redux/rooms';
 import connect from 'react-redux/es/connect/connect';
 import {goBack} from '../services/navigator';
+import ImagePicker from 'react-native-image-picker';
 
 class NewRoomScreen extends Component {
 
@@ -21,6 +22,7 @@ class NewRoomScreen extends Component {
       inviteLink: null,
       username: null,
       availability: 'PRIVATE',
+      token: null,
     };
   }
 
@@ -35,6 +37,33 @@ class NewRoomScreen extends Component {
   };
   changeAvailability = (text) => {
     this.setState({availability: text});
+  };
+
+  changeAvatar = () => {
+    ImagePicker.showImagePicker({
+      title: 'Select photo',
+      maxWidth: 720,
+      maxHeight: 480,
+      quality: 0.8,
+      videoQuality: 'low',
+      noData: true,
+      takePhotoButtonTitle: 'Camera',
+      chooseFromLibraryButtonTitle: 'Gallery',
+    }, async (response) => {
+      if (response.uri) {
+        this.setState({
+          avatar: response.uri,
+        });
+        let formdata = new FormData();
+        formdata.append('file', {uri: response.uri, name: response.fileName, type: response.type});
+        const {token} = await Api.post(FILE_UPLOAD, formdata);
+        if (this.state.id) {
+          Api.post(ROOMS_ADD_AVATAR, {params: {id: this.state.id}, token});
+        } else {
+          this.setState({token});
+        }
+      }
+    });
   };
 
   onSubmit = async () => {
@@ -55,6 +84,9 @@ class NewRoomScreen extends Component {
         type, title, info,
       }, {toastError: true});
       await appendRoom(room);
+      if (this.state.token) {
+        await Api.post(ROOMS_ADD_AVATAR, {params: {id: room.id}, token: this.state.token});
+      }
       if (type === 'GROUP') {
         return goBack();
       }
@@ -96,6 +128,7 @@ class NewRoomScreen extends Component {
         changeInfo={this.changeInfo}
         changeAvailability={this.changeAvailability}
         changeUsername={this.changeUsername}
+        changeAvatar={this.changeAvatar}
         onSubmit={this.onSubmit}
       />
     );

@@ -48,10 +48,10 @@ class NewRoom extends React.PureComponent {
   }
 
   renderCreate() {
-    const {t, type, title, info, changeTitle, changeInfo} = this.props;
+    const {t, type, title, info, changeTitle, changeInfo, changeAvatar} = this.props;
     return (<View>
       <View style={styles.titleWrap}>
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={changeAvatar}>
           <View style={styles.avatarPicker}>
             <Icon style={styles.avatarPickerIcon} name={'camera'} type={'MaterialCommunityIcons'}/>
           </View>
