@@ -5,10 +5,14 @@ import rootSaga from '../sagas';
 
 import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
+import {APP_VERSION} from '../constant/config';
 
 const persistConfig = {
   key: 'root',
   storage,
+  stateReconciler: hardSet,
+  version: APP_VERSION,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
