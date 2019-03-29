@@ -6,6 +6,7 @@ import MessageCreators from '../../redux/messages';
 import {connect} from 'react-redux';
 import {getRoomMessages} from '../../selector/messages';
 import {last} from 'lodash';
+import {getRoomProp} from '../../selector/rooms';
 
 class HistoryContainer extends React.PureComponent {
 
@@ -42,10 +43,11 @@ class HistoryContainer extends React.PureComponent {
 
   render() {
     const {loading} = this.state;
-    const {roomId, history, panHandlers, changeBg} = this.props;
+    const {roomId, title, history, panHandlers, changeBg} = this.props;
     return <RoomHistory
       loading={loading}
       roomId={roomId}
+      title={title}
       history={history}
       onScroll={this.onScroll}
       changeBg={changeBg}
@@ -66,6 +68,7 @@ function bindAction(dispatch) {
 
 const mapStateToProps = (state, props) => ({
   history: getRoomMessages(state, props),
+  title: getRoomProp(state, {roomId: props.roomId, key: 'title'}),
 });
 
 export default connect(mapStateToProps, bindAction)(HistoryContainer);

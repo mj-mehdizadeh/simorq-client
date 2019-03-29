@@ -14,7 +14,7 @@ class RoomHistory extends React.PureComponent {
   };
 
   render() {
-    const {t, roomId, history, onScroll, changeBg} = this.props;
+    const {t, roomId, title, history, onScroll, changeBg} = this.props;
     return <View style={styles.container}>
       <View style={styles.headerWrap}>
         <Header style={styles.header}>
@@ -24,11 +24,11 @@ class RoomHistory extends React.PureComponent {
             </Button>
           </Left>
           <Body style={styles.headerBody}>
-          <AvatarContainer size={'small'} roomId={roomId}/>
-          <View style={styles.headerTitleWrap}>
-            <Title style={styles.headerTitle} bold>Title</Title>
-            <Subtitle style={styles.headerSubTitle}>Subtitle</Subtitle>
-          </View>
+            <AvatarContainer size={'small'} roomId={roomId}/>
+            <View style={styles.headerTitleWrap}>
+              <Title style={styles.headerTitle} bold>{title}</Title>
+              <Subtitle style={styles.headerSubTitle}>Subtitle</Subtitle>
+            </View>
           </Body>
           <Right>
             <Button transparent onPress={changeBg}>
