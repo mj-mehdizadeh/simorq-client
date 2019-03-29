@@ -41,6 +41,7 @@ export default StyleSheet.create({
   headerSubTitle: {
     color: '#565656',
     fontSize: 12,
+    textAlign: 'left',
   },
   headerIcon: {
     color: '#202020',
