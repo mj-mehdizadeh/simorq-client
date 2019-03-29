@@ -38,8 +38,4 @@ Avatar.propTypes = {
   size: PropTypes.oneOf(['x-small', 'small', 'medium']),
 };
 
-Avatar.defaultProps = {
-  size: 'medium',
-};
-
 export default Avatar;

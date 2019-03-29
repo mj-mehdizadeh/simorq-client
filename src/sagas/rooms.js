@@ -51,7 +51,7 @@ export function trimRoom(room) {
   return {
     ...room,
     avatar: {
-      file: room.avatar,
+      ...room.avatar,
       color: item[1],
       backgroundColor: item[0],
       initial: mkInitials(room.title),
