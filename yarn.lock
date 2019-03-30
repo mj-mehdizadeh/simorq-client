@@ -4888,6 +4888,10 @@ react-native-animatable@^1.2.4, react-native-animatable@^1.3.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-contacts@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-contacts/-/react-native-contacts-4.0.0.tgz#5fa41527ca37cb3382890d3d867765c1ea4fb7e7"
+
 react-native-drawer@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
