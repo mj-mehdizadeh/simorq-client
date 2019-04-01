@@ -34,7 +34,7 @@ export function resetNavigate(routeName, params) {
  * @param {string} routeName
  * @param {NavigationParams} params
  */
-export function navigate(routeName, params) {
+export function navigate(routeName, params = null) {
   _container.dispatch(
     NavigationActions.navigate({
       type: 'Navigation/NAVIGATE',
