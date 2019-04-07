@@ -7,8 +7,7 @@ import {initEvents} from '../services/socket_events';
 class RoomListScreen extends React.PureComponent {
 
   componentDidMount() {
-    const {dispatch} = this.props;
-    initEvents(dispatch);
+    initEvents();
   }
 
   render() {
@@ -17,14 +16,8 @@ class RoomListScreen extends React.PureComponent {
   }
 }
 
-function bindAction(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
 const mapStateToProps = state => ({
   rooms: getRoomList(state),
 });
 
-export default connect(mapStateToProps, bindAction)(RoomListScreen);
+export default connect(mapStateToProps)(RoomListScreen);
