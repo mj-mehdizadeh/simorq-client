@@ -18,27 +18,24 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducer);
 
 // creates the store
-export default function configureStore() {
-  const middleware = [];
-  const enhancers = [];
+const middleware = [];
+const enhancers = [];
 
-  /* ------------- Middleware ------------- */
-  //middleware.push(someMiddleware)
+/* ------------- Middleware ------------- */
+//middleware.push(someMiddleware)
 
-  /* ------------- Saga Middleware ------------- */
-  const sagaMiddleware = createSagaMiddleware();
-  middleware.push(sagaMiddleware);
+/* ------------- Saga Middleware ------------- */
+const sagaMiddleware = createSagaMiddleware();
+middleware.push(sagaMiddleware);
 
-  /* ------------- Assemble Middleware ------------- */
-  enhancers.push(applyMiddleware(...middleware));
+/* ------------- Assemble Middleware ------------- */
+enhancers.push(applyMiddleware(...middleware));
 
-  /* ------------- Redux Configuration ------------- */
-  const store = createStore(persistedReducer, compose(...enhancers));
-  // kick off root saga
-  sagaMiddleware.run(rootSaga);
+/* ------------- Redux Configuration ------------- */
+export const store = createStore(persistedReducer, compose(...enhancers));
+// kick off root saga
+sagaMiddleware.run(rootSaga);
 
-  /* ------------- Persist Redux Configuration ------------- */
-  let persistor = persistStore(store);
+/* ------------- Persist Redux Configuration ------------- */
+export const persistor = persistStore(store);
 
-  return {store, persistor};
-}
