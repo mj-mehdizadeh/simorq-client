@@ -23,7 +23,7 @@ class CardContainer extends React.PureComponent {
 }
 
 const mapStateToProps = (state, props) => ({
-  room: getRoom(state, props),
+  room: getRoom(state, props.roomId),
   lastMessage: getRoomLastMessage(state, props),
 });
 

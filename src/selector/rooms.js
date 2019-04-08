@@ -2,10 +2,10 @@ import {createSelector} from 'reselect';
 import {filter, get, map} from 'lodash';
 
 export const getRooms = state => state.rooms;
-export const getRoom = (state, props) => get(state.rooms, props.roomId);
+export const getRoom = (state, roomId) => get(state.rooms, roomId);
 
 export const getRoomProp = (state, props) => {
-  const room = getRoom(state, props);
+  const room = getRoom(state, props.roomId);
   return room ? get(room, props.key) : null;
 };
 export const getRoomChatId = (state, props) => {
