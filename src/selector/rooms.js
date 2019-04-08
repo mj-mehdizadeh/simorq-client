@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {filter, get, map} from 'lodash';
+import {filter, findKey, get, map} from 'lodash';
 
 export const getRooms = state => state.rooms;
 export const getRoom = (state, roomId) => get(state.rooms, roomId);
@@ -10,6 +10,14 @@ export const getRoomProp = (state, props) => {
 };
 export const getRoomChatId = (state, props) => {
   return props.chatId || getRoomProp(state, {roomId: props.roomId, key: 'subscribe.chatId'});
+};
+
+export const getRoomByChatId = (state, chatId) => {
+  return getRoom(state, getRoomIdByChatId(state, chatId));
+};
+
+export const getRoomIdByChatId = (state, chatId) => {
+  return findKey(state.rooms, room => room.subscribe && room.subscribe.chatId === chatId);
 };
 
 export const getRoomList = createSelector(

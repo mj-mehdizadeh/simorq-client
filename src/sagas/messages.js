@@ -1,11 +1,14 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import Creators, {MessagesTypes} from '../redux/messages';
+import RoomCreators from '../redux/rooms';
 
 import {keyBy, map} from 'lodash';
 import Api from '../services/api';
 import {MESSAGE_NEW, MESSAGES} from '../constant/methods';
 import {HISTORY_PAGINATION} from '../constant/app';
 import {getMe} from '../services/client';
+import {getRoomByChatId} from '../selector/rooms';
+import {getStoreState, storeDispatch} from '../redux/configureStore';
 
 /* ------------- CONSTANT ------------- */
 const _END_OF_SCROLL = {};
@@ -39,12 +42,7 @@ export function* takeHistory(action) {
 
 export function putMessages(messages) {
   return put(
-    Creators.appendMessages(
-      keyBy(
-        map(messages, TrimMessage),
-        'id',
-      ),
-    ),
+    Creators.appendMessages(normalizeMessages(messages)),
   );
 }
 
@@ -69,9 +67,27 @@ export function* takeNewMessage(action) {
   }
 }
 
-/* ------------- Trim ------------- */
+/* ------------- Events ------------- */
 
-export function TrimMessage(message) {
+export async function onNewMessage(message) {
+  const room = getRoomByChatId(getStoreState(), message.chatId);
+  if (!room) {
+    // todo getRoom by chatId
+    await storeDispatch(RoomCreators.fetchRoom(message.roomId));
+  }
+  storeDispatch(Creators.appendMessages(normalizeMessages([message])));
+}
+
+/* ------------- Normalize ------------- */
+
+export function normalizeMessages(messages) {
+  return keyBy(
+    map(messages, normalizeMessage),
+    'id',
+  );
+}
+
+export function normalizeMessage(message) {
   return {
     ...message,
     out: message.roomId === getMe('roomId'),

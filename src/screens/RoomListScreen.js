@@ -3,11 +3,14 @@ import {connect} from 'react-redux';
 import RoomList from '../components/RoomList/index';
 import {getRoomList} from '../selector/rooms';
 import Socket from '../services/socket';
+import {onNewMessage} from '../sagas/messages';
 
 class RoomListScreen extends React.PureComponent {
 
   componentDidMount() {
-    Socket.init([]);
+    Socket.init([
+      ['new-message', onNewMessage],
+    ]);
   }
 
   render() {
