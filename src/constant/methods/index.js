@@ -10,6 +10,7 @@ export const SUBSCRIBES = 'subscribes';
 
 export const ROOMS_CREATE = 'rooms';
 export const ROOMS_EDIT = 'rooms/:id';
+export const ROOMS_FIND = 'rooms/:id';
 export const ROOMS_ADD_AVATAR = 'rooms/:id/avatar';
 
 export const CLIENT_ME = 'client/me';

@@ -4,6 +4,7 @@ import {createActions, createReducer} from 'reduxsauce';
 
 const {Types, Creators} = createActions({
   fetchRooms: null,
+  fetchRoom: ['roomId'],
   appendRooms: ['rooms'],
   appendRoom: ['room'],
 });

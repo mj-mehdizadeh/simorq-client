@@ -1,7 +1,7 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import Creators, {RoomsTypes} from '../redux/rooms';
 import Api from '../services/api';
-import {SUBSCRIBES} from '../constant/methods';
+import {ROOMS_FIND, SUBSCRIBES} from '../constant/methods';
 import {putMessages} from './messages';
 
 import {keyBy, map} from 'lodash';
@@ -13,14 +13,22 @@ const fetchRoomList = () => {
   return Api.get(SUBSCRIBES, null, {toastError: true}).catch(err => []);
 };
 
+const fetchRoom = (id) => {
+  return Api.get(ROOMS_FIND, {id}, {toastError: true}).catch(err => []);
+};
+
 /* ------------- Sags ------------- */
+
+export function* getRoom() {
+  yield takeEvery(RoomsTypes.FETCH_ROOM, takeRoomList);
+}
 
 export function* getRoomList() {
   yield takeEvery(RoomsTypes.FETCH_ROOMS, takeRoomList);
 }
 
-export function* takeRoomList() {
-  const response = yield call(fetchRoomList);
+export function* takeRoomList(action) {
+  const response = yield call(action.roomId ? fetchRoom : fetchRoomList, action.roomId);
   yield putRooms(response.rooms);
   yield putMessages(response.messages);
 }
