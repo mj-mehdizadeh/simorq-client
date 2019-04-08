@@ -65,8 +65,8 @@ export function* takeNewMessage(action) {
       yield putMessages([message]);
     }
   } catch (e) {
+    yield put(Creators.editMessage(action.message.id, {failed: true}));
   }
-
 }
 
 /* ------------- Trim ------------- */
@@ -74,6 +74,6 @@ export function* takeNewMessage(action) {
 export function TrimMessage(message) {
   return {
     ...message,
-    out: message.createdBy === getMe('id'),
+    out: message.roomId === getMe('roomId'),
   };
 }

@@ -72,6 +72,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: variable.brandPrimary,
   },
+  statusIconFailed: {
+    width: 10,
+    fontSize: 15,
+    color: variable.brandDanger,
+  },
 });
 
 export default styles;

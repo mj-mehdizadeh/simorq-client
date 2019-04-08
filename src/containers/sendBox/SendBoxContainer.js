@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import SendBox from '../../components/SendBox';
@@ -29,7 +28,8 @@ class SendBoxContainer extends React.PureComponent {
       chatId,
       randomId: random(10000000, 999999999),
       text,
-      createdBy: getMe('id'),
+      roomId: getMe('roomId'),
+      sending: true,
     }, {
       roomId,
     });

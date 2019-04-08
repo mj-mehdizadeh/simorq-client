@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Image, TouchableWithoutFeedback} from 'react-native';
@@ -29,8 +28,10 @@ class RoomMessage extends React.Component {
     const {t, message, readHistoryMaxId} = this.props;
     return (<Text style={message.out ? footerSelf : styles.footer}>
       {t('date.msgTime', {date: message.createdAt})}
-      {message.out && (<Icon style={styles.statusIconDeliver} name="check" type="MaterialCommunityIcons"/>)}
-      {(message.out && readHistoryMaxId >= message.id) && (<Icon style={styles.statusIconSeen} name="check-all" type="MaterialCommunityIcons"/>)}
+      {message.failed && (<Icon style={styles.statusIconFailed} name="info"/>)}
+      {(message.sending && !message.failed) && (<Icon style={styles.statusIconDeliver} name="schedule"/>)}
+      {(!message.sending && message.out) && (<Icon style={styles.statusIconDeliver} name="check" type="MaterialCommunityIcons"/>)}
+      {(!message.sending && message.out && readHistoryMaxId >= message.id) && (<Icon style={styles.statusIconSeen} name="check-all" type="MaterialCommunityIcons"/>)}
     </Text>);
   }
 }
