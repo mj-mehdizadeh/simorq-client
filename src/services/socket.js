@@ -6,8 +6,11 @@ import {randomString} from './core';
 const apiSingleton = randomString(10);
 export default class Socket {
 
-  constructor() {
-    this.init();
+  _events = [];
+
+  constructor(events) {
+    this._events = events;
+    this._events.push(['disconnect', this.checkDisconnect]);
   }
 
   /**
@@ -15,9 +18,6 @@ export default class Socket {
    * @returns {Socket}
    */
   static get instance() {
-    if (!this[apiSingleton]) {
-      this[apiSingleton] = new Socket();
-    }
     return this[apiSingleton];
   }
 
@@ -25,18 +25,9 @@ export default class Socket {
     return this._socket;
   }
 
-  async init() {
-    this._socket = io(SOCKET_IO_URL, {
-      query: {
-        token: OAuth.getToken(),
-      },
-    });
-    this.socket.on('disconnect', async (reason) => {
-      if (reason === 'io server disconnect') {
-        await OAuth.grantRefreshToken();
-        this._socket.connect();
-      }
-    });
+  static init(events) {
+    this[apiSingleton] = new Socket(events);
+    this[apiSingleton].connect();
   }
 
   static on(id, action) {
@@ -49,5 +40,21 @@ export default class Socket {
 
   static close() {
     return this.instance.socket.close();
+  }
+
+  async connect() {
+    this._socket = io(SOCKET_IO_URL, {
+      query: {
+        access_token: OAuth.getToken().access_token,
+      },
+    });
+    this._events.forEach(item => this._socket.on(item[0], item[1]));
+  }
+
+  async checkDisconnect(reason) {
+    if (reason === 'io server disconnect') {
+      await OAuth.grantRefreshToken();
+      await this.connect();
+    }
   }
 }

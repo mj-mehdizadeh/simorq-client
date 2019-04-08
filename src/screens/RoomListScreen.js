@@ -2,12 +2,12 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import RoomList from '../components/RoomList/index';
 import {getRoomList} from '../selector/rooms';
-import {initEvents} from '../services/socket_events';
+import Socket from '../services/socket';
 
 class RoomListScreen extends React.PureComponent {
 
   componentDidMount() {
-    initEvents();
+    Socket.init([]);
   }
 
   render() {

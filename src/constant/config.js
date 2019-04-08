@@ -1,4 +1,5 @@
 export const API_BASE_URL = '';
+export const SOCKET_IO_URL = '';
 export const APP_VERSION = 'V1.0.0';
 export const DEFAULT_COUNTRY = 'IR';
 export const API_CONCURRENCY = 1;
