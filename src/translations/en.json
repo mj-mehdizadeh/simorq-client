@@ -1,4 +1,11 @@
 {
+  "app": {
+    "name": "Simorq",
+    "state": {
+      "connecting": "Connecting...",
+      "updating": "Updating..."
+    }
+  },
   "common": {
     "loading": "Loading..."
   },
@@ -54,7 +61,7 @@
     "username": "Username",
     "infoHint": "You can provide an optional description for your channel.",
     "private": "Private",
-    "public":"Public"
+    "public": "Public"
   }
 }
 

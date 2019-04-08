@@ -3,7 +3,7 @@ import {createActions, createReducer} from 'reduxsauce';
 /* ------------- Types and Action Creators ------------- */
 
 const {Types, Creators} = createActions({
-  fetchRooms: null,
+  fetchRooms: ['changeState'],
   fetchRoom: ['roomId'],
   appendRooms: ['rooms'],
   appendRoom: ['room'],

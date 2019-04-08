@@ -7,8 +7,9 @@ import HistoryWrapContainer from '../../containers/room/HistoryWrapContainer';
 import styles from './styles';
 import {navigate} from '../../services/navigator';
 import {NEW_ROOM_SCREEN} from '../../constant/navigator';
+import {translate} from 'react-i18next';
 
-export default class RoomList extends React.PureComponent {
+class RoomList extends React.PureComponent {
 
   _keyExtractor = (item, index) => item + '-' + index;
   _renderItem = ({item, index}) => <RoomCardContainer
@@ -26,10 +27,15 @@ export default class RoomList extends React.PureComponent {
   };
 
   render() {
+    const {t, appState} = this.props;
     return <Container style={styles.container}>
       <Header style={styles.header}>
         <Body>
-          <Title bold>SimorQ</Title>
+          <Title bold>
+            {appState === 'CONNECTING' && t('app.state.connecting')}
+            {appState === 'UPDATING' && t('app.state.updating')}
+            {appState === 'CONNECTED' && t('app.name')}
+          </Title>
         </Body>
         <Right>
           <Button transparent>
@@ -55,6 +61,10 @@ export default class RoomList extends React.PureComponent {
   }
 }
 
+export default translate()(RoomList);
+
 RoomList.propTypes = {
+  t: PropTypes.func.isRequired,
   rooms: PropTypes.arrayOf(PropTypes.string),
+  appState: PropTypes.oneOf(['CONNECTING', 'UPDATING', 'CONNECTED']),
 };

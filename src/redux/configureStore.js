@@ -13,6 +13,7 @@ const persistConfig = {
   storage,
   stateReconciler: hardSet,
   version: APP_VERSION,
+  blacklist: ['app'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -38,6 +39,8 @@ sagaMiddleware.run(rootSaga);
 
 /* ------------- Persist Redux Configuration ------------- */
 export const persistor = persistStore(store);
+
+// persistor.purge();
 
 export function storeDispatch(action) {
   return store.dispatch(action);

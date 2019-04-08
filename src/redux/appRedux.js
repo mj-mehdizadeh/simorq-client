@@ -13,16 +13,16 @@ export default Creators;
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = {
-  state: null, // CONNECTING, UPDATING, CONNECTED
+  state: 'CONNECTING', // CONNECTING, UPDATING, CONNECTED
 };
 
 /* ------------- Reducers ------------- */
 
-export const setConfig = (state, config) => {
-  return {...state, ...config};
+export const setConfig = (state, action) => {
+  return {...state, ...action.config};
 };
-export const setState = (state, newState) => {
-  return {...state, state: newState};
+export const setState = (state, action) => {
+  return {...state, state: action.state};
 };
 
 /* ------------- Hookup Reducers To Types ------------- */

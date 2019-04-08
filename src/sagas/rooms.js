@@ -6,6 +6,7 @@ import {putMessages} from './messages';
 
 import {keyBy, map} from 'lodash';
 import {mkColor, mkInitials} from '../services/app';
+import AppCreators from '../redux/appRedux';
 
 /* ------------- Api ------------- */
 
@@ -28,9 +29,11 @@ export function* getRoomList() {
 }
 
 export function* takeRoomList(action) {
+  action.changeState ? yield (put(AppCreators.setState('UPDATING'))) : null;
   const response = yield call(action.roomId ? fetchRoom : fetchRoomList, action.roomId);
   yield putRooms(response.rooms);
   yield putMessages(response.messages);
+  action.changeState ? yield (put(AppCreators.setState('CONNECTED'))) : null;
 }
 
 export function* appendRoom() {
