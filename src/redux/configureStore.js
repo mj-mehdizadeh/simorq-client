@@ -39,3 +39,10 @@ sagaMiddleware.run(rootSaga);
 /* ------------- Persist Redux Configuration ------------- */
 export const persistor = persistStore(store);
 
+export function storeDispatch(action) {
+  return store.dispatch(action);
+}
+
+export function getStoreState() {
+  return store.getState();
+}
