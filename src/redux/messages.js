@@ -8,6 +8,7 @@ const {Types, Creators} = createActions({
   appendMessages: ['messages'],
   deleteMessage: ['id', 'chatId'],
   newMessage: ['message', 'params'],
+  editMessage: ['id', 'params', 'replace'],
 });
 
 export const MessagesTypes = Types;
@@ -56,9 +57,20 @@ export const deleteMessage = (state, action) => {
   };
 };
 
+export const editMessage = (state, action) => {
+  return {
+    history: state.history,
+    storage: {
+      ...state.storage,
+      [action.id]: action.replace ? action.params : {...state.storage[action.id], ...action.params},
+    },
+  };
+};
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.APPEND_MESSAGES]: appendMessages,
   [Types.DELETE_MESSAGE]: deleteMessage,
+  [Types.EDIT_MESSAGE]: editMessage,
 });
