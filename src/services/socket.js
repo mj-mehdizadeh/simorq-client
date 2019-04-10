@@ -6,11 +6,13 @@ import {randomString} from './core';
 const apiSingleton = randomString(10);
 export default class Socket {
 
+  _socket = null;
   _events = [];
 
   constructor(events) {
     this._events = events;
-    this._events.push(['disconnect', this.checkDisconnect]);
+    this._events.push(['disconnect', this.checkDisconnect.bind(this)]);
+    this.socketConnect();
   }
 
   /**
@@ -27,11 +29,6 @@ export default class Socket {
 
   static init(events) {
     this[apiSingleton] = new Socket(events);
-    this[apiSingleton].connect();
-  }
-
-  static on(id, action) {
-    return this.instance.socket.on(id, action);
   }
 
   static emit(id, data) {
@@ -42,7 +39,7 @@ export default class Socket {
     return this.instance.socket.close();
   }
 
-  async connect() {
+  socketConnect() {
     this._socket = io(SOCKET_IO_URL, {
       query: {
         access_token: OAuth.getToken().access_token,
@@ -54,7 +51,7 @@ export default class Socket {
   async checkDisconnect(reason) {
     if (reason === 'io server disconnect') {
       await OAuth.grantRefreshToken();
-      await this.connect();
+      this.socketConnect();
     }
   }
 }
