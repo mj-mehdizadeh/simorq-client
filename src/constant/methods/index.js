@@ -13,6 +13,9 @@ export const ROOMS_EDIT = 'rooms/:id';
 export const ROOMS_FIND = 'rooms/:id';
 export const ROOMS_ADD_AVATAR = 'rooms/:id/avatar';
 
+export const IMPORT_CONTACTS = 'contacts';
+export const CHECK_CONTACTS = 'contacts/check';
+
 export const CLIENT_ME = 'client/me';
 
 export const FILE_UPLOAD = 'upload';

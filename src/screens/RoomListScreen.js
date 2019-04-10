@@ -6,6 +6,7 @@ import Socket from '../services/socket';
 import {onNewMessage} from '../sagas/messages';
 import AppCreators from '../redux/appRedux';
 import RoomsCreators from '../redux/rooms';
+import {importAllContacts} from '../services/contacts';
 
 class RoomListScreen extends React.PureComponent {
 
@@ -15,6 +16,7 @@ class RoomListScreen extends React.PureComponent {
       ['disconnect', this.onDisconnect],
       ['new-message', onNewMessage],
     ]);
+    await importAllContacts();
   }
 
   onConnect = async () => {
