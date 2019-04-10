@@ -9,6 +9,7 @@ import {HISTORY_PAGINATION} from '../constant/app';
 import {getMe} from '../services/client';
 import {getRoomByChatId} from '../selector/rooms';
 import {getStoreState, storeDispatch} from '../redux/configureStore';
+import {getMessageIdByRandId} from '../selector/messages';
 
 /* ------------- CONSTANT ------------- */
 const _END_OF_SCROLL = {};
@@ -70,6 +71,10 @@ export function* takeNewMessage(action) {
 /* ------------- Events ------------- */
 
 export async function onNewMessage(message) {
+  const messageId = getMessageIdByRandId(getStoreState(), message.randomId);
+  if (messageId && messageId !== message.id) {
+    return;
+  }
   const room = getRoomByChatId(getStoreState(), message.chatId);
   if (!room) {
     // todo getRoom by chatId
