@@ -1,9 +1,12 @@
 import {PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
-import {map, uniqBy, sortBy} from 'lodash';
+import {differenceBy, map, sortBy, uniqBy} from 'lodash';
 import md5 from 'md5';
 import Api from './api';
-import {CHECK_CONTACTS} from '../constant/methods';
+import {CHECK_CONTACTS, GET_CONTACTS, IMPORT_CONTACTS} from '../constant/methods';
+import {getStoreState, storeDispatch} from '../redux/configureStore';
+import ContactsCreators from '../redux/contacts';
+import {END_OF_CONTACTS} from '../constant/errors';
 
 export async function getAllContacts() {
   await PermissionsAndroid.request(
@@ -16,14 +19,14 @@ export async function getAllContacts() {
   return new Promise((resolve, reject) => {
     Contacts.getAllWithoutPhotos((err, contacts) => {
       if (err !== 'denied') {
-        return resolve(prettifyContacts(contacts));
+        return resolve(normalizeContacts(contacts));
       }
       reject(err);
     });
   });
 }
 
-function prettifyContacts(contacts) {
+function normalizeContacts(contacts) {
   const allContacts = [];
   map(contacts, contact => {
     map(contact.phoneNumbers, phoneNumber => {
@@ -47,8 +50,25 @@ export async function importAllContacts(forceUpdate = false) {
   const contactsHash = md5(phoneNumbers);
   const {equal} = await Api.post(CHECK_CONTACTS, {contactsHash});
   if (!equal || forceUpdate) {
-    // dispatch get Api contacts
-    // check difrence
-    // upload difrence
+    await fetchAllContacts();
+    const difference = differenceBy(contacts, getStoreState().contacts, contact => {
+      return parseInt(contact.phone_number) || contact.phoneNumber;
+    });
+    await Api.post(IMPORT_CONTACTS, {contacts: difference});
   }
+}
+
+export async function fetchAllContacts(skip = 0, limit = 40) {
+  try {
+    const response = await Api.get(GET_CONTACTS, {skip, limit});
+    storeDispatch(ContactsCreators.contactsResponse(response));
+    if (response.contacts && response.contacts.length === limit) {
+      return fetchAllContacts(skip + response.contacts.length);
+    }
+  } catch (e) {
+    if (e.name !== END_OF_CONTACTS) {
+      throw e;
+    }
+  }
+  return 1;
 }

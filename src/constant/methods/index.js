@@ -15,6 +15,7 @@ export const ROOMS_ADD_AVATAR = 'rooms/:id/avatar';
 
 export const IMPORT_CONTACTS = 'contacts';
 export const CHECK_CONTACTS = 'contacts/check';
+export const GET_CONTACTS = 'contacts';
 
 export const CLIENT_ME = 'client/me';
 

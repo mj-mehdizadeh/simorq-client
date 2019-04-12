@@ -1,6 +1,7 @@
 import {all, fork} from 'redux-saga/effects';
 import {appendRoom, getRoom, getRoomList} from './rooms';
 import {getHistory, newMessage} from './messages';
+import {getContacts} from './contacts';
 
 export default function* root() {
   yield all([
@@ -9,5 +10,6 @@ export default function* root() {
     fork(getRoom),
     fork(getHistory),
     fork(newMessage),
+    fork(getContacts),
   ]);
 }
