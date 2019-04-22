@@ -2,11 +2,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import RoomHistory from '../../components/RoomHistory/index';
-import MessageCreators from '../../redux/messages';
 import {connect} from 'react-redux';
 import {getRoomMessages} from '../../selector/messages';
 import {last} from 'lodash';
 import {getRoomProp} from '../../selector/rooms';
+import {fetchHistory} from '../../services/messages/api';
 
 class HistoryContainer extends React.PureComponent {
 
@@ -35,9 +35,9 @@ class HistoryContainer extends React.PureComponent {
   };
 
   loadMore = async () => {
-    const {history, loadHistory, roomId} = this.props;
+    const {history, roomId} = this.props;
     const from = last(history);
-    await loadHistory(roomId, from);
+    await fetchHistory(roomId, from);
     this.setState({loading: false});
   };
 
@@ -60,15 +60,9 @@ HistoryContainer.propTypes = {
   roomId: PropTypes.string.isRequired,
 };
 
-function bindAction(dispatch) {
-  return {
-    loadHistory: (roomId, from) => dispatch(MessageCreators.fetchHistory(roomId, from)),
-  };
-}
-
 const mapStateToProps = (state, props) => ({
   history: getRoomMessages(state, props),
   title: getRoomProp(state, {roomId: props.roomId, key: 'title'}),
 });
 
-export default connect(mapStateToProps, bindAction)(HistoryContainer);
+export default connect(mapStateToProps)(HistoryContainer);

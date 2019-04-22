@@ -4,10 +4,8 @@ import {concat, forIn, groupBy, indexOf, map, reverse, sortBy, sortedUniq} from 
 /* ------------- Types and Action Creators ------------- */
 
 const {Types, Creators} = createActions({
-  fetchHistory: ['roomId', 'from', 'direction'],
   appendMessages: ['messages'],
   deleteMessage: ['id', 'chatId'],
-  newMessage: ['message', 'params'],
   editMessage: ['id', 'params', 'replace'],
 });
 

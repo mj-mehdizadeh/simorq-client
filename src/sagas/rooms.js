@@ -2,11 +2,11 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import Creators, {RoomsTypes} from '../redux/rooms';
 import Api from '../utils/api';
 import {ROOMS_FIND, SUBSCRIBES} from '../constant/methods';
-import {putMessages} from './messages';
 
 import {keyBy, map} from 'lodash';
 import {mkColor, mkInitials} from '../utils/app';
 import AppCreators from '../redux/appRedux';
+import {putMessages} from '../services/messages/dispatcher';
 
 /* ------------- Api ------------- */
 
