@@ -8,8 +8,8 @@ import {putMessages} from './messages/dispatcher';
 
 /* ------------- Api ------------- */
 
-export async function fetchRoom(id) {
-  const response = await Api.get(ROOMS_FIND, {id}, {toastError: true});
+export async function fetchRoom(params) {
+  const response = await Api.get(ROOMS_FIND, params, {toastError: true});
   putRooms(response.rooms);
   putMessages(response.messages);
 }
