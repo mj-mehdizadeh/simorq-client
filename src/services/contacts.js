@@ -26,22 +26,8 @@ export async function getAllContacts() {
   });
 }
 
-function normalizeContacts(contacts) {
-  const allContacts = [];
-  map(contacts, contact => {
-    map(contact.phoneNumbers, phoneNumber => {
-      const title = [
-        (contact.givenName || ''),
-        (contact.middleName || ''),
-        (contact.familyName || ''),
-      ].join(' ').replace(/\s+/g, ' ').trim();
-      allContacts.push({
-        title,
-        phone_number: phoneNumber.number.replace(/[^A-Z0-9]+/ig, ''),
-      });
-    });
-  });
-  return sortBy(uniqBy(allContacts, 'phone_number'), 'phone_number');
+export async function importContact(contact) {
+  await Api.post(IMPORT_CONTACTS, {contacts: [contact]});
 }
 
 export async function importAllContacts(forceUpdate = false) {
@@ -71,4 +57,24 @@ export async function fetchAllContacts(skip = 0, limit = 40) {
     }
   }
   return 1;
+}
+
+/* ------------- Normalizer ------------- */
+
+function normalizeContacts(contacts) {
+  const allContacts = [];
+  map(contacts, contact => {
+    map(contact.phoneNumbers, phoneNumber => {
+      const title = [
+        (contact.givenName || ''),
+        (contact.middleName || ''),
+        (contact.familyName || ''),
+      ].join(' ').replace(/\s+/g, ' ').trim();
+      allContacts.push({
+        title,
+        phone_number: phoneNumber.number.replace(/[^A-Z0-9]+/ig, ''),
+      });
+    });
+  });
+  return sortBy(uniqBy(allContacts, 'phone_number'), 'phone_number');
 }
