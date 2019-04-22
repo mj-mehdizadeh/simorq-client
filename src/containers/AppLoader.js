@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {navigate} from '../services/navigator';
+import {navigate} from '../utils/navigator';
 import {APP_NAVIGATOR, AUTH_NAVIGATOR} from '../constant/navigator';
 import {translate} from 'react-i18next';
 import PropTypes from 'prop-types';
-import {loadUserLang, setT} from '../services/i18n';
-import OAuth from '../services/oauth';
+import {loadUserLang, setT} from '../utils/i18n';
+import OAuth from '../utils/oauth';
 import LoadingPage from '../components/LoadingPage';
-import {loadMe} from '../services/client';
+import {loadMe} from '../utils/client';
 
 class AppLoader extends Component {
 

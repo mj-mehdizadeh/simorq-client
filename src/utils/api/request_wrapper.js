@@ -1,16 +1,23 @@
 export default class RequestWrapper {
 
-  /**
-   * @type Promise
-   */
-  _promise;
-
   constructor(resolve, reject, actionId, data, options) {
     this._resolve = resolve;
     this._reject = reject;
     this._actionId = actionId;
     this._data = data;
     this._options = options;
+  }
+
+  /**
+   * @type Promise
+   */
+  _promise;
+
+  /**
+   * @return {Promise}
+   */
+  get promise() {
+    return this._promise;
   }
 
   get actionId() {
@@ -23,13 +30,6 @@ export default class RequestWrapper {
 
   get options() {
     return this._options;
-  }
-
-  /**
-   * @return {Promise}
-   */
-  get promise() {
-    return this._promise;
   }
 
   resolve(value) {

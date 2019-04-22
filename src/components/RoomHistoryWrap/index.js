@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import {ImageBackground, PanResponder, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import SendBoxContainer from '../../containers/sendBox/SendBoxContainer';
-import {transitionIn, transitionMove, transitionOut, transitionRelease} from '../../services/transition';
+import {transitionIn, transitionMove, transitionOut, transitionRelease} from '../../utils/transition';
 import HistoryContainer from '../../containers/room/HistoryContainer';
 import styles from './styles';
 import {BACKGROUND_IMAGES} from '../../constant/app';
-import {generateFileUri} from '../../services/app';
+import {generateFileUri} from '../../utils/app';
 
 export default class RoomHistoryWrap extends React.PureComponent {
 

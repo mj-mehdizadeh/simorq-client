@@ -5,8 +5,8 @@ import MessageCreators from '../../redux/messages';
 import {connect} from 'react-redux';
 import {random} from 'lodash';
 import {getRoomChatId} from '../../selector/rooms';
-import {mongoObjectId} from '../../services/core';
-import {getMe} from '../../services/client';
+import {mongoObjectId} from '../../utils/core';
+import {getMe} from '../../utils/client';
 
 class SendBoxContainer extends React.PureComponent {
   state = {

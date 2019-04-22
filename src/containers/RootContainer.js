@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {Root, StyleProvider} from 'native-base';
 import {Provider} from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
 import {I18nextProvider} from 'react-i18next';
 import getTheme from '../theme/components';
 import variables from '../theme/variables/material';
-import {store, persistor} from '../redux/configureStore';
-import i18n from '../services/i18n';
+import {persistor, store} from '../redux/configureStore';
+import i18n from '../utils/i18n';
 import AppNavigator from '../navigation/AppNavigator';
-import {setContainer} from '../services/navigator';
+import {setContainer} from '../utils/navigator';
 
 // create our store
 
@@ -16,6 +15,7 @@ export default class RootContainer extends Component {
   setNavigationRef = (navigatorRef) => {
     setContainer(navigatorRef);
   };
+
   render() {
     return (
       <I18nextProvider i18n={i18n}>

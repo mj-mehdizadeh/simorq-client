@@ -3,10 +3,10 @@ import Creators, {MessagesTypes} from '../redux/messages';
 import RoomCreators from '../redux/rooms';
 
 import {keyBy, map} from 'lodash';
-import Api from '../services/api';
+import Api from '../utils/api';
 import {MESSAGE_NEW, MESSAGES} from '../constant/methods';
 import {HISTORY_PAGINATION} from '../constant/app';
-import {getMe} from '../services/client';
+import {getMe} from '../utils/client';
 import {getRoomByChatId} from '../selector/rooms';
 import {getStoreState, storeDispatch} from '../redux/configureStore';
 import {getMessageIdByRandId} from '../selector/messages';

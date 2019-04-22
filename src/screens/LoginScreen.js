@@ -3,14 +3,14 @@ import {filter, find} from 'lodash';
 import Login from '../components/Login/index';
 import countryList from '../constant/country';
 import {DEFAULT_COUNTRY} from '../constant/config';
-import Api from '../services/api';
+import Api from '../utils/api';
 import {AUTH_LOGIN, AUTH_REGISTER, AUTH_SEND_CODE} from '../constant/methods';
-import {mkPhoneNumber} from '../services/core';
-import ErrorManager from '../services/error/error_manager';
+import {mkPhoneNumber} from '../utils/core';
+import ErrorManager from '../utils/error/error_manager';
 import {ROOM_LIST_SCREEN} from '../constant/navigator';
-import {navigate} from '../services/navigator';
-import OAuth from '../services/oauth';
-import {fetchMe} from '../services/client';
+import {navigate} from '../utils/navigator';
+import OAuth from '../utils/oauth';
+import {fetchMe} from '../utils/client';
 
 const country = find(countryList, {code: DEFAULT_COUNTRY});
 

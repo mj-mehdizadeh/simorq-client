@@ -5,7 +5,7 @@ import {Body, Button, Container, Header, Icon, Right, Title} from 'native-base';
 import RoomCardContainer from '../../containers/room/CardContainer';
 import HistoryWrapContainer from '../../containers/room/HistoryWrapContainer';
 import styles from './styles';
-import {navigate} from '../../services/navigator';
+import {navigate} from '../../utils/navigator';
 import {NEW_ROOM_SCREEN} from '../../constant/navigator';
 import {translate} from 'react-i18next';
 

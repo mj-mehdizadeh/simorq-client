@@ -70,6 +70,13 @@ export default class Api {
     return Api.instance.invoke('get', actionId, {params}, options);
   }
 
+  static validate(actionId, params) {
+    const errors = validate(params, getRule(actionId));
+    if (errors) {
+      throw new AppError(VALIDATE_ERROR, errors);
+    }
+  }
+
   /**
    * @param {string} method
    * @param {string} actionId
@@ -112,13 +119,6 @@ export default class Api {
     });
 
     return promise;
-  }
-
-  static validate(actionId, params) {
-    const errors = validate(params, getRule(actionId));
-    if (errors) {
-      throw new AppError(VALIDATE_ERROR, errors);
-    }
   }
 
   /**

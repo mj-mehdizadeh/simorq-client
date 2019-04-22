@@ -2,11 +2,11 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import RoomList from '../components/RoomList/index';
 import {getRoomList} from '../selector/rooms';
-import Socket from '../services/socket';
+import Socket from '../utils/socket';
 import {onNewMessage} from '../sagas/messages';
 import AppCreators from '../redux/appRedux';
 import RoomsCreators from '../redux/rooms';
-import {importAllContacts} from '../services/contacts';
+import {importAllContacts} from '../utils/contacts';
 
 class RoomListScreen extends React.PureComponent {
 

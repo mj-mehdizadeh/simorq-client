@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import NewRoom from '../components/NewRoom';
-import Api from '../services/api';
+import Api from '../utils/api';
 import {FILE_UPLOAD, ROOMS_ADD_AVATAR, ROOMS_CREATE, ROOMS_EDIT} from '../constant/methods';
 import RoomsCreators from '../redux/rooms';
 import connect from 'react-redux/es/connect/connect';
-import {goBack} from '../services/navigator';
+import {goBack} from '../utils/navigator';
 import ImagePicker from 'react-native-image-picker';
 
 class NewRoomScreen extends Component {

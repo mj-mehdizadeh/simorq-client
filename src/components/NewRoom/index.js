@@ -1,26 +1,10 @@
 import * as React from 'react';
 import {TouchableWithoutFeedback} from 'react-native';
-import {
-  Body,
-  Button,
-  Container,
-  Content,
-  Header,
-  Icon,
-  Input,
-  Item,
-  Left,
-  Radio,
-  Spinner,
-  Text,
-  Textarea,
-  Title,
-  View,
-} from 'native-base';
+import {Body, Button, Container, Content, Header, Icon, Input, Item, Left, Radio, Spinner, Text, Textarea, Title, View} from 'native-base';
 import styles from './styles';
 import {translate} from 'react-i18next';
 import PropTypes from 'prop-types';
-import {goBack} from '../../services/navigator';
+import {goBack} from '../../utils/navigator';
 
 class NewRoom extends React.PureComponent {
   render() {

@@ -6,7 +6,6 @@ import {randomString} from './core';
 const apiSingleton = randomString(10);
 export default class Socket {
 
-  _socket = null;
   _events = [];
 
   constructor(events) {
@@ -22,6 +21,8 @@ export default class Socket {
   static get instance() {
     return this[apiSingleton];
   }
+
+  _socket = null;
 
   get socket() {
     return this._socket;
