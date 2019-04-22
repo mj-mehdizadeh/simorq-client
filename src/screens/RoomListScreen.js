@@ -4,9 +4,9 @@ import RoomList from '../components/RoomList/index';
 import {getRoomList} from '../selector/rooms';
 import Socket from '../utils/socket';
 import AppCreators from '../redux/appRedux';
-import RoomsCreators from '../redux/rooms';
 import {importAllContacts} from '../utils/contacts';
 import {onNewMessage} from '../services/messages/events';
+import {fetchSubscribes} from '../services/rooms';
 
 class RoomListScreen extends React.PureComponent {
 
@@ -20,8 +20,7 @@ class RoomListScreen extends React.PureComponent {
   }
 
   onConnect = async () => {
-    const {fetchRooms} = this.props;
-    await fetchRooms(true);
+    await fetchSubscribes(true);
   };
   onDisconnect = async (reason) => {
     const {changeAppState} = this.props;
@@ -39,7 +38,6 @@ class RoomListScreen extends React.PureComponent {
 function bindAction(dispatch) {
   return {
     changeAppState: (state) => dispatch(AppCreators.setState(state)),
-    fetchRooms: (changeState) => dispatch(RoomsCreators.fetchRooms(changeState)),
   };
 }
 

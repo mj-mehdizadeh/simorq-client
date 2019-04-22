@@ -1,6 +1,6 @@
 import {put, takeEvery} from 'redux-saga/effects';
 import Creators, {ContactsTypes} from '../redux/contacts';
-import {putRooms} from './rooms';
+import {putRooms} from '../services/rooms';
 
 /* ------------- Api ------------- */
 
