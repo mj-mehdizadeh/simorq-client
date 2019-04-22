@@ -4,7 +4,7 @@ import RoomList from '../components/RoomList/index';
 import {getRoomList} from '../selector/rooms';
 import Socket from '../utils/socket';
 import AppCreators from '../redux/appRedux';
-import {importAllContacts} from '../utils/contacts';
+import {importAllContacts} from '../services/contacts';
 import {onNewMessage} from '../services/messages/events';
 import {fetchSubscribes} from '../services/rooms';
 

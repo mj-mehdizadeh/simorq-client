@@ -2,7 +2,7 @@ import {PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
 import {differenceBy, map, sortBy, uniqBy} from 'lodash';
 import md5 from 'md5';
-import Api from './api';
+import Api from '../utils/api';
 import {CHECK_CONTACTS, GET_CONTACTS, IMPORT_CONTACTS} from '../constant/methods';
 import {getStoreState, storeDispatch} from '../redux/configureStore';
 import ContactsCreators from '../redux/contacts';
