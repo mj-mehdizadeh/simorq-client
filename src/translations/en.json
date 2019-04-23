@@ -68,6 +68,9 @@
     "edit": "Edit Contact",
     "firstName":  "First Name",
     "lastName": "Last Name"
+  },
+  "contactList": {
+    "title": "Contact List"
   }
 }
 
