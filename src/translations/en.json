@@ -62,6 +62,12 @@
     "infoHint": "You can provide an optional description for your channel.",
     "private": "Private",
     "public": "Public"
+  },
+  "newContact": {
+    "new": "New Contact",
+    "edit": "Edit Contact",
+    "firstName":  "First Name",
+    "lastName": "Last Name"
   }
 }
 

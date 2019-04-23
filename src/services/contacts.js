@@ -27,7 +27,7 @@ export async function getAllContacts() {
 }
 
 export async function importContact(contact) {
-  await Api.post(IMPORT_CONTACTS, {contacts: [contact]});
+  await Api.post(IMPORT_CONTACTS, {contacts: [contact]}, {toastError: true});
 }
 
 export async function importAllContacts(forceUpdate = false) {
