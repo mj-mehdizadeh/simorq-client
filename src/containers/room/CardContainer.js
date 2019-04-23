@@ -6,7 +6,7 @@ import {getRoom} from '../../selector/rooms';
 import connect from 'react-redux/es/connect/connect';
 import {getRoomLastMessage} from '../../selector/messages';
 
-class CardContainer extends React.PureComponent {
+class RoomCardContainer extends React.PureComponent {
   onPress = () => {
     if (this.props.onPress) {
       this.props.onPress(this.props.roomId);
@@ -17,6 +17,7 @@ class CardContainer extends React.PureComponent {
     return <RoomCard
       room={this.props.room}
       lastMessage={this.props.lastMessage}
+      type={this.props.type}
       onPress={this.onPress}
     />;
   }
@@ -24,15 +25,20 @@ class CardContainer extends React.PureComponent {
 
 const mapStateToProps = (state, props) => ({
   room: getRoom(state, props.roomId),
-  lastMessage: getRoomLastMessage(state, props),
+  lastMessage: props.type === 'room' ? getRoomLastMessage(state, props) : null,
 });
 
-export default connect(mapStateToProps)(CardContainer);
+export default connect(mapStateToProps)(RoomCardContainer);
 
-CardContainer.propTypes = {
+RoomCardContainer.defaultProps = {
+  type: 'room',
+};
+
+RoomCardContainer.propTypes = {
   roomId: PropTypes.string.isRequired,
   index: PropTypes.number,
   room: PropTypes.object.isRequired,
   lastMessage: PropTypes.object,
   onPress: PropTypes.func,
+  type: PropTypes.oneOf(['room', 'contact', 'search']),
 };

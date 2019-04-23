@@ -9,32 +9,62 @@ import {unreadCount} from '../../utils/core';
 
 class RoomCard extends React.PureComponent {
   render() {
-    const {room, lastMessage, onPress, t} = this.props;
+    const {room, type, onPress} = this.props;
     return (<View style={room.id === 2 ? styles.itemDivider : styles.item}>
       <ListItem thumbnail noBorder={room.id === 2} onPress={onPress}>
         <Left>
-          <AvatarContainer roomId={room.id}/>
+          <AvatarContainer roomId={room.id} size={type === 'room' ? 'medium' : 'small'}/>
         </Left>
         <Body style={styles.body}>
           <View style={styles.titleWrap}>
-            <Text style={styles.title} bold>{room.title}</Text>
-            {(lastMessage && lastMessage.out && room.subscribe.readHistoryMaxId < lastMessage.id) && (
-              <Icon style={styles.iconDeliver} name="check" type="MaterialCommunityIcons"/>
-            )}
-            {(lastMessage && lastMessage.out && room.subscribe.readHistoryMaxId >= lastMessage.id) && (
-              <Icon style={styles.iconSeen} name="check-all" type="MaterialCommunityIcons"/>
-            )}
-            <Text style={styles.time} note>{!!lastMessage && t('date.msgTime', {date: lastMessage.createdAt})}</Text>
+            <Text style={type === 'room' ? styles.roomTitle : styles.title} bold>{room.title}</Text>
+            {type === 'room' && this.renderStatus()}
+            {type === 'room' && this.renderTime()}
           </View>
-          <View style={styles.noteWrap}>
-            <Text style={styles.note} note numberOfLines={1}>{!!lastMessage && lastMessage.text}</Text>
-            {room.subscribe.unreadCount > 0 && (<Badge primary small>
-              <Text>{unreadCount(room.subscribe.unreadCount)}</Text>
-            </Badge>)}
-          </View>
+          {type === 'room' && (this.renderRoomBody())}
+          {type === 'contact' && (this.renderContactBody())}
         </Body>
       </ListItem>
     </View>);
+  }
+
+  renderStatus() {
+    const {room, lastMessage} = this.props;
+    if (!lastMessage || !lastMessage.out) {
+      return null;
+    }
+    if (room.subscribe.readHistoryMaxId < lastMessage.id) {
+      return <Icon style={styles.iconDeliver} name="check" type="MaterialCommunityIcons"/>;
+    }
+    if (room.subscribe.readHistoryMaxId >= lastMessage.id) {
+      return <Icon style={styles.iconSeen} name="check-all" type="MaterialCommunityIcons"/>;
+    }
+  }
+
+  renderTime() {
+    const {t, lastMessage} = this.props;
+    if (!lastMessage) {
+      return null;
+    }
+    return <Text style={styles.time} note>{t('date.msgTime', {date: lastMessage.createdAt})}</Text>;
+  }
+
+  renderRoomBody() {
+    const {room, lastMessage} = this.props;
+    if (!lastMessage) {
+      return null;
+    }
+    return (<View style={styles.noteWrap}>
+      <Text style={styles.note} note numberOfLines={1}>{lastMessage.text}</Text>
+      {room.subscribe.unreadCount > 0 && (<Badge primary small>
+        <Text>{unreadCount(room.subscribe.unreadCount)}</Text>
+      </Badge>)}
+    </View>);
+  }
+
+  renderContactBody() {
+    const {room} = this.props;
+    return <Text style={styles.note} note numberOfLines={1}>{room.lastSeen}</Text>;
   }
 }
 
@@ -44,4 +74,5 @@ RoomCard.propTypes = {
   t: PropTypes.func.isRequired,
   room: PropTypes.object,
   lastMessage: PropTypes.object,
+  type: PropTypes.oneOf(['room', 'contact', 'search']),
 };

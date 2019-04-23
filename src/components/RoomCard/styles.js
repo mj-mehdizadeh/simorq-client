@@ -27,6 +27,11 @@ export default StyleSheet.create({
     fontSize: 15,
     textAlign: 'left',
   },
+  roomTitle: {
+    flex: 1,
+    fontSize: 13,
+    textAlign: 'left',
+  },
   iconSeen: {
     maxWidth: 20,
     fontSize: 13,
