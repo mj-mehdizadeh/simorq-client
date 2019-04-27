@@ -5,7 +5,6 @@ import RoomHistory from '../../components/RoomHistory/index';
 import {connect} from 'react-redux';
 import {getRoomMessages} from '../../selector/messages';
 import {last} from 'lodash';
-import {getRoomProp} from '../../selector/rooms';
 import {fetchHistory} from '../../services/messages/api';
 
 class HistoryContainer extends React.PureComponent {
@@ -43,11 +42,10 @@ class HistoryContainer extends React.PureComponent {
 
   render() {
     const {loading} = this.state;
-    const {roomId, title, history, panHandlers, changeBg} = this.props;
+    const {roomId, history, panHandlers, changeBg} = this.props;
     return <RoomHistory
       loading={loading}
       roomId={roomId}
-      title={title}
       history={history}
       onScroll={this.onScroll}
       changeBg={changeBg}
@@ -62,7 +60,6 @@ HistoryContainer.propTypes = {
 
 const mapStateToProps = (state, props) => ({
   history: getRoomMessages(state, props),
-  title: getRoomProp(state, {roomId: props.roomId, key: 'title'}),
 });
 
 export default connect(mapStateToProps)(HistoryContainer);

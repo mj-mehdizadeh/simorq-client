@@ -2,8 +2,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {translate} from 'react-i18next';
-import {Body, Button, Header, Icon, Left, Right, Subtitle, Text, Title, View} from 'native-base';
-import AvatarContainer from '../../containers/room/AvatarContainer';
+import {Text, View} from 'native-base';
 import styles from './styles';
 import RecycleContainer from '../../containers/room/RecycleContainer';
 
@@ -14,29 +13,8 @@ class RoomHistory extends React.PureComponent {
   };
 
   render() {
-    const {t, roomId, title, history, onScroll, changeBg} = this.props;
+    const {t, history, onScroll} = this.props;
     return <View style={styles.container}>
-      <View style={styles.headerWrap}>
-        <Header style={styles.header}>
-          <Left>
-            <Button transparent onPress={this.props.close}>
-              <Icon style={styles.headerIcon} name="arrow-back"/>
-            </Button>
-          </Left>
-          <Body style={styles.headerBody}>
-            <AvatarContainer size={'small'} roomId={roomId}/>
-            <View style={styles.headerTitleWrap}>
-              <Title style={styles.headerTitle} bold>{title}</Title>
-              <Subtitle style={styles.headerSubTitle}>Subtitle</Subtitle>
-            </View>
-          </Body>
-          <Right>
-            <Button transparent onPress={changeBg}>
-              <Icon style={styles.headerIcon} name="more-vert"/>
-            </Button>
-          </Right>
-        </Header>
-      </View>
       {this.props.loading === 'initial' && (<View style={styles.loadingWrap}>
         <Text style={styles.loading}>{t('history.loading')}</Text>
       </View>)}

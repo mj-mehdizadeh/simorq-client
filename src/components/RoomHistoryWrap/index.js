@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {ImageBackground, PanResponder, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import SendBoxContainer from '../../containers/sendBox/SendBoxContainer';
+import RoomHeaderContainer from '../../containers/room/HeaderContainer';
 import {transitionIn, transitionMove, transitionOut, transitionRelease} from '../../utils/transition';
 import HistoryContainer from '../../containers/room/HistoryContainer';
 import styles from './styles';
@@ -50,6 +51,7 @@ export default class RoomHistoryWrap extends React.PureComponent {
           <View
             key={roomId}
             style={roomId === this.props.roomId ? styles.container : styles.hide}>
+            <RoomHeaderContainer roomId={roomId}/>
             <HistoryContainer
               roomId={roomId}
               changeBg={this.changeBackground}
