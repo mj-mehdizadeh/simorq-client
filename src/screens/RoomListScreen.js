@@ -20,7 +20,10 @@ class RoomListScreen extends React.PureComponent {
   }
 
   onConnect = async () => {
+    const {changeAppState} = this.props;
+    changeAppState('UPDATING');
     await fetchSubscribes(true);
+    changeAppState('CONNECTED');
   };
   onDisconnect = async (reason) => {
     const {changeAppState} = this.props;

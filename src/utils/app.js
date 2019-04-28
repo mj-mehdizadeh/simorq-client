@@ -22,5 +22,5 @@ export function mkInitials(title) {
 }
 
 export function generateFileUri(token) {
-  return `${API_BASE_URL}download/${token}`;
+  return `${API_BASE_URL}/download/${token}`;
 }

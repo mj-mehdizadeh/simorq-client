@@ -17,7 +17,11 @@ class RoomCard extends React.PureComponent {
         </Left>
         <Body style={styles.body}>
           <View style={styles.titleWrap}>
-            <Text style={type === 'room' ? styles.roomTitle : styles.title} bold>{room.title}</Text>
+            <View style={styles.titleView}>
+              <Text style={type === 'room' ? styles.roomTitle : styles.title} bold>
+                {room.title}
+              </Text>
+            </View>
             {type === 'room' && this.renderStatus()}
             {type === 'room' && this.renderTime()}
           </View>
@@ -50,12 +54,12 @@ class RoomCard extends React.PureComponent {
   }
 
   renderRoomBody() {
-    const {room, lastMessage} = this.props;
-    if (!lastMessage) {
-      return null;
-    }
+    const {t, room, lastMessage} = this.props;
     return (<View style={styles.noteWrap}>
-      <Text style={styles.note} note numberOfLines={1}>{lastMessage.text}</Text>
+      <View style={styles.titleView}>
+        {!!lastMessage && (<Text style={styles.note} note numberOfLines={1}>{lastMessage.text}</Text>)}
+        {!lastMessage && (<Text style={styles.emptyNote} note numberOfLines={1}>{t('roomCard.noMessage')}</Text>)}
+      </View>
       {room.subscribe.unreadCount > 0 && (<Badge primary small>
         <Text>{unreadCount(room.subscribe.unreadCount)}</Text>
       </Badge>)}

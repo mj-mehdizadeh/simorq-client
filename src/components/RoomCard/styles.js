@@ -22,14 +22,16 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 4,
   },
-  title: {
+  titleView: {
     flex: 1,
-    fontSize: 15,
+    flexDirection: 'row',
+  },
+  title: {
+    fontSize: 13,
     textAlign: 'left',
   },
   roomTitle: {
-    flex: 1,
-    fontSize: 13,
+    fontSize: 15,
     textAlign: 'left',
   },
   iconSeen: {
@@ -54,9 +56,13 @@ export default StyleSheet.create({
   note: {
     fontSize: 14,
     color: '#838c96',
-    flex: 1,
     paddingRight: 5,
     textAlign: 'left',
+  },
+  emptyNote: {
+    fontSize: 12,
+    color: '#0079ff',
+    paddingRight: 5,
   },
   noteWrap: {
     flexDirection: 'row',

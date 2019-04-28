@@ -71,6 +71,9 @@
   },
   "contactList": {
     "title": "Contact List"
+  },
+  "roomCard": {
+    "noMessage": "No Message in this room"
   }
 }
 

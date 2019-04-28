@@ -25,7 +25,7 @@ class RoomCardContainer extends React.PureComponent {
 
 const mapStateToProps = (state, props) => ({
   room: getRoom(state, props.roomId),
-  lastMessage: props.type === 'room' ? getRoomLastMessage(state, props) : null,
+  lastMessage: !props.type || props.type === 'room' ? getRoomLastMessage(state, props) : null,
 });
 
 export default connect(mapStateToProps)(RoomCardContainer);
