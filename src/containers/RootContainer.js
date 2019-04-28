@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Root, StyleProvider} from 'native-base';
+import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import {I18nextProvider} from 'react-i18next';
 import getTheme from '../theme/components';
