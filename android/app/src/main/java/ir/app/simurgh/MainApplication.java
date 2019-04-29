@@ -3,6 +3,7 @@ package ir.app.simurgh;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.amarcruz.rntextsize.RNTextSizePackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNTextSizePackage(),
             new ReactNativeRestartPackage(),
             new ImagePickerPackage(),
             new RNGestureHandlerPackage(),
