@@ -1,11 +1,12 @@
-package com.horuf;
+package ir.app.simurgh;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.rt2zz.reactnativecontacts.ReactNativeContacts;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -26,9 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativeContacts(),
+            new ReactNativeRestartPackage(),
             new ImagePickerPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new ReactNativeContacts()
       );
     }
 
