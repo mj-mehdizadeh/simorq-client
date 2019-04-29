@@ -19,7 +19,7 @@ MessageContainer.propTypes = {
   id: PropTypes.string.isRequired,
 };
 const mapStateToProps = (state, props) => ({
-  message: getMessage(state, props),
+  message: getMessage(state, props.id),
 });
 
 export default connect(mapStateToProps)(MessageContainer);
