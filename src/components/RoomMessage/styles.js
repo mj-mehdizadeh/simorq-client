@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import variable from '../../theme/variables/material';
 
-const styles = StyleSheet.create({
+const commonStyle = {
   wrap: {
     transform: [{scaleY: -1}],
     flexDirection: 'row',
@@ -9,14 +9,8 @@ const styles = StyleSheet.create({
     padding: 2.5,
     paddingLeft: 10,
   },
-  wrapSelf: {
-    transform: [{scaleY: -1}],
-    justifyContent: 'flex-end',
-    paddingLeft: 2.5,
-    paddingRight: 10,
-  },
   box: {
-    padding: 9,
+    padding: 2,
     maxWidth: 290,
     backgroundColor: '#fff',
     shadowColor: '#d9d9d9',
@@ -27,11 +21,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderTopLeftRadius: 9,
   },
-  boxSelf: {
-    backgroundColor: '#ebebeb',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 9,
-  },
   image: {
     width: 276,
     height: 276,
@@ -40,18 +29,6 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     borderTopRightRadius: 20,
   },
-  imageSelf: {
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 9,
-  },
-  content: {
-    // backgroundColor: 'yellow',
-  },
-  text: {
-    position: 'relative',
-    backgroundColor: 'orange',
-    flexDirection: 'row',
-  },
   footer: {
     fontSize: 11,
     color: '#838c96',
@@ -59,22 +36,107 @@ const styles = StyleSheet.create({
     marginBottom: -4,
     paddingRight: 8,
   },
+  statusIcon: {
+    width: 10,
+    fontSize: 15,
+  },
+};
+const styles = StyleSheet.create({
+  wrap: commonStyle.wrap,
+  wrapSelf: {
+    ...commonStyle.wrap,
+    justifyContent: 'flex-end',
+    paddingLeft: 2.5,
+    paddingRight: 10,
+  },
+  box: commonStyle.box,
+  boxSelf: {
+    ...commonStyle.box,
+    backgroundColor: '#ebebeb',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 9,
+  },
+  noBox: {
+    padding: 9,
+    maxWidth: 290,
+  },
+  header: {
+    flexDirection: 'row',
+    height: 15,
+  },
+  headerTitle: {
+    color: variable.brandPrimary,
+    fontSize: 12,
+  },
+  replyToTouch: {
+    height: 45,
+  },
+  replyToWrap: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    padding: 5,
+  },
+  replyImage: {
+    width: 35,
+    height: 35,
+    borderRadius: 4,
+  },
+  replyToTitle: {
+    color: variable.brandPrimary,
+    fontSize: 12,
+  },
+  replyToMessage: {
+    fontSize: 12,
+  },
+  attachmentBox: {},
+  mediaWrap: {},
+  imageRound: commonStyle.image,
+  imageRoundSelf: {
+    ...commonStyle.image,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 9,
+  },
+  imageRoundTop: {
+    ...commonStyle.image,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+  },
+  imageRoundTopSelf: {
+    ...commonStyle.image,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 9,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+  },
+  imageRoundBottom: {
+    ...commonStyle.image,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+  },
+  imageFlat: {
+    borderRadius: 4,
+  },
+  content: {},
+  text: {
+    position: 'relative',
+    backgroundColor: 'orange',
+    flexDirection: 'row',
+  },
+  footer: commonStyle.footer,
   footerSelf: {
+    ...commonStyle.footer,
     paddingRight: 0,
   },
   statusIconDeliver: {
-    width: 10,
-    fontSize: 15,
+    ...commonStyle.statusIcon,
     color: '#838c96',
   },
   statusIconSeen: {
-    width: 10,
-    fontSize: 15,
+    ...commonStyle.statusIcon,
     color: variable.brandPrimary,
   },
   statusIconFailed: {
-    width: 10,
-    fontSize: 15,
+    ...commonStyle.statusIcon,
     color: variable.brandDanger,
   },
 });
