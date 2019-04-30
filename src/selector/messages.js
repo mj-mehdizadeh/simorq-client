@@ -1,4 +1,4 @@
-import {getRoomChatId} from './rooms';
+import {getRoomChatId, getRoomProp} from './rooms';
 import {findKey, get, head} from 'lodash';
 
 export const getMessages = state => state.messages.storage;
@@ -16,4 +16,24 @@ export const getMessageIdByRandId = (state, randomId) => {
 export const getRoomMessages = (state, props) => {
   const chatId = getRoomChatId(state, props);
   return state.messages.history[chatId] || [];
+};
+
+export const getMessageRoomTitle = (state, id) => {
+  const roomId = getMessageProp(state, {id, key: 'roomId'});
+  return getRoomProp(state, {roomId: roomId, key: 'title'});
+};
+export const getMessageForwardFromTitle = (state, id) => {
+  const forwardFrom = getMessageProp(state, {id, key: 'forwardFrom'});
+  if (!forwardFrom) {
+    return null;
+  }
+  return getRoomProp(state, {roomId: forwardFrom.roomId, key: 'title'});
+};
+export const getMessageReplyTitle = (state, id) => {
+  const replyToId = getMessageProp(state, {id, key: 'replyTo'});
+  if (!replyToId) {
+    return null;
+  }
+  const replyToRoomId = getMessageProp(state, {id, key: 'roomId'});
+  return getRoomProp(state, {roomId: replyToRoomId, key: 'title'});
 };
