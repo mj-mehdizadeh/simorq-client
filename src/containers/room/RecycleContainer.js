@@ -3,26 +3,33 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Dimensions} from 'react-native';
 import {DataProvider, LayoutProvider, RecyclerListView} from 'recyclerlistview';
-import MessageContainer from '../../containers/MessageContainer';
+import MessageContainer from '../message/MessageContainer';
+import {getMessageBoxSize, getMessageType} from '../../services/messages/helper';
+
+let {width} = Dimensions.get('window');
 
 class RecycleContainer extends React.PureComponent {
   constructor(args) {
     super(args);
-    let {width} = Dimensions.get('window');
     this._dataProvider = new DataProvider((r1, r2) => {
       return r1 !== r2;
     });
     this._layoutProvider = new LayoutProvider(
-      index => 1,
-      (type, dim) => {
-        dim.width = width;
-        dim.height = 58;
-      },
+      this.layoutProviderType,
+      this.setLayoutForType,
     );
     this.state = {
       dataProvider: this._dataProvider.cloneWithRows(this.props.history),
     };
   }
+
+  layoutProviderType = (index) => {
+    return getMessageType(this.props.history[index]);
+  };
+  setLayoutForType = (type, dim, index) => {
+    dim.width = width;
+    dim.height = getMessageBoxSize(this.props.history[index], this.props.roomType);
+  };
 
   componentWillReceiveProps(nextProps) {
     const {history} = nextProps;
@@ -51,12 +58,14 @@ class RecycleContainer extends React.PureComponent {
   }
 
   _rowRenderer = (type, messageId) => {
-    return (<MessageContainer id={messageId}/>);
+    return (<MessageContainer id={messageId} roomId={this.props.roomId}/>);
   };
 }
 
 RecycleContainer.propTypes = {
   history: PropTypes.array.isRequired,
+  roomId: PropTypes.string.isRequired,
+  roomType: PropTypes.string.isRequired,
   onScroll: PropTypes.func.isRequired,
   recycleRef: PropTypes.func.isRequired,
 };

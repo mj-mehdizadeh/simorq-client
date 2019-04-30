@@ -13,16 +13,18 @@ class RoomHistory extends React.PureComponent {
   };
 
   render() {
-    const {t, history, onScroll} = this.props;
+    const {t, history, onScroll, roomId, roomType} = this.props;
     return <View style={styles.container}>
       {this.props.loading === 'initial' && (<View style={styles.loadingWrap}>
         <Text style={styles.loading}>{t('history.loading')}</Text>
       </View>)}
       <View
         style={styles.content}>
-        {!!history.length && (
+        {(history && history.length) && (
           <RecycleContainer
             history={history}
+            roomId={roomId}
+            roomType={roomType}
             onScroll={onScroll}
             recycleRef={this.recycleRef}
           />)}
@@ -33,6 +35,8 @@ class RoomHistory extends React.PureComponent {
 
 RoomHistory.propTypes = {
   t: PropTypes.func.isRequired,
+  roomId: PropTypes.string.isRequired,
+  roomType: PropTypes.string.isRequired,
   history: PropTypes.array,
   onScroll: PropTypes.func.isRequired,
 };
