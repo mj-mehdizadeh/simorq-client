@@ -116,7 +116,23 @@ const styles = StyleSheet.create({
   imageFlat: {
     borderRadius: 4,
   },
-  content: {},
+  fileWrap: {},
+  fileBox: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    padding: 7,
+  },
+  fileName: {
+    color: variable.brandPrimary,
+    fontSize: 13,
+  },
+  fileInfo: {
+    fontSize: 11,
+    color: '#838c96',
+  },
+  textBox: {
+
+  },
   text: {
     position: 'relative',
     backgroundColor: 'orange',
