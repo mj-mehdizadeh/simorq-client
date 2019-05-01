@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {translate} from 'react-i18next';
 import {Icon, Text, View} from 'native-base';
 import styles from './styles';
+import {ltTime} from '../../utils/core';
 
 class Footer extends React.PureComponent {
 
@@ -11,17 +12,17 @@ class Footer extends React.PureComponent {
     return (<View style={media ? styles.mediaFooterWrap : styles.footerWrap}>
       <View style={isOutbox ? styles.footerSelf : styles.footer}>
         <Text style={styles.timeWrap}>
-          {t('date.msgTime', {date: createdAt})}
+          {ltTime(createdAt)}
         </Text>
-        <Text style={styles.statusWrap}>
+        {isOutbox && (<Text style={styles.statusWrap}>
           {failed ? (<Icon style={styles.statusIconFailed} name="info"/>) : (
             sending ? (<Icon style={styles.statusIconDeliver} name="schedule"/>) : (
               seen ? (<Icon style={styles.statusIconSeen} name="check-all" type="MaterialCommunityIcons"/>) : (
-                isOutbox && (<Icon style={styles.statusIconDeliver} name="check" type="MaterialCommunityIcons"/>)
+                <Icon style={styles.statusIconDeliver} name="check" type="MaterialCommunityIcons"/>
               )
             )
           )}
-        </Text>
+        </Text>)}
         {/*Channel Views and else...*/}
       </View>
     </View>);

@@ -30,11 +30,9 @@ const commonStyle = {
     borderTopRightRadius: 20,
   },
   footer: {
-    fontSize: 11,
-    color: '#838c96',
-    textAlign: 'right',
-    marginBottom: -4,
-    paddingRight: 8,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingRight: 10,
   },
   statusIcon: {
     width: 10,
@@ -52,7 +50,7 @@ const styles = StyleSheet.create({
   box: commonStyle.box,
   boxSelf: {
     ...commonStyle.box,
-    backgroundColor: '#ebebeb',
+    backgroundColor: '#f0f0f0',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 9,
   },
@@ -131,17 +129,33 @@ const styles = StyleSheet.create({
     color: '#838c96',
   },
   textBox: {
-
+    padding: 3,
+    paddingRight: 7,
+    paddingBottom: 0,
+  },
+  textBoxSelf: {
+    paddingLeft: 3,
+    paddingRight: 7,
   },
   text: {
     position: 'relative',
-    backgroundColor: 'orange',
     flexDirection: 'row',
   },
   footer: commonStyle.footer,
   footerSelf: {
     ...commonStyle.footer,
-    paddingRight: 0,
+    paddingRight: 5,
+  },
+  timeWrap: {
+    fontSize: 11,
+    color: '#838c96',
+    textAlign: 'right',
+  },
+  statusWrap: {
+    fontSize: 11,
+    color: '#838c96',
+    textAlign: 'right',
+    marginLeft: 5,
   },
   statusIconDeliver: {
     ...commonStyle.statusIcon,
@@ -158,9 +172,3 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
-
-export const wrapSelf = StyleSheet.flatten([styles.wrap, styles.wrapSelf]);
-export const boxSelf = StyleSheet.flatten([styles.box, styles.boxSelf]);
-export const imageSelf = StyleSheet.flatten([styles.image, styles.imageSelf]);
-export const footerSelf = StyleSheet.flatten([styles.footer, styles.footerSelf]);
-export const timeSelf = StyleSheet.flatten([styles.time, styles.timeSelf]);

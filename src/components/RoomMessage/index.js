@@ -18,41 +18,39 @@ class RoomMessage extends React.PureComponent {
   }
 
   renderBox() {
-    const {rules, message, roomTitle, forwardFromTitle, onRoomPress, onForwardFromPress} = this.props;
-    return (<View style={!rules.hasBox ? styles.noBox : (rules.isOutbox ? styles.box : rules.boxSelf)}>
+    const {rules, message, roomTitle, readHistoryMaxId, forwardFromTitle, onRoomPress, onForwardFromPress} = this.props;
+    return (<View style={!rules.hasBox ? styles.noBox : (rules.isOutbox ? styles.box : styles.boxSelf)}>
       {rules.hasHeader && (<MessageTitle roomTitle={roomTitle} forwardFromTitle={forwardFromTitle} onRoomPress={onRoomPress} onForwardFromPress={onForwardFromPress}/>)}
       {rules.hasReply && <ReplyToContainer replyTo={message.replyTo}/>}
       {rules.hasAttachment && this.renderAttachment()}
-    </View>);
-  }
-
-  renderAttachment() {
-    const {rules, message, readHistoryMaxId} = this.props;
-    return (<View style={styles.attachmentBox}>
-      {rules.isMedia && <Media attachment={message.attachment} rules={rules}/>}
-      {rules.isFile && <File attachment={message.attachment}/>}
-      {rules.isAudio && <File attachment={message.attachment}/>}
       {rules.hasText && this.renderText()}
       <Footer
         failed={message.failed}
         sending={message.sending}
         seen={rules.isOutbox && readHistoryMaxId >= message.id}
         createdAt={message.createdAt}
-        isOutbox={rules.isOutbox}
+        isOutbox={message.out}
         media={rules.isMedia && !rules.hasText} message={message}/>
     </View>);
   }
 
+  renderAttachment() {
+    const {rules, message} = this.props;
+    return (<View style={styles.attachmentBox}>
+      {rules.isMedia && <Media attachment={message.attachment} rules={rules}/>}
+      {rules.isFile && <File attachment={message.attachment}/>}
+      {rules.isAudio && <File attachment={message.attachment}/>}
+    </View>);
+  }
+
   renderText() {
-    const {text} = this.props.message;
-    return (<View style={styles.textBox}>
-      <Text style={styles.text}>{text}</Text>
+    return (<View style={this.props.rules.isOutbox ? styles.textBoxSelf : styles.textBox}>
+      <Text style={styles.text}>{this.props.message.text}</Text>
     </View>);
   }
 }
 
 RoomMessage.propTypes = {
-  t: PropTypes.func.isRequired,
   message: PropTypes.object.isRequired,
   rules: PropTypes.object.isRequired,
 };
