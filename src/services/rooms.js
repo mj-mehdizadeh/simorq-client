@@ -20,6 +20,10 @@ export async function fetchSubscribes() {
   putMessages(response.messages);
 }
 
+export async function fetchRoomByIds(roomIds) {
+  const response = await Api.get(ROOMS_FIND, {roomIds: JSON.stringify(roomIds)}, {toastError: true});
+  putRooms(response);
+}
 /* ------------- Dispatcher ------------- */
 
 export function putRooms(rooms) {

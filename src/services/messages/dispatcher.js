@@ -1,9 +1,14 @@
-import {storeDispatch} from '../../redux/configureStore';
+import {getStoreState, storeDispatch} from '../../redux/configureStore';
 import Creators from '../../redux/messages';
-import {keyBy, map} from 'lodash';
+import {keyBy, map, uniq} from 'lodash';
 import {getMe} from '../../utils/client';
+import {getRoom} from '../../selector/rooms';
+import {fetchRoomByIds} from '../rooms';
 
-export function putMessages(messages) {
+export function putMessages(messages, check = true) {
+  if (check) {
+    checkMessagesRoom(messages);
+  }
   return storeDispatch(
     Creators.appendMessages(normalizeMessages(messages)),
   );
@@ -29,4 +34,16 @@ export function normalizeMessage(message) {
     ...message,
     out: message.roomId === getMe('roomId'),
   };
+}
+
+export async function checkMessagesRoom(messages) {
+  const roomIds = [];
+  messages.forEach(message => {
+    if (message.roomId && !getRoom(getStoreState(), message.roomId)) {
+      roomIds.push(message.roomId);
+    }
+  });
+  if (roomIds.length) {
+    await fetchRoomByIds(uniq(roomIds));
+  }
 }

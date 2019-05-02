@@ -9,8 +9,7 @@ export async function onNewMessage(message) {
   if (messageId && messageId !== message.id) {
     return;
   }
-  const room = getRoomByChatId(getStoreState(), message.chatId);
-  if (!room) {
+  if (!getRoomByChatId(getStoreState(), message.chatId)) {
     await fetchRoom({chatId: message.chatId});
   }
   putMessages([message]);
