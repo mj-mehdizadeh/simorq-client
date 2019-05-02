@@ -16,7 +16,7 @@ export async function fetchHistory(roomId, from, direction) {
 
 export async function postNewMessage(message, params) {
   putMessages([message]);
-  const response = Api.post(MESSAGE_NEW, {
+  const response = await Api.post(MESSAGE_NEW, {
     room_id: params.roomId,
     random_id: message.randomId,
     text: message.text,
