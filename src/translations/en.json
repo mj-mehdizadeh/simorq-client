@@ -49,7 +49,8 @@
     "nextBtn": "Next"
   },
   "history": {
-    "loading": "Loading messages..."
+    "loading": "Loading messages...",
+    "sendMessage": "There is no message, send a message"
   },
   "newRoom": {
     "header_GROUP": "New Group",

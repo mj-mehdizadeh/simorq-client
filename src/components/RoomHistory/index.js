@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {translate} from 'react-i18next';
@@ -18,17 +17,17 @@ class RoomHistory extends React.PureComponent {
       {this.props.loading === 'initial' && (<View style={styles.loadingWrap}>
         <Text style={styles.loading}>{t('history.loading')}</Text>
       </View>)}
-      <View
-        style={styles.content}>
-        {(history && history.length) && (
-          <RecycleContainer
-            history={history}
-            roomId={roomId}
-            roomType={roomType}
-            onScroll={onScroll}
-            recycleRef={this.recycleRef}
-          />)}
-      </View>
+      {(history && history.length) ? (<View style={styles.content}>
+        <RecycleContainer
+          history={history}
+          roomId={roomId}
+          roomType={roomType}
+          onScroll={onScroll}
+          recycleRef={this.recycleRef}
+        />
+      </View>) : (<View style={styles.loadingWrap}>
+        <Text style={styles.loading}>{t('history.sendMessage')}</Text>
+      </View>)}
     </View>;
   }
 }
