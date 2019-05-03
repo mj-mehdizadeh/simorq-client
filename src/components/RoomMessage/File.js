@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {TouchableWithoutFeedback} from 'react-native';
 import {translate} from 'react-i18next';
-import {Body, Button, Icon, Left, Text, View} from 'native-base';
+import {Button, Icon, Text, View} from 'native-base';
 import styles from './styles';
 import {convertBytes, convertSecendToTime} from '../../utils/core';
 
@@ -14,19 +14,19 @@ class File extends React.PureComponent {
       <View style={styles.fileWrap}>
         <TouchableWithoutFeedback onPress={onPress}>
           <View style={styles.fileBox}>
-            <Left>
-              <Button info round>
-                <Icon name="arrow-downward"/>
+            <View style={styles.fileLeft}>
+              <Button style={styles.downloadBtn} info round>
+                <Icon name="arrow-downward" style={styles.downloadBtnIcon}/>
               </Button>
-            </Left>
-            <Body>
-              <Text style={styles.fileName}>
+            </View>
+            <View style={styles.fileBody}>
+              <Text bold style={styles.fileName} numberOfLines={1}>
                 {attachment.name}
               </Text>
               <Text style={styles.fileInfo}>
                 {convertBytes(attachment.size)} - {attachment.duration ? convertSecendToTime(attachment.duration) : attachment.mimeType}
               </Text>
-            </Body>
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </View>

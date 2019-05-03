@@ -33,6 +33,7 @@ const commonStyle = {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingRight: 10,
+    paddingLeft: 5,
   },
   statusIcon: {
     width: 10,
@@ -65,6 +66,8 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: variable.brandPrimary,
     fontSize: 12,
+    paddingLeft: 5,
+    paddingRight: 10,
   },
   replyToTouch: {
     height: 45,
@@ -114,15 +117,34 @@ const styles = StyleSheet.create({
   imageFlat: {
     borderRadius: 4,
   },
-  fileWrap: {},
+  fileWrap: {
+    minWidth: 100,
+    padding: 7,
+  },
   fileBox: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 7,
+  },
+  fileLeft: {
+    width: 50,
+  },
+  downloadBtn: {
+    width: 45,
+    height: 45,
+    padding: 0,
+  },
+  downloadBtnIcon: {
+    marginRight: 5,
+    marginLeft: 5,
+  },
+  fileBody: {
+    maxWidth: 240,
   },
   fileName: {
     color: variable.brandPrimary,
-    fontSize: 13,
+    paddingRight: 14,
+    fontSize: 15,
+    paddingBottom: 3,
   },
   fileInfo: {
     fontSize: 11,
@@ -145,6 +167,7 @@ const styles = StyleSheet.create({
   footerSelf: {
     ...commonStyle.footer,
     paddingRight: 5,
+    paddingLeft: 10,
   },
   timeWrap: {
     fontSize: 11,
