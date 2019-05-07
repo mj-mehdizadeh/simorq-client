@@ -22,12 +22,8 @@ const commonStyle = {
     borderTopLeftRadius: 9,
   },
   image: {
-    width: 276,
-    height: 276,
-    margin: -8,
-    marginBottom: 6,
-    borderRadius: 9,
-    borderTopRightRadius: 20,
+    borderRadius: 20,
+    borderTopLeftRadius: 9,
   },
   footer: {
     flexDirection: 'row',
@@ -93,29 +89,16 @@ const styles = StyleSheet.create({
   mediaWrap: {},
   imageRound: commonStyle.image,
   imageRoundSelf: {
-    ...commonStyle.image,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 9,
   },
-  imageRoundTop: {
-    ...commonStyle.image,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4,
-  },
-  imageRoundTopSelf: {
-    ...commonStyle.image,
-    borderTopLeftRadius: 20,
+  imageFlatTop: {
+    borderTopLeftRadius: 9,
     borderTopRightRadius: 9,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4,
   },
-  imageRoundBottom: {
-    ...commonStyle.image,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-  },
-  imageFlat: {
-    borderRadius: 4,
+  imageFlatBottom: {
+    borderBottomLeftRadius: 9,
+    borderBottomRightRadius: 9,
   },
   fileWrap: {
     minWidth: 100,

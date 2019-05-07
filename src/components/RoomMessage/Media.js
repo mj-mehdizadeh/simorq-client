@@ -5,20 +5,28 @@ import {translate} from 'react-i18next';
 import {Image, View} from 'native-base';
 import styles from './styles';
 
+const imageStyle = [styles.imageRound];
 class Media extends React.PureComponent {
+  static getDerivedStateFromProps(props, state) {
+    const {rules, medium} = props;
+    if (rules.isOutbox) {
+      imageStyle.push(styles.imageRoundSelf);
+    }
+    if (rules.hasHeader) {
+      imageStyle.push(styles.imageFlatTop);
+    }
+    if (rules.hasText) {
+      imageStyle.push(styles.imageFlatBottom);
+    }
+    imageStyle.push({width: medium.width, height: medium.height});
+  }
 
   render() {
-    const {attachment, rules, onMediaPress} = this.props;
-    let imageStyleRound = rules.hasText ? 'imageRoundTop' : 'imageRound';
-    imageStyleRound += rules.isOutbox ? 'self' : '';
+    const {medium, onMediaPress} = this.props;
     return (
       <View style={styles.mediaWrap}>
         <TouchableWithoutFeedback onPress={onMediaPress}>
-          <Image style={rules.hasReply || rules.hasHeader ? (
-            rules.hasText ? styles.imageFlat : styles.imageRoundBottom
-          ) : (
-            styles[imageStyleRound]
-          )} source={{uri: attachment.medium.uri}}/>
+          <Image style={imageStyle} source={{uri: medium.uri}}/>
         </TouchableWithoutFeedback>
       </View>
     );
@@ -27,7 +35,7 @@ class Media extends React.PureComponent {
 
 Media.propTypes = {
   t: PropTypes.func.isRequired,
-  attachment: PropTypes.object,
+  medium: PropTypes.object,
   rules: PropTypes.object,
   onMediaPress: PropTypes.func,
 };
