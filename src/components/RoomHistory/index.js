@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {translate} from 'react-i18next';
 import {Text, View} from 'native-base';
 import styles from './styles';
-import RecycleContainer from '../../containers/room/RecycleContainer';
+import RecycleContainer from '../../containers/room/recycle';
 
 class RoomHistory extends React.PureComponent {
 

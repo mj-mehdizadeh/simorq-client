@@ -5,7 +5,7 @@ import styles from '../NewContact/styles';
 import {Body, Button, Container, Header, Icon, Left} from 'native-base';
 import {goBack} from '../../utils/navigator';
 import {FlatList} from 'react-native';
-import RoomCardContainer from '../../containers/room/CardContainer';
+import RoomCardContainer from '../../containers/room/card';
 
 class ContactList extends Component {
   render() {

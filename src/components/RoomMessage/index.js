@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'native-base';
 import styles from './styles';
-import ReplyToContainer from '../../containers/message/ReplyToContainer';
+import ReplyToContainer from '../../containers/message/reply-to';
 import MessageTitle from './message-title';
 import Media from './media';
 import File from './file';

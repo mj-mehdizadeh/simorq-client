@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Dimensions} from 'react-native';
 import {DataProvider, LayoutProvider, RecyclerListView} from 'recyclerlistview';
-import MessageContainer from '../message/MessageContainer';
+import MessageContainer from '../message';
 import {getMessageBoxSize, getMessageType} from '../../services/messages/helper';
 
 let {width} = Dimensions.get('window');

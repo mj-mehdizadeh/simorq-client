@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Badge, Body, Icon, Left, ListItem, Text, View} from 'native-base';
 import styles from './styles';
-import AvatarContainer from '../../containers/room/AvatarContainer';
+import AvatarContainer from '../../containers/room/avatar';
 import {translate} from 'react-i18next';
 import {unreadCount} from '../../utils/core';
 

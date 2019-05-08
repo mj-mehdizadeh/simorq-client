@@ -2,7 +2,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Body, Button, Header, Icon, Left, Right, Subtitle, Title, View} from 'native-base';
-import AvatarContainer from '../../containers/room/AvatarContainer';
+import AvatarContainer from '../../containers/room/avatar';
 import styles from './styles';
 
 export class RoomHeader extends React.PureComponent {
