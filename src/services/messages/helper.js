@@ -1,5 +1,6 @@
 import {getMessage} from '../../selector/messages';
 import {getStoreState} from '../../redux/configureStore';
+import rnTextSize from 'react-native-text-size';
 
 export function getMessageBoxRules(id, roomType) {
   const message = getMessage(getStoreState(), id);
@@ -30,11 +31,11 @@ export function getMessageType(id, roomType) {
   ].join('');
 }
 
-export function getMessageBoxSize(id, roomType) {
+export async function getMessageBoxSize(id, roomType) {
   const style = getMessageBoxRules(id, roomType);
   const message = getMessage(getStoreState(), id);
-  const sizes = {wrap: 0, box: 4, header: 20, reply: 40, media: 1, file: 40, audio: 40, text: 1, footer: 20};
-  let height = 0;
+  const sizes = {wrap: 5, box: 4, header: 15, reply: 45, media: 1, file: 60, audio: 60, text: 1, footer: 20};
+  let height = sizes.wrap;
 
   height += sizes.box;
 
@@ -54,10 +55,18 @@ export function getMessageBoxSize(id, roomType) {
     height += sizes.audio;
   }
   if (style.hasText) {
-    // todo height += calculate text;
+    height += message.box.textHeight;
   }
   if (style.hasText || !style.isMedia) {
     height += sizes.footer;
   }
   return height;
+}
+
+export function textHeights(texts, width) {
+  return rnTextSize.flatHeights({
+    text: texts,
+    width,
+    fontSize: 14,
+  });
 }
