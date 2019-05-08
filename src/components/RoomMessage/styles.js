@@ -11,7 +11,7 @@ const commonStyle = {
   },
   box: {
     padding: 2,
-    maxWidth: 290,
+    maxWidth: 320,
     backgroundColor: '#fff',
     shadowColor: '#d9d9d9',
     shadowOffset: {width: 0, height: 1},
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
   text: {
     position: 'relative',
     flexDirection: 'row',
+    fontSize: 14,
   },
   footer: commonStyle.footer,
   footerSelf: {

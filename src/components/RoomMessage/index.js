@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'native-base';
 import styles from './styles';
 import ReplyToContainer from '../../containers/message/ReplyToContainer';
-import MessageTitle from './MessageTitle';
-import Media from './Media';
-import File from './File';
-import Footer from './Footer';
+import MessageTitle from './message-title';
+import Media from './media';
+import File from './file';
+import Footer from './footer';
 
 class RoomMessage extends React.PureComponent {
   render() {
@@ -44,8 +44,9 @@ class RoomMessage extends React.PureComponent {
   }
 
   renderText() {
-    return (<View style={this.props.rules.isOutbox ? styles.textBoxSelf : styles.textBox}>
-      <Text style={styles.text}>{this.props.message.text}</Text>
+    const {message, rules} = this.props;
+    return (<View style={[rules.isOutbox ? styles.textBoxSelf : styles.textBox, {maxWidth: message.box.maxWidth}]}>
+      <Text style={styles.text}>{message.text}</Text>
     </View>);
   }
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {getMessageProp, getMessageRoomTitle} from '../../selector/messages';
 import {connect} from 'react-redux';
-import ReplyTo from '../../components/RoomMessage/ReplyTo';
+import ReplyTo from '../../components/RoomMessage/reply-to';
 
 class ReplyToContainer extends React.PureComponent {
   onPress = () => {
