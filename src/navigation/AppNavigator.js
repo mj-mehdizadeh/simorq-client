@@ -10,8 +10,8 @@ import {
 } from '../constant/navigator';
 import LoginScreen from '../screens/LoginScreen';
 import RoomListScreen from '../screens/RoomListScreen';
-import AppLoader from '../containers/AppLoader';
 import NewRoomScreen from '../screens/NewRoomScreen';
+import AppLoader from '../containers/app';
 // import TestScreen from '../screens/TestScreen';
 
 const AppNavigator = createStackNavigator(
