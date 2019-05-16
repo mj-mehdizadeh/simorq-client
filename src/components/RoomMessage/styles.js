@@ -8,6 +8,7 @@ const commonStyle = {
     justifyContent: 'flex-start',
     padding: 2.5,
     paddingLeft: 10,
+    width: 360,
   },
   box: {
     padding: 2,
@@ -28,8 +29,10 @@ const commonStyle = {
   footer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    paddingRight: 10,
+    paddingRight: 5,
     paddingLeft: 5,
+    alignSelf: 'flex-end',
+    borderRadius: 7,
   },
   statusIcon: {
     width: 10,
@@ -148,19 +151,29 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   footer: commonStyle.footer,
-  footerSelf: {
+  footerMedia: {
     ...commonStyle.footer,
-    paddingRight: 5,
-    paddingLeft: 10,
+    backgroundColor: 'rgba(0,0,0,0.4)',
   },
   timeWrap: {
     fontSize: 11,
-    color: '#838c96',
+    color: '#4e525a',
+    textAlign: 'right',
+  },
+  timeWrapMedia: {
+    fontSize: 11,
+    color: '#fff',
     textAlign: 'right',
   },
   statusWrap: {
     fontSize: 11,
     color: '#838c96',
+    textAlign: 'right',
+    marginLeft: 5,
+  },
+  statusWrapMedia: {
+    fontSize: 11,
+    color: '#fff',
     textAlign: 'right',
     marginLeft: 5,
   },
@@ -175,6 +188,11 @@ const styles = StyleSheet.create({
   statusIconFailed: {
     ...commonStyle.statusIcon,
     color: variable.brandDanger,
+  },
+  mediaFooterWrap: {
+    marginTop: -18,
+    paddingBottom: 3,
+    paddingRight: 7,
   },
 });
 

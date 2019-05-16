@@ -1,15 +1,19 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {TouchableWithoutFeedback} from 'react-native';
-import {translate} from 'react-i18next';
-import {Image, View} from 'native-base';
+import {Image, TouchableWithoutFeedback} from 'react-native';
+import {View} from 'native-base';
 import styles from './styles';
 
-const imageStyle = [styles.imageRound];
 class Media extends React.PureComponent {
-  static getDerivedStateFromProps(props, state) {
-    const {rules, medium} = props;
-    if (rules.isOutbox) {
+  state = {
+    imageStyle: [styles.imageRound],
+  };
+
+  componentDidMount() {
+    const {rules, medium} = this.props;
+    const imageStyle = [];
+    imageStyle.push(styles.imageRound);
+    if (!rules.isOutbox) {
       imageStyle.push(styles.imageRoundSelf);
     }
     if (rules.hasHeader) {
@@ -18,7 +22,8 @@ class Media extends React.PureComponent {
     if (rules.hasText) {
       imageStyle.push(styles.imageFlatBottom);
     }
-    imageStyle.push({width: medium.width, height: medium.height});
+    imageStyle.push({width: medium.width - 4, height: medium.height});
+    this.setState({imageStyle});
   }
 
   render() {
@@ -26,7 +31,7 @@ class Media extends React.PureComponent {
     return (
       <View style={styles.mediaWrap}>
         <TouchableWithoutFeedback onPress={onMediaPress}>
-          <Image style={imageStyle} source={{uri: medium.uri}}/>
+          <Image style={this.state.imageStyle} source={{uri: medium.uri}}/>
         </TouchableWithoutFeedback>
       </View>
     );
@@ -34,10 +39,9 @@ class Media extends React.PureComponent {
 }
 
 Media.propTypes = {
-  t: PropTypes.func.isRequired,
   medium: PropTypes.object,
   rules: PropTypes.object,
   onMediaPress: PropTypes.func,
 };
 
-export default translate()(Media);
+export default Media;

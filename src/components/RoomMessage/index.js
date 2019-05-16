@@ -37,7 +37,7 @@ class RoomMessage extends React.PureComponent {
   renderAttachment() {
     const {rules, message} = this.props;
     return (<View style={styles.attachmentBox}>
-      {(rules.isMedia && message.attachment.thumbs.medium) && <Media attachment={message.attachment.thumbs.medium} rules={rules}/>}
+      {rules.isMedia && <Media medium={message.attachment.thumbs.medium} rules={rules}/>}
       {(rules.isFile || (rules.isMedia && !message.attachment.thumbs.medium)) && <File attachment={message.attachment}/>}
       {rules.isAudio && <File attachment={message.attachment}/>}
     </View>);
