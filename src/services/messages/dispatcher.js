@@ -1,6 +1,6 @@
 import {getStoreState, storeDispatch} from '../../redux/configureStore';
 import Creators from '../../redux/messages';
-import {keyBy, map, uniq, groupBy, forIn} from 'lodash';
+import {forIn, groupBy, keyBy, map, uniq} from 'lodash';
 import {getMe} from '../../utils/client';
 import {getRoom} from '../../selector/rooms';
 import {fetchRoomByIds} from '../rooms';
@@ -45,7 +45,7 @@ export function normalizeMessage(message) {
 
 export async function checkMessagesRoom(messages) {
   const roomIds = [];
-  messages.forEach(message => {
+  forIn(messages, message => {
     if (message.roomId && !getRoom(getStoreState(), message.roomId)) {
       roomIds.push(message.roomId);
     }
@@ -56,10 +56,15 @@ export async function checkMessagesRoom(messages) {
 }
 
 export async function calculateWidth(messages) {
-  forIn(groupBy(messages, 'box.maxWidth'), async (list, maxWidth) => {
-    const heights = await textHeights(map(list, 'text'), maxWidth);
-    heights.forEach((height, index) => {
-      list[index].box.textHeight = height;
-    });
+  const promises = map(groupBy(messages, 'box.maxWidth'), async (list, maxWidth) => {
+    return calcGroupMessage(list, maxWidth);
+  });
+  await Promise.all(promises);
+}
+
+async function calcGroupMessage(list, maxWidth) {
+  const heights = await textHeights(map(list, item => item.text || '1'), parseInt(maxWidth, 10));
+  heights.forEach((height, index) => {
+    list[index].box.textHeight = list[index].text ? height : 0;
   });
 }

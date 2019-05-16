@@ -1,6 +1,7 @@
 import {getMessage} from '../../selector/messages';
 import {getStoreState} from '../../redux/configureStore';
 import rnTextSize from 'react-native-text-size';
+import {floor} from 'lodash';
 
 export function getMessageBoxRules(id, roomType) {
   const message = getMessage(getStoreState(), id);
@@ -10,7 +11,7 @@ export function getMessageBoxRules(id, roomType) {
     hasHeader: !!message.forwardFrom || (!message.out && roomType !== 'USER' && (!message.attachment || !!message.replyTo)),
     hasReply: !!message.replyTo,
     hasAttachment: !!message.attachment,
-    isMedia: ['PHOTO', 'VIDEO', 'GIF', 'LOCATION'].includes(message.type),
+    isMedia: ['PHOTO', 'VIDEO', 'GIF', 'LOCATION'].includes(message.type) && !!message.attachment.thumbs.medium,
     isFile: message.type === 'FILE',
     isAudio: message.type === 'VOICE',
     hasText: !!message.text,
@@ -31,7 +32,7 @@ export function getMessageType(id, roomType) {
   ].join('');
 }
 
-export async function getMessageBoxSize(id, roomType) {
+export function getMessageBoxSize(id, roomType) {
   const style = getMessageBoxRules(id, roomType);
   const message = getMessage(getStoreState(), id);
   const sizes = {wrap: 5, box: 4, header: 15, reply: 45, media: 1, file: 60, audio: 60, text: 1, footer: 20};
@@ -46,7 +47,7 @@ export async function getMessageBoxSize(id, roomType) {
     height += sizes.reply;
   }
   if (style.isMedia) {
-    height += message.attachment.thumbs.medium.height;
+    height += message.attachment.thumbs.medium.height - 4;
   }
   if (style.isFile) {
     height += sizes.file;
@@ -55,7 +56,7 @@ export async function getMessageBoxSize(id, roomType) {
     height += sizes.audio;
   }
   if (style.hasText) {
-    height += message.box.textHeight;
+    height += floor(message.box.textHeight);
   }
   if (style.hasText || !style.isMedia) {
     height += sizes.footer;
