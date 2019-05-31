@@ -15,12 +15,12 @@ export async function fetchHistory(roomId, from, direction) {
 }
 
 export async function postNewMessage(message, params) {
-  putMessages([message], false);
+  putMessages([message]);
   const response = await Api.post(MESSAGE_NEW, {
     room_id: params.roomId,
     random_id: message.randomId,
     text: message.text,
   }, {toastError: true});
+  await putMessages([response]);
   deleteMessage(message.id, response.chatId);
-  putMessages([response]);
 }
