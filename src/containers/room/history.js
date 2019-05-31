@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import RoomHistory from '../../components/RoomHistory/index';
 import {connect} from 'react-redux';
 import {getRoomMessages} from '../../selector/messages';
-import {last} from 'lodash';
+import {head} from 'lodash';
 import {fetchHistory} from '../../services/messages/api';
 import {getRoomProp} from '../../selector/rooms';
 
@@ -25,9 +25,9 @@ class HistoryContainer extends React.PureComponent {
 
   onScroll = async (event, offsetX, offsetY) => {
     const {height} = event.nativeEvent.contentSize;
-    if (!this._scrollFlag.down && offsetY < 300) {
+    if (!this._scrollFlag.down && height - offsetY <= 2 * height) {
       this._scrollFlag.down = true;
-    } else if (!this._scrollFlag.up && height - offsetY <= 2 * height) {
+    } else if (!this._scrollFlag.up && offsetY < 300) {
       this._scrollFlag.up = true;
       await this.loadMore();
       this._scrollFlag.up = false;
@@ -36,7 +36,8 @@ class HistoryContainer extends React.PureComponent {
 
   loadMore = async () => {
     const {history, roomId} = this.props;
-    const from = last(history);
+    const from = head(history);
+    console.log('loadMore', from);
     await fetchHistory(roomId, from);
     this.setState({loading: false});
   };

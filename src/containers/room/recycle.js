@@ -54,7 +54,9 @@ class RecycleContainer extends React.PureComponent {
       layoutProvider={this._layoutProvider}
       dataProvider={this.state.dataProvider}
       onScroll={this.onScroll}
-      rowRenderer={this._rowRenderer}/>;
+      rowRenderer={this._rowRenderer}
+      optimizeForInsertDeleteAnimations={true}
+      initialRenderIndex={this.props.history.length - 1}/>;
   }
 
   _rowRenderer = (type, messageId) => {

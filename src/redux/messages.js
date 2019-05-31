@@ -1,5 +1,5 @@
 import {createActions, createReducer} from 'reduxsauce';
-import {concat, forIn, groupBy, indexOf, map, reverse, sortBy, sortedUniq} from 'lodash';
+import {concat, forIn, groupBy, indexOf, map, sortBy, sortedUniq} from 'lodash';
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -24,12 +24,12 @@ export const INITIAL_STATE = {
 export const appendMessages = (state, action) => {
   const newHistory = {...state.history};
   forIn(groupBy(action.messages, 'chatId'), (messages, chatId) => {
-    newHistory[chatId] = reverse(sortedUniq(sortBy(
+    newHistory[chatId] = sortedUniq(sortBy(
       concat(
         newHistory[chatId] || [],
         map(messages, 'id'),
       ),
-    )));
+    ));
   });
   return {
     storage: {...state.storage, ...action.messages},

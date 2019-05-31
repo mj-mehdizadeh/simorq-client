@@ -3852,7 +3852,6 @@ jest-worker@^24.6.0:
 jest@^24.7.1:
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/jest/-/jest-24.7.1.tgz#0d94331cf510c75893ee32f87d7321d5bf8f2501"
-  integrity sha512-AbvRar5r++izmqo5gdbAjTeA6uNRGoNRuj5vHB0OnDXo2DXWZJVuaObiGgtlvhKb+cWy2oYbQSfxv7Q7GjnAtA==
   dependencies:
     import-local "^2.0.0"
     jest-cli "^24.7.1"
@@ -4082,9 +4081,9 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash-es@4.17.4:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
+lodash.debounce@4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
 lodash.pad@^4.1.0:
   version "4.5.1"
@@ -5434,7 +5433,6 @@ react-native-tab-view@^1.2.0:
 react-native-text-size@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-native-text-size/-/react-native-text-size-3.0.0.tgz#2a85757cb44c7497ad6422ebb2d53344c6634821"
-  integrity sha512-FCYpPVd8PYwgt6JSU7+k7eQtJtTAdupQVGqUNPViy/ggoUY0GlQL+rskRkuq/xd0PDro2jKkdo0w/LtAxZDh6A==
 
 react-native-vector-icons@6.1.0:
   version "6.1.0"
@@ -5447,7 +5445,6 @@ react-native-vector-icons@6.1.0:
 react-native@0.59.5:
   version "0.59.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.5.tgz#79500d2885a3dc83216715e1fc6effa878ad6ea9"
-  integrity sha512-8Q/9cS6IMsGNiFhJgzmncbUeuacXQMe5EJl0c63fW30DvjEjeTVCvhM08eGzSpsNlOvL2XDRa4YOiCrwI7S1TA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^1.2.1"
@@ -5578,7 +5575,6 @@ react-tween-state@^0.1.5:
 react@16.8.3:
   version "16.8.3"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.3.tgz#c6f988a2ce895375de216edcfaedd6b9a76451d9"
-  integrity sha512-3UoSIsEq8yTJuSu0luO1QQWYbgGEILm+eJl2QN/VLDi7hL+EN18M3q3oVZwmVzzBJ3DkM7RMdRwBmZZ+b4IzSA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -5633,11 +5629,11 @@ realpath-native@^1.1.0:
   dependencies:
     util.promisify "^1.0.0"
 
-recyclerlistview@^1.3.4:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/recyclerlistview/-/recyclerlistview-1.3.4.tgz#4c0e57d19d5480d3c4e7e5abc45b23ca7ce09a5f"
+recyclerlistview@^2.0.0-beta.4:
+  version "2.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/recyclerlistview/-/recyclerlistview-2.0.0-beta.4.tgz#c3c96f3e55650b1c96543fe71009009ea5ce9d63"
   dependencies:
-    lodash-es "4.17.4"
+    lodash.debounce "4.0.8"
     prop-types "15.5.8"
     ts-object-utils "0.0.5"
 

@@ -6,7 +6,6 @@ export default StyleSheet.create({
   },
   content: {
     flex: 1,
-    transform: [{scaleY: -1}],
   },
   loadingWrap: {
     flex: 1,

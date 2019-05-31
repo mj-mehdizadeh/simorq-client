@@ -3,7 +3,6 @@ import variable from '../../theme/variables/material';
 
 const commonStyle = {
   wrap: {
-    transform: [{scaleY: -1}],
     flexDirection: 'row',
     justifyContent: 'flex-start',
     padding: 2.5,
