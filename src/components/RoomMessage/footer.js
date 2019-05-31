@@ -14,7 +14,7 @@ class Footer extends React.PureComponent {
         </Text>
         {isOutbox && (<Text style={media ? styles.statusWrapMedia : styles.statusWrap}>
           {failed ? (<Icon style={styles.statusIconFailed} name="info"/>) : (
-            sending ? (<Icon style={styles.statusIconDeliver} name="schedule"/>) : (
+            sending ? (<Icon style={styles.statusIconDeliver} name="timer" type="MaterialCommunityIcons"/>) : (
               seen ? (<Icon style={styles.statusIconSeen} name="check-all" type="MaterialCommunityIcons"/>) : (
                 <Icon style={styles.statusIconDeliver} name="check" type="MaterialCommunityIcons"/>
               )
